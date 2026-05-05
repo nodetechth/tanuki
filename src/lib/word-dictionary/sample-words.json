@@ -1,0 +1,3252 @@
+[
+  {
+    "word": "accommodate",
+    "phonetic_jp": "アコモデイト",
+    "stress": "əˈkɒməˌdeɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To provide space or a place for someone or something.",
+        "definition_jp": "誰かや何かが居場所やスペースを得ること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To adjust or adapt to meet someone's needs.",
+        "definition_jp": "誰かの必要に合わせて調整や適応をすること"
+      }
+    ],
+    "usage_notes": "主に物理的な収容や要望への対応に使われます。",
+    "synonyms": [
+      "house",
+      "adapt",
+      "adjust"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The hotel can accommodate 100 guests.",
+          "sentence_jp": "そのホテルは100人の宿泊ができます。"
+        },
+        "business": {
+          "sentence_en": "We will accommodate your request for a meeting time.",
+          "sentence_jp": "ミーティング時間のご要望に対応いたします。"
+        },
+        "toeic": {
+          "sentence_en": "The conference room accommodates up to 50 people.",
+          "sentence_jp": "会議室は最大50人を収容できます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "They accommodated my needs by changing the schedule.",
+          "sentence_jp": "彼らはスケジュールを変えて私の要望に応えました。"
+        },
+        "business": {
+          "sentence_en": "Our company accommodates clients from various industries.",
+          "sentence_jp": "当社は様々な業界のクライアントに対応しています。"
+        },
+        "toeic": {
+          "sentence_en": "Please accommodate any special dietary requirements when booking.",
+          "sentence_jp": "予約時に特別な食事の要望に対応してください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "It’s hard to accommodate all their preferences in such a short time.",
+          "sentence_jp": "そんな短時間ですべての好みに対応するのは難しいです。"
+        },
+        "business": {
+          "sentence_en": "The policy was modified to accommodate the evolving needs of our stakeholders effectively.",
+          "sentence_jp": "当社は利害関係者の変化するニーズに効果的に対応するため方針を修正しました。"
+        },
+        "toeic": {
+          "sentence_en": "The new office design accommodates both collaborative work and private meetings efficiently.",
+          "sentence_jp": "新しいオフィス設計は共同作業と個別の会議の双方に効率的に対応しています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "aggregate",
+    "phonetic_jp": "アグリゲイト",
+    "stress": "ˈæɡrɪɡɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To collect or combine things into a whole.",
+        "definition_jp": "ものを集めて全体にすること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A total amount or sum made by combining parts.",
+        "definition_jp": "部分を合わせた合計のさま"
+      },
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Formed or calculated by adding several amounts together.",
+        "definition_jp": "いくつかの量を合わせて形成されること"
+      }
+    ],
+    "usage_notes": "動詞としては「集める」、名詞としては「合計」、形容詞としては「総計の」という意味で使われます。",
+    "synonyms": [
+      "total",
+      "combine",
+      "sum"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "She aggregated all her toys in one box.",
+          "sentence_jp": "彼女はすべてのおもちゃを一つの箱に集めた。"
+        },
+        "business": {
+          "sentence_en": "We aggregate data from each department monthly.",
+          "sentence_jp": "私たちは毎月各部署のデータを集計します。"
+        },
+        "toeic": {
+          "sentence_en": "The aggregate sales reached ten thousand units last quarter.",
+          "sentence_jp": "前四半期の総売上は1万台に達しました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "When you aggregate the scores, his is the highest among friends.",
+          "sentence_jp": "得点を合計すると、彼は友達の中で一番高いです。"
+        },
+        "business": {
+          "sentence_en": "The company aggregates the results from various branches for the annual report.",
+          "sentence_jp": "会社は年次報告のために各支店からの結果を集計します。"
+        },
+        "toeic": {
+          "sentence_en": "The aggregate figures in the report show an increase in revenue compared to last year.",
+          "sentence_jp": "報告書の総合数字は前年と比べて収益の増加を示しています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "People often aggregate their experiences before making a major life decision.",
+          "sentence_jp": "人は大きな人生の決断をする前に、自分の経験を集約することが多い。"
+        },
+        "business": {
+          "sentence_en": "The financial analyst aggregates diverse market data to provide comprehensive investment advice.",
+          "sentence_jp": "金融アナリストは多様な市場データを集計して包括的な投資助言を提供する。"
+        },
+        "toeic": {
+          "sentence_en": "To assess the project’s success, we must consider the aggregate impact of all phases across different departments.",
+          "sentence_jp": "プロジェクトの成功を評価するには、各部署の全段階にわたる総合的な影響を考慮しなければなりません。"
+        }
+      }
+    }
+  },
+  {
+    "word": "ambivalent",
+    "phonetic_jp": "アンビバレント",
+    "stress": "æmˈbɪvələnt",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Having mixed feelings or contradictory ideas about something.",
+        "definition_jp": "ある事柄に対して相反する感情や考えを持っていること"
+      }
+    ],
+    "usage_notes": "「ambivalent」は感情がはっきりしない様子を表します。",
+    "synonyms": [
+      "uncertain",
+      "conflicted",
+      "mixed"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I am ambivalent about moving to a new city.",
+          "sentence_jp": "新しい街に引っ越すことに対して複雑な気持ちです。"
+        },
+        "business": {
+          "sentence_en": "She felt ambivalent about the new company policy.",
+          "sentence_jp": "彼女は新しい会社の方針に対して複雑な気持ちを持っていました。"
+        },
+        "toeic": {
+          "sentence_en": "The employee was ambivalent about taking the new position.",
+          "sentence_jp": "その従業員は新しい役職に就くことに対して複雑な感情を抱いていました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "He was ambivalent because he wanted to stay but also desired a change.",
+          "sentence_jp": "彼は残りたい気持ちと変化を望む気持ちで複雑な感情を抱いていました。"
+        },
+        "business": {
+          "sentence_en": "The management was ambivalent about implementing the budget cuts due to possible risks.",
+          "sentence_jp": "経営陣は予算削減の実施にリスクを伴うため、複雑な気持ちを抱いていました。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, the team showed ambivalent reactions to the new marketing strategy.",
+          "sentence_jp": "会議中、チームは新しいマーケティング戦略に対し複雑な反応を示しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "She expressed ambivalent feelings about the relationship, torn between love and doubt.",
+          "sentence_jp": "彼女は愛情と疑念の間で引き裂かれ、関係について複雑な感情を表明しました。"
+        },
+        "business": {
+          "sentence_en": "The board's ambivalent stance towards the merger reflected concerns over both potential benefits and significant challenges.",
+          "sentence_jp": "取締役会の合併に対する複雑な立場は、潜在的利益と重大な課題の両方に関する懸念を反映していました。"
+        },
+        "toeic": {
+          "sentence_en": "The employees were ambivalent during the restructure announcement, uncertain about the impact on job security and company growth.",
+          "sentence_jp": "再編成の発表時、従業員は職の安定性と会社の成長に対して不確かなため、複雑な感情を抱いていました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "available",
+    "phonetic_jp": "アベイラブル",
+    "stress": "/əˈveɪ.lə.bəl/",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Able to be used or obtained.",
+        "definition_jp": "利用できること"
+      },
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Free to do something or meet someone.",
+        "definition_jp": "時間や予定が空いているさま"
+      }
+    ],
+    "usage_notes": "人や物の利用可能状態を表す形容詞です。",
+    "synonyms": [
+      "obtainable",
+      "free",
+      "accessible"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The book is available at the library.",
+          "sentence_jp": "その本は図書館で利用できます。"
+        },
+        "business": {
+          "sentence_en": "The report is available for review now.",
+          "sentence_jp": "レポートは現在確認可能です。"
+        },
+        "toeic": {
+          "sentence_en": "The meeting room is available at 3 p.m.",
+          "sentence_jp": "会議室は午後3時に利用可能です。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I am available to meet after 5 o’clock today.",
+          "sentence_jp": "今日は5時以降に会うことができます。"
+        },
+        "business": {
+          "sentence_en": "The product is available in various sizes to meet customer needs.",
+          "sentence_jp": "商品は顧客のニーズに合わせて様々なサイズで提供されます。"
+        },
+        "toeic": {
+          "sentence_en": "Please confirm if the data will be available before the deadline.",
+          "sentence_jp": "締め切り前にデータが利用可能か確認してください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Although I’m usually busy, I’m available this weekend if you want to get together.",
+          "sentence_jp": "普段は忙しいけれど、もし会いたければ今週末は時間があります。"
+        },
+        "business": {
+          "sentence_en": "Our team is available around the clock to provide comprehensive support for your inquiries.",
+          "sentence_jp": "当社のチームはお客様の問い合わせに対し24時間体制で包括的なサポートを提供することが可能です。"
+        },
+        "toeic": {
+          "sentence_en": "The software update will be available for download starting next Monday at midnight.",
+          "sentence_jp": "ソフトウェアのアップデートは次の月曜日の深夜からダウンロード可能になります。"
+        }
+      }
+    }
+  },
+  {
+    "word": "awkward",
+    "phonetic_jp": "オークワード",
+    "stress": "ˈɔː.kwərd",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Not comfortable or easy to use, do, or deal with.",
+        "definition_jp": "使いにくいこと"
+      },
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Causing embarrassment or nervousness.",
+        "definition_jp": "気まずいさま"
+      }
+    ],
+    "usage_notes": "awkwardは、不器用や気まずさの意味で使われます。",
+    "synonyms": [
+      "clumsy",
+      "uncomfortable",
+      "embarrassing"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "It was an awkward moment for me.",
+          "sentence_jp": "それは私にとって気まずい瞬間でした。"
+        },
+        "business": {
+          "sentence_en": "The meeting started with an awkward silence.",
+          "sentence_jp": "会議は気まずい沈黙から始まりました。"
+        },
+        "toeic": {
+          "sentence_en": "She gave an awkward answer to the question.",
+          "sentence_jp": "彼女はその質問に気まずい答えをしました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I felt awkward talking to new people at the party.",
+          "sentence_jp": "パーティーで初対面の人と話すのは気まずく感じました。"
+        },
+        "business": {
+          "sentence_en": "It was awkward to admit our mistake in front of the clients.",
+          "sentence_jp": "顧客の前で誤りを認めるのは気まずかったです。"
+        },
+        "toeic": {
+          "sentence_en": "The awkward design of the device made it difficult to operate efficiently.",
+          "sentence_jp": "その装置の使いにくい設計のため、効率的に操作するのは難しかったです。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "She navigated the awkward conversation with humor and grace.",
+          "sentence_jp": "彼女は気まずい会話をユーモアと優雅さで切り抜けました。"
+        },
+        "business": {
+          "sentence_en": "Addressing the awkward financial discrepancies required a delicate approach during the board meeting.",
+          "sentence_jp": "役員会で気まずい財務の不一致に対処するには慎重な取り組みが必要でした。"
+        },
+        "toeic": {
+          "sentence_en": "The awkward phrasing in the report caused confusion among team members, leading to delays in the project timeline.",
+          "sentence_jp": "報告書の使いにくい表現がチームメンバーの間に混乱を引き起こし、プロジェクトの進行に遅れが生じました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "benchmark",
+    "phonetic_jp": "ベンチマーク",
+    "stress": "ˈbɛntʃˌmɑrk",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A standard or point of reference used to measure or judge something.",
+        "definition_jp": "何かを測定または評価するための標準や基準のこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To measure or evaluate something by comparing it to a standard.",
+        "definition_jp": "標準と比較して何かを測定または評価すること"
+      }
+    ],
+    "usage_notes": "ビジネスや技術の分野でよく使われる専門用語です。",
+    "synonyms": [
+      "standard",
+      "criterion",
+      "yardstick"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "We use a benchmark to check how good the product is.",
+          "sentence_jp": "私たちは製品の良さを確かめるためにベンチマークを使います。"
+        },
+        "business": {
+          "sentence_en": "Our company set a benchmark for customer service.",
+          "sentence_jp": "当社は顧客サービスのためのベンチマークを設定しました。"
+        },
+        "toeic": {
+          "sentence_en": "The benchmark for sales was reached last month.",
+          "sentence_jp": "先月、売上のベンチマークが達成されました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I compared the performance of my computer using a benchmark test online.",
+          "sentence_jp": "オンラインのベンチマークテストを使って自分のコンピュータの性能を比較しました。"
+        },
+        "business": {
+          "sentence_en": "We benchmarked our process against industry leaders to find areas for improvement.",
+          "sentence_jp": "改善点を見つけるために業界のリーダーとプロセスをベンチマークしました。"
+        },
+        "toeic": {
+          "sentence_en": "The report showed that the company's profits exceeded the benchmark by 10%.",
+          "sentence_jp": "報告書によると、会社の利益はベンチマークを10%上回りました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "By using a proper benchmark, we can objectively assess how our new model performs in daily tasks.",
+          "sentence_jp": "適切なベンチマークを用いることで、新モデルが日常の作業でどの程度性能を発揮するか客観的に評価できます。"
+        },
+        "business": {
+          "sentence_en": "Our strategic plan involves benchmarking key performance indicators to ensure our competitiveness in the market.",
+          "sentence_jp": "我々の戦略計画は、市場での競争力を確保するために主要な業績指標をベンチマークすることを含みます。"
+        },
+        "toeic": {
+          "sentence_en": "During the quarterly meeting, the team reviewed benchmark data to identify trends and adjust business strategies accordingly.",
+          "sentence_jp": "四半期会議でチームはベンチマークデータを見直し、傾向を特定してそれに応じて経営戦略を調整しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "bottleneck",
+    "phonetic_jp": "ボトルネック",
+    "stress": "ˈbɒtəlˌnɛk",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A point of congestion or blockage that slows down progress.",
+        "definition_jp": "進行を遅らせる渋滞や障害のこと"
+      }
+    ],
+    "usage_notes": "主に生産や処理の遅れを指す際に使われる言葉です。",
+    "synonyms": [
+      "obstacle",
+      "delay",
+      "blockage"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The bottleneck in the road caused a traffic jam.",
+          "sentence_jp": "道路のボトルネックが交通渋滞を引き起こしました。"
+        },
+        "business": {
+          "sentence_en": "We need to find the bottleneck in our process to improve efficiency.",
+          "sentence_jp": "効率を上げるために、プロセスのボトルネックを見つける必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The manager said the bottleneck is the slow approval procedure.",
+          "sentence_jp": "マネージャーは遅い承認手続きがボトルネックだと言いました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "The project was delayed because the bottleneck was not resolved in time.",
+          "sentence_jp": "ボトルネックが時間内に解決されなかったため、プロジェクトは遅れました。"
+        },
+        "business": {
+          "sentence_en": "Addressing the bottleneck in the supply chain allowed us to increase output significantly.",
+          "sentence_jp": "サプライチェーンのボトルネックを解消することで、出力を大幅に増やせました。"
+        },
+        "toeic": {
+          "sentence_en": "According to the report, bottlenecks occur mainly during the packaging stage of production.",
+          "sentence_jp": "報告によると、ボトルネックは主に生産の包装段階で発生します。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Recognizing the bottleneck early in the process was crucial to preventing a severe backlog of orders.",
+          "sentence_jp": "プロセスの早い段階でボトルネックを認識することが、注文の大幅な遅れを防ぐために重要でした。"
+        },
+        "business": {
+          "sentence_en": "Our quarterly review uncovered a bottleneck in the data analysis workflow, prompting a reassessment of resource allocation.",
+          "sentence_jp": "四半期レビューでデータ分析作業のボトルネックが判明し、リソース配分の見直しを促しました。"
+        },
+        "toeic": {
+          "sentence_en": "The consultancy report highlighted that inefficiencies at the bottleneck stage could reduce overall production capacity by up to 30 percent.",
+          "sentence_jp": "コンサルタント報告によると、ボトルネック段階の非効率性は全体の生産能力を最大30パーセント減少させる可能性があります。"
+        }
+      }
+    }
+  },
+  {
+    "word": "branch",
+    "phonetic_jp": "ブランチ",
+    "stress": "'bræntʃ",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A part of a tree that grows out from the trunk.",
+        "definition_jp": "木の幹から伸びる部分であること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A local office or store that is part of a larger company or organization.",
+        "definition_jp": "大きな会社や組織の一部である地域の支店であること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To divide into smaller parts or sections.",
+        "definition_jp": "より小さな部分や区分に分かれること"
+      }
+    ],
+    "usage_notes": "「branch」は名詞としても動詞としても使われることが多いです。",
+    "synonyms": [
+      "division",
+      "office",
+      "section"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The bird sat on the tree branch.",
+          "sentence_jp": "鳥が木の枝に止まりました。"
+        },
+        "business": {
+          "sentence_en": "Our company opened a new branch in Tokyo.",
+          "sentence_jp": "当社は東京に新しい支店を開設しました。"
+        },
+        "toeic": {
+          "sentence_en": "Please visit the branch for customer service.",
+          "sentence_jp": "お客様サービスのために支店にお越しください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Many birds nested in the thick branches of the old oak tree.",
+          "sentence_jp": "多くの鳥が古いオークの太い枝に巣を作っていました。"
+        },
+        "business": {
+          "sentence_en": "The marketing branch handles all promotions and advertising campaigns.",
+          "sentence_jp": "マーケティング部門はすべての宣伝と広告キャンペーンを担当しています。"
+        },
+        "toeic": {
+          "sentence_en": "The company plans to branch out into international markets next year.",
+          "sentence_jp": "会社は来年、国際市場に進出する予定です。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "As the trail branched off in several directions, we had to decide which path to take carefully.",
+          "sentence_jp": "道がいくつかの方向に分かれたので、どの道を行くか慎重に決めなければなりませんでした。"
+        },
+        "business": {
+          "sentence_en": "Diversifying our service offerings will allow us to branch into new markets and increase overall profitability.",
+          "sentence_jp": "サービスの多角化により、新規市場へ進出し、収益性を向上させることが可能になります。"
+        },
+        "toeic": {
+          "sentence_en": "The regional branch manager will present the quarterly report at the upcoming international conference.",
+          "sentence_jp": "地域支店長が次回の国際会議で四半期報告を発表します。"
+        }
+      }
+    }
+  },
+  {
+    "word": "collaborate",
+    "phonetic_jp": "コラボレート",
+    "stress": "kəˈlæbəreɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To work together with others to achieve a common goal.",
+        "definition_jp": "共通の目標を達成するために他の人と一緒に働くこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To cooperate with someone, especially in a work or project.",
+        "definition_jp": "特に仕事やプロジェクトで誰かと協力すること"
+      }
+    ],
+    "usage_notes": "「collaborate」は協力して作業をする意味で使われます。ビジネスや学術的な場面によく用いられます。",
+    "synonyms": [
+      "cooperate",
+      "team up",
+      "work together"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I will collaborate with my friend on the project.",
+          "sentence_jp": "私は友達とそのプロジェクトで協力します。"
+        },
+        "business": {
+          "sentence_en": "We need to collaborate to finish the report on time.",
+          "sentence_jp": "期限内に報告書を終えるために協力する必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The teams collaborate to improve customer service.",
+          "sentence_jp": "チームは顧客サービス向上のために協力しています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "They decided to collaborate because working together is more efficient.",
+          "sentence_jp": "彼らは一緒に働くほうが効率的なので協力することに決めました。"
+        },
+        "business": {
+          "sentence_en": "Our companies will collaborate on developing new technology to enter the market.",
+          "sentence_jp": "私たちの会社は市場参入のために新技術の開発で協力します。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, departments agreed to collaborate to increase productivity by 20%.",
+          "sentence_jp": "会議中に部署は生産性を20%向上させるために協力することに合意しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Artists often collaborate across different disciplines to create innovative works.",
+          "sentence_jp": "アーティストは革新的な作品を作るために異なる分野で協力することがよくあります。"
+        },
+        "business": {
+          "sentence_en": "To maintain competitive advantage, firms must collaborate extensively on research and development projects.",
+          "sentence_jp": "競争優位を維持するために、企業は研究開発プロジェクトで広範囲に協力しなければなりません。"
+        },
+        "toeic": {
+          "sentence_en": "The quarterly report emphasized how collaborative efforts between departments significantly enhanced operational efficiency.",
+          "sentence_jp": "四半期報告書は部署間の協力的な努力が業務効率を大幅に向上させたことを強調しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "colleague",
+    "phonetic_jp": "コリーグ",
+    "stress": "ˈkɒliːɡ",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A person you work with, especially in a profession or business.",
+        "definition_jp": "同じ職場や専門分野で一緒に働く人のこと"
+      }
+    ],
+    "usage_notes": "仕事の場面で使うことが多いです。",
+    "synonyms": [
+      "coworker",
+      "associate",
+      "partner"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "My colleague helped me with the project.",
+          "sentence_jp": "私の同僚がそのプロジェクトを手伝ってくれました。"
+        },
+        "business": {
+          "sentence_en": "I will meet my colleague for a meeting at 10 AM.",
+          "sentence_jp": "午前10時に同僚と会議をします。"
+        },
+        "toeic": {
+          "sentence_en": "Your colleague will call you back after the break.",
+          "sentence_jp": "休憩後に同僚が折り返し電話をかけます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Many of my colleagues have become close friends outside work.",
+          "sentence_jp": "多くの同僚が職場の外でも親しい友達になりました。"
+        },
+        "business": {
+          "sentence_en": "Our colleagues in the marketing department are preparing the new campaign.",
+          "sentence_jp": "マーケティング部門の同僚たちは新しいキャンペーンを準備しています。"
+        },
+        "toeic": {
+          "sentence_en": "Please inform your colleague about the change in the meeting schedule.",
+          "sentence_jp": "会議の予定変更を同僚に知らせてください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Although we are colleagues, we often share our personal stories during lunch breaks.",
+          "sentence_jp": "同僚でありながら、昼休みによく私的な話を共有します。"
+        },
+        "business": {
+          "sentence_en": "Our colleagues across different departments must collaborate efficiently to meet the quarterly goals.",
+          "sentence_jp": "異なる部署の同僚が効率的に協力し、四半期の目標を達成しなければなりません。"
+        },
+        "toeic": {
+          "sentence_en": "The HR manager asked all colleagues to submit their annual reports by the end of the month.",
+          "sentence_jp": "人事部長は全ての同僚に月末までに年次報告書を提出するよう依頼しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "compliance",
+    "phonetic_jp": "コンプライアンス",
+    "stress": "kəmˈplaɪəns",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The act of following rules or orders.",
+        "definition_jp": "規則や命令に従うこと"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "Agreement to a request or demand.",
+        "definition_jp": "要請や要求に応じること"
+      }
+    ],
+    "usage_notes": "ビジネスや法律の文脈でよく使われます",
+    "synonyms": [
+      "obedience",
+      "conformity",
+      "adherence"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "She showed compliance with the new rules.",
+          "sentence_jp": "彼女は新しいルールに従いました。"
+        },
+        "business": {
+          "sentence_en": "Our company ensures compliance with the law.",
+          "sentence_jp": "当社は法律の遵守を確実にしています。"
+        },
+        "toeic": {
+          "sentence_en": "Please confirm your compliance by Friday.",
+          "sentence_jp": "金曜日までに遵守を確認してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "His compliance with the diet helped improve his health.",
+          "sentence_jp": "彼の食事制限の順守が健康改善に役立ちました。"
+        },
+        "business": {
+          "sentence_en": "The team’s compliance with safety standards prevents accidents.",
+          "sentence_jp": "チームの安全基準の順守が事故を防いでいます。"
+        },
+        "toeic": {
+          "sentence_en": "Compliance with the updated regulations is required by next month.",
+          "sentence_jp": "改訂された規則への遵守は来月までに必要です。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Achieving compliance with complex regulations often requires expert advice.",
+          "sentence_jp": "複雑な規則への遵守を達成するには専門家の助言が必要なことが多いです。"
+        },
+        "business": {
+          "sentence_en": "The compliance department audits all operations to ensure regulatory adherence and reduce risks.",
+          "sentence_jp": "コンプライアンス部門は規制順守とリスク軽減のためにすべての業務を監査します。"
+        },
+        "toeic": {
+          "sentence_en": "Failure to maintain compliance with international standards can lead to serious financial penalties.",
+          "sentence_jp": "国際基準の遵守を維持できないと、重大な財務的罰則につながる可能性があります。"
+        }
+      }
+    }
+  },
+  {
+    "word": "confirm",
+    "phonetic_jp": "コンファーム",
+    "stress": "kənˈfɜːrm",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To make sure or prove that something is true or correct.",
+        "definition_jp": "何かが正しいことを確かめること"
+      }
+    ],
+    "usage_notes": "ビジネスや日常会話でよく使われる動詞です。",
+    "synonyms": [
+      "verify",
+      "validate",
+      "affirm"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I will confirm the time of the meeting.",
+          "sentence_jp": "ミーティングの時間を確認します。"
+        },
+        "business": {
+          "sentence_en": "Please confirm your appointment by email.",
+          "sentence_jp": "メールで予約を確認してください。"
+        },
+        "toeic": {
+          "sentence_en": "Can you confirm the delivery date for the order?",
+          "sentence_jp": "注文の配達日を確認できますか？"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She called to confirm if we were still going to the party.",
+          "sentence_jp": "彼女はまだパーティーに行くかどうか確認するために電話しました。"
+        },
+        "business": {
+          "sentence_en": "We need to confirm the details of the contract before signing.",
+          "sentence_jp": "契約書に署名する前に詳細を確認する必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The manager confirmed the schedule changes in the meeting yesterday.",
+          "sentence_jp": "マネージャーは昨日の会議でスケジュール変更を確認しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After checking twice, he could finally confirm that the tickets were genuine.",
+          "sentence_jp": "彼は二度チェックした後、チケットが本物であることを確かに確認できました。"
+        },
+        "business": {
+          "sentence_en": "The audit team confirmed the accuracy of the financial statements for the last quarter.",
+          "sentence_jp": "監査チームは前四半期の財務諸表の正確性を確認しました。"
+        },
+        "toeic": {
+          "sentence_en": "Please confirm your attendance by the end of this week to ensure proper arrangements.",
+          "sentence_jp": "適切な手配を行うために、今週末までに出席の確認をお願いします。"
+        }
+      }
+    }
+  },
+  {
+    "word": "deadline",
+    "phonetic_jp": "デッドライン",
+    "stress": "ˈdɛdlaɪn",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A date or time when something must be done.",
+        "definition_jp": "何かを終わらせなければならない時間や日付のこと"
+      }
+    ],
+    "usage_notes": "主に仕事や学校の締め切りを指すことが多い",
+    "synonyms": [
+      "due date",
+      "cutoff",
+      "time limit"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I have a deadline for my homework tomorrow.",
+          "sentence_jp": "私は明日、宿題の締め切りがあります。"
+        },
+        "business": {
+          "sentence_en": "The deadline to submit the report is Friday.",
+          "sentence_jp": "報告書の提出締め切りは金曜日です。"
+        },
+        "toeic": {
+          "sentence_en": "Please meet the project deadline by next week.",
+          "sentence_jp": "来週までにプロジェクトの締め切りを守ってください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I worked late to finish my assignment before the deadline.",
+          "sentence_jp": "締め切り前に課題を終わらせるために残業しました。"
+        },
+        "business": {
+          "sentence_en": "We need to discuss how to meet the upcoming deadline efficiently.",
+          "sentence_jp": "今後の締め切りを効率的に守る方法について話し合う必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The manager reminded the team about the urgent deadline next Monday.",
+          "sentence_jp": "マネージャーはチームに来週月曜日の緊急締め切りを思い出させました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Despite many challenges, she managed to meet every single deadline this semester.",
+          "sentence_jp": "多くの困難があったにもかかわらず、彼女は今学期のすべての締め切りを守りました。"
+        },
+        "business": {
+          "sentence_en": "Achieving the stringent deadline required reallocating resources and prioritizing tasks strategically.",
+          "sentence_jp": "厳しい締め切りを達成するには、資源の再配分と戦略的なタスクの優先順位付けが必要でした。"
+        },
+        "toeic": {
+          "sentence_en": "Due to unexpected delays, the team proposed an extension for the final project deadline during the meeting.",
+          "sentence_jp": "予期せぬ遅延のため、チームは会議中に最終プロジェクトの締め切り延期を提案しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "drift",
+    "phonetic_jp": "ドリフト",
+    "stress": "ˈdrɪft",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To be carried slowly by wind or water.",
+        "definition_jp": "風や水にゆっくり運ばれること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A slow movement caused by wind or water.",
+        "definition_jp": "風や水によってゆっくり動くさま"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To move aimlessly or without control.",
+        "definition_jp": "目的なくまたは制御なく動くこと"
+      }
+    ],
+    "usage_notes": "「drift」は自然の動きや偶然の移動に使われます。",
+    "synonyms": [
+      "float",
+      "wander",
+      "slide"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "Leaves drift on the water.",
+          "sentence_jp": "葉っぱが水の上に漂っています。"
+        },
+        "business": {
+          "sentence_en": "Reports drift in slowly every morning.",
+          "sentence_jp": "報告書が毎朝ゆっくり届きます。"
+        },
+        "toeic": {
+          "sentence_en": "The boat will drift to the dock by 10 a.m.",
+          "sentence_jp": "船は午前10時までに桟橋に漂着します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Sometimes I just drift around the city without a plan.",
+          "sentence_jp": "時々私は計画なしで街をぶらぶらします。"
+        },
+        "business": {
+          "sentence_en": "The project seems to drift without a clear direction or leadership.",
+          "sentence_jp": "このプロジェクトは明確な方向性やリーダーシップなく進行しているようです。"
+        },
+        "toeic": {
+          "sentence_en": "Due to the wind, the advertisement banners will drift off course.",
+          "sentence_jp": "風のため、広告バナーがコースからずれます。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After graduation, she decided to drift through different countries to find herself.",
+          "sentence_jp": "卒業後、彼女は自分探しのために様々な国をさまようことに決めました。"
+        },
+        "business": {
+          "sentence_en": "Without specific goals, teams often drift aimlessly, reducing productivity and morale.",
+          "sentence_jp": "具体的な目標がなければ、チームは目的もなく漂い、生産性と士気が下がることがあります。"
+        },
+        "toeic": {
+          "sentence_en": "The company plans to adjust its marketing strategies because recent sales figures are drifting below expectations.",
+          "sentence_jp": "最近の売上高が予想を下回っているため、会社はマーケティング戦略の調整を計画しています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "eventually",
+    "phonetic_jp": "イベンチュアリー",
+    "stress": "ɪˈvɛn.tʃu.ə.li",
+    "definitions": [
+      {
+        "part_of_speech": "adverb",
+        "definition_en": "In the end, especially after a long time or a lot of effort.",
+        "definition_jp": "長い時間や多くの努力の後に最終的にそうなること"
+      }
+    ],
+    "usage_notes": "時間がかかることや結果に重点を置く場合に使う。",
+    "synonyms": [
+      "finally",
+      "ultimately",
+      "in the end"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I eventually finished my homework.",
+          "sentence_jp": "私はついに宿題を終えました。"
+        },
+        "business": {
+          "sentence_en": "The project eventually succeeded after many trials.",
+          "sentence_jp": "そのプロジェクトは多くの試行の後に最終的に成功しました。"
+        },
+        "toeic": {
+          "sentence_en": "The report will eventually be submitted by Friday.",
+          "sentence_jp": "報告書は最終的に金曜日までに提出されます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "After hours of waiting, they eventually agreed to meet us.",
+          "sentence_jp": "数時間待った後、彼らは最終的に私たちと会うことに同意しました。"
+        },
+        "business": {
+          "sentence_en": "We eventually secured the contract after lengthy negotiations.",
+          "sentence_jp": "長い交渉の後、私たちは最終的に契約を獲得しました。"
+        },
+        "toeic": {
+          "sentence_en": "The products will eventually reach the stores by next month.",
+          "sentence_jp": "商品は最終的に来月までに店舗に届く予定です。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Though it took a long time, she eventually gained the trust of her new friends.",
+          "sentence_jp": "時間はかかったが、彼女は最終的に新しい友人たちの信頼を得ました。"
+        },
+        "business": {
+          "sentence_en": "Despite initial setbacks, the company eventually expanded its market presence internationally.",
+          "sentence_jp": "初期の挫折にもかかわらず、会社は最終的に国際的に市場の存在感を拡大しました。"
+        },
+        "toeic": {
+          "sentence_en": "The construction project will eventually meet all safety standards after final inspections are completed.",
+          "sentence_jp": "建設プロジェクトは最終検査が完了した後に全ての安全基準を満たすことになります。"
+        }
+      }
+    }
+  },
+  {
+    "word": "feedback",
+    "phonetic_jp": "フィードバック",
+    "stress": "ˈfiːdbæk",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "Information about reactions to a product or performance used as a basis for improvement.",
+        "definition_jp": "製品やパフォーマンスに対する反応の情報を基に改善すること"
+      }
+    ],
+    "usage_notes": "主にビジネスや教育の場面で使われることが多いです。",
+    "synonyms": [
+      "response",
+      "comment",
+      "critique"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I got good feedback on my drawing.",
+          "sentence_jp": "私の絵について良いフィードバックをもらいました。"
+        },
+        "business": {
+          "sentence_en": "Please send your feedback after the meeting.",
+          "sentence_jp": "会議の後でフィードバックを送ってください。"
+        },
+        "toeic": {
+          "sentence_en": "The manager asked for feedback on the new system.",
+          "sentence_jp": "マネージャーは新しいシステムについてフィードバックを求めました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I appreciate your feedback because it helps me improve my work.",
+          "sentence_jp": "あなたのフィードバックに感謝します。仕事を改善するのに役立ちます。"
+        },
+        "business": {
+          "sentence_en": "We use customer feedback to enhance our products and services regularly.",
+          "sentence_jp": "私たちは顧客のフィードバックを使って定期的に製品とサービスを向上させます。"
+        },
+        "toeic": {
+          "sentence_en": "The survey collected feedback from over 300 participants about the training program.",
+          "sentence_jp": "調査は研修プログラムについて300人以上の参加者からフィードバックを集めました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After receiving constructive feedback, she was able to significantly refine her presentation skills.",
+          "sentence_jp": "建設的なフィードバックを受けた後、彼女はプレゼンテーションスキルを大幅に洗練させることができました。"
+        },
+        "business": {
+          "sentence_en": "Our team implemented the detailed feedback from stakeholders to align the project goals with company strategy.",
+          "sentence_jp": "私たちのチームはステークホルダーの詳細なフィードバックを実装し、プロジェクト目標を会社の戦略に合わせることを行いました。"
+        },
+        "toeic": {
+          "sentence_en": "During the quarterly review meeting, comprehensive feedback was provided to improve workflow efficiency and employee productivity.",
+          "sentence_jp": "四半期レビュー会議で、ワークフローの効率と従業員の生産性を向上させるための包括的なフィードバックが提供されました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "fiscal",
+    "phonetic_jp": "フィスカル",
+    "stress": "ˈfɪskəl",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Related to government money or public finances.",
+        "definition_jp": "政府の財政や公的資金に関すること"
+      }
+    ],
+    "usage_notes": "主に経済や会計の文脈で使われます。",
+    "synonyms": [
+      "financial",
+      "economic",
+      "budgetary"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The fiscal year starts in April.",
+          "sentence_jp": "会計年度は4月に始まります。"
+        },
+        "business": {
+          "sentence_en": "Our fiscal report is ready for review.",
+          "sentence_jp": "当社の会計報告書がレビューの準備ができています。"
+        },
+        "toeic": {
+          "sentence_en": "The fiscal quarter ends on June 30.",
+          "sentence_jp": "会計四半期は6月30日に終了します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Fiscal policies affect how much money people pay in taxes.",
+          "sentence_jp": "財政政策は人々が払う税金の金額に影響します。"
+        },
+        "business": {
+          "sentence_en": "The company announced its fiscal performance during the meeting.",
+          "sentence_jp": "会社は会議中に財務成績を発表しました。"
+        },
+        "toeic": {
+          "sentence_en": "The fiscal budget for next year was approved yesterday by the board.",
+          "sentence_jp": "来年の財政予算は昨日、取締役会で承認されました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "The fiscal responsibility of managing public funds ensures proper services for citizens.",
+          "sentence_jp": "公的資金を管理する財政的責任は市民に適切なサービスを保証します。"
+        },
+        "business": {
+          "sentence_en": "Fiscal constraints imposed by external economic conditions require the company to adjust its strategic planning.",
+          "sentence_jp": "外部の経済状況による財政的制約が、会社に戦略的計画の調整を要求しています。"
+        },
+        "toeic": {
+          "sentence_en": "Due to the recent fiscal downturn, the department had to reduce expenditures to meet budget targets.",
+          "sentence_jp": "最近の財政不況のため、部門は予算目標を達成するために支出を削減しなければなりませんでした。"
+        }
+      }
+    }
+  },
+  {
+    "word": "fluctuate",
+    "phonetic_jp": "フラクチュエイト",
+    "stress": "ˈflʌktʃueɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To change or vary irregularly in size, amount, or level.",
+        "definition_jp": "大きさや量、レベルが不規則に変わること"
+      }
+    ],
+    "usage_notes": "よく価格や感情の変動を表すときに使われます。",
+    "synonyms": [
+      "vary",
+      "oscillate",
+      "change"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "Prices often fluctuate during the year.",
+          "sentence_jp": "価格は一年間でよく変わります。"
+        },
+        "business": {
+          "sentence_en": "Stock values fluctuate daily in the market.",
+          "sentence_jp": "株価は市場で毎日変動します。"
+        },
+        "toeic": {
+          "sentence_en": "The number of customers may fluctuate this month.",
+          "sentence_jp": "今月は顧客数が変動するかもしれません。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "My mood tends to fluctuate depending on the weather.",
+          "sentence_jp": "天気によって気分が変わりやすいです。"
+        },
+        "business": {
+          "sentence_en": "The company's profits fluctuate due to seasonal demands.",
+          "sentence_jp": "季節的な需要により会社の利益は変動します。"
+        },
+        "toeic": {
+          "sentence_en": "Sales figures have fluctuated over the past three quarters.",
+          "sentence_jp": "売上高は過去3四半期にわたり変動しています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Her excitement began to fluctuate as the event approached and uncertainties grew.",
+          "sentence_jp": "イベントが近づき不確実性が増すにつれて彼女の興奮は変動し始めました。"
+        },
+        "business": {
+          "sentence_en": "Despite efforts to stabilize the economy, currency exchange rates continued to fluctuate unpredictably.",
+          "sentence_jp": "経済を安定させる努力にもかかわらず、通貨為替レートは予測できずに変動し続けました。"
+        },
+        "toeic": {
+          "sentence_en": "During the quarterly financial review, analysts noted that market demand for the product fluctuated in response to geopolitical tensions.",
+          "sentence_jp": "四半期の財務レビューで分析者は、地政学的緊張に応じて製品の市場需要が変動したと指摘しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "forget",
+    "phonetic_jp": "フォーゲット",
+    "stress": "fəˈɡɛt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To be unable to remember something.",
+        "definition_jp": "何かを覚えていないこと"
+      }
+    ],
+    "usage_notes": "forgetは過去のことや約束などを思い出せないことに使います。",
+    "synonyms": [
+      "overlook",
+      "miss",
+      "neglect"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I forget my keys at home.",
+          "sentence_jp": "私は家に鍵を忘れます。"
+        },
+        "business": {
+          "sentence_en": "Please don’t forget the meeting tomorrow.",
+          "sentence_jp": "明日の会議を忘れないでください。"
+        },
+        "toeic": {
+          "sentence_en": "He forgot to send the email on time.",
+          "sentence_jp": "彼はメールを時間通りに送るのを忘れました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I forgot to tell you about the party yesterday.",
+          "sentence_jp": "昨日のパーティーのことを伝えるのを忘れていました。"
+        },
+        "business": {
+          "sentence_en": "She forgot to attach the report in her email.",
+          "sentence_jp": "彼女はメールに報告書を添付するのを忘れました。"
+        },
+        "toeic": {
+          "sentence_en": "The manager forgot to confirm the reservation with the client.",
+          "sentence_jp": "マネージャーはクライアントとの予約確認を忘れました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "I almost forgot how beautiful this place is after so much time has passed.",
+          "sentence_jp": "長い時間が経って、この場所の美しさをほとんど忘れていました。"
+        },
+        "business": {
+          "sentence_en": "Despite several reminders, the team forgot to submit the quarterly report on time.",
+          "sentence_jp": "何度もリマインダーを受けたにもかかわらず、チームは四半期報告書の期限提出を忘れてしまいました。"
+        },
+        "toeic": {
+          "sentence_en": "The employee forgot to notify the customer of the schedule change, causing confusion.",
+          "sentence_jp": "従業員はスケジュール変更を顧客に通知するのを忘れ、混乱が生じました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "genuine",
+    "phonetic_jp": "ジェニュイン",
+    "stress": "ˈdʒɛn.ju.ɪn",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Truly what something is said to be; authentic or real.",
+        "definition_jp": "本物であることや、偽物でないこと"
+      }
+    ],
+    "usage_notes": "本物かどうかを強調するときに使います。",
+    "synonyms": [
+      "authentic",
+      "real",
+      "true"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "This is a genuine leather bag.",
+          "sentence_jp": "これは本当の革のかばんです。"
+        },
+        "business": {
+          "sentence_en": "We need a genuine signature on the contract.",
+          "sentence_jp": "契約書には本物の署名が必要です。"
+        },
+        "toeic": {
+          "sentence_en": "Please confirm genuine documents for the application.",
+          "sentence_jp": "申請には本物の書類を確認してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She showed genuine happiness when she heard the good news.",
+          "sentence_jp": "いい知らせを聞いた時、彼女は本当の喜びを見せました。"
+        },
+        "business": {
+          "sentence_en": "Our clients expect genuine commitment from all team members.",
+          "sentence_jp": "クライアントは全てのチームメンバーからの本当の献身を期待しています。"
+        },
+        "toeic": {
+          "sentence_en": "The company requires genuine receipts to process reimbursement requests.",
+          "sentence_jp": "会社は払い戻し申請を処理するために本物の領収書を必要とします。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "In conversation, it's refreshing to encounter someone's genuine thoughts rather than rehearsed responses.",
+          "sentence_jp": "会話の中で、用意された返答ではなく誰かの本当の意見に出会うと清々しいことです。"
+        },
+        "business": {
+          "sentence_en": "To foster trust, leadership must demonstrate genuine transparency and accountability throughout the organization.",
+          "sentence_jp": "信頼を育むために、リーダーシップは組織全体で本当の透明性と説明責任を示すことが必要です。"
+        },
+        "toeic": {
+          "sentence_en": "The audit confirmed that all reported expenses were supported by genuine invoices and corresponded to company policies.",
+          "sentence_jp": "監査により申告された全ての経費が本物の請求書で裏付けられ、会社の方針に合致していることが確認されました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "grab",
+    "phonetic_jp": "グラブ",
+    "stress": "ɡræb",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To take something quickly with your hand.",
+        "definition_jp": "手で素早く何かを取ること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To get the attention of someone.",
+        "definition_jp": "誰かの注意を引くこと"
+      }
+    ],
+    "usage_notes": "カジュアルな場面でよく使われる動詞です。",
+    "synonyms": [
+      "seize",
+      "snatch",
+      "catch"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I will grab my bag and go.",
+          "sentence_jp": "カバンを取って行きます。"
+        },
+        "business": {
+          "sentence_en": "Please grab the reports before the meeting.",
+          "sentence_jp": "会議の前にレポートを取ってください。"
+        },
+        "toeic": {
+          "sentence_en": "You can grab a coffee at the vending machine.",
+          "sentence_jp": "自動販売機でコーヒーを取れます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She grabbed the phone as soon as it rang.",
+          "sentence_jp": "彼女は電話が鳴るとすぐにそれを取った。"
+        },
+        "business": {
+          "sentence_en": "He grabbed the opportunity to present his ideas.",
+          "sentence_jp": "彼は自分のアイデアを発表する機会をつかんだ。"
+        },
+        "toeic": {
+          "sentence_en": "The manager asked me to grab the files from the archive.",
+          "sentence_jp": "マネージャーは私にアーカイブからファイルを取るように頼んだ。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "During the concert, I managed to grab the performer's autograph.",
+          "sentence_jp": "コンサート中に、私は演者のサインを何とか手に入れた。"
+        },
+        "business": {
+          "sentence_en": "The company grabbed a significant market share by launching innovative products.",
+          "sentence_jp": "その会社は革新的な商品を発売することで、重要な市場シェアを獲得した。"
+        },
+        "toeic": {
+          "sentence_en": "Please grab the visitor badges from the reception desk before entering the conference room.",
+          "sentence_jp": "会議室に入る前に受付で訪問者バッジを取ってください。"
+        }
+      }
+    }
+  },
+  {
+    "word": "initiative",
+    "phonetic_jp": "イニシアティブ",
+    "stress": "ɪˈnɪʃətɪv",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The ability to start actions independently.",
+        "definition_jp": "自分で行動を始めること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A new plan or process to achieve a goal.",
+        "definition_jp": "目標を達成するための新しい計画や取り組みのこと"
+      }
+    ],
+    "usage_notes": "ビジネスや日常会話でよく使われる言葉です。",
+    "synonyms": [
+      "enterprise",
+      "drive",
+      "proposal"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "She took the initiative to clean the room.",
+          "sentence_jp": "彼女は部屋を掃除することに率先して取り組んだ。"
+        },
+        "business": {
+          "sentence_en": "We need initiative to finish the project.",
+          "sentence_jp": "私たちはプロジェクトを終わらせるために積極性が必要です。"
+        },
+        "toeic": {
+          "sentence_en": "The company started a new initiative to reduce waste.",
+          "sentence_jp": "会社は廃棄物を減らす新しい取り組みを始めました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Taking initiative often leads to success in life.",
+          "sentence_jp": "率先して行動することは人生の成功につながることが多い。"
+        },
+        "business": {
+          "sentence_en": "Employees are encouraged to show initiative during meetings.",
+          "sentence_jp": "従業員は会議中に自ら率先することが推奨されています。"
+        },
+        "toeic": {
+          "sentence_en": "This initiative aims to increase customer satisfaction by improving services.",
+          "sentence_jp": "この取り組みはサービスを改善して顧客満足度を高めることを目的としています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Taking the initiative in difficult situations often requires courage and foresight.",
+          "sentence_jp": "困難な状況で率先して行動するには勇気と先見の明が必要なことが多い。"
+        },
+        "business": {
+          "sentence_en": "Our company’s new initiative focuses on sustainable development and corporate social responsibility.",
+          "sentence_jp": "当社の新しい取り組みは持続可能な開発と企業の社会的責任に重点を置いています。"
+        },
+        "toeic": {
+          "sentence_en": "The initiative proposed during the board meeting includes multiple strategies to optimize operational efficiency within the next fiscal year.",
+          "sentence_jp": "取締役会で提案された取り組みには、次の会計年度内に業務効率を最適化するための複数の戦略が含まれています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "inquiry",
+    "phonetic_jp": "インクワイアリ",
+    "stress": "ɪnˈkwaɪəri",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A question or request for information.",
+        "definition_jp": "情報を求める質問や問い合わせをすること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "An official process to find out the facts about something.",
+        "definition_jp": "何かの事実を調査する正式な手続きを行うこと"
+      }
+    ],
+    "usage_notes": "formalな場面でよく使われる単語です",
+    "synonyms": [
+      "question",
+      "investigation",
+      "request"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I have an inquiry about your menu.",
+          "sentence_jp": "メニューについて質問があります。"
+        },
+        "business": {
+          "sentence_en": "Please send your inquiry by email.",
+          "sentence_jp": "お問い合わせはメールでお送りください。"
+        },
+        "toeic": {
+          "sentence_en": "The staff answered the inquiry quickly.",
+          "sentence_jp": "スタッフは問い合わせにすぐ対応しました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She made an inquiry to learn more about the new game.",
+          "sentence_jp": "彼女は新しいゲームについてもっと知るために問い合わせました。"
+        },
+        "business": {
+          "sentence_en": "The company launched an inquiry to investigate the incident thoroughly.",
+          "sentence_jp": "会社は事件を徹底的に調査するために調査を開始しました。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, he raised an inquiry regarding the project deadline.",
+          "sentence_jp": "会議中、彼はプロジェクトの締め切りについて質問しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After receiving numerous inquiries, she decided to write a detailed FAQ.",
+          "sentence_jp": "多くの問い合わせを受けて、彼女は詳細なFAQを書くことにしました。"
+        },
+        "business": {
+          "sentence_en": "The inquiry committee submitted a comprehensive report that addressed all concerns raised by stakeholders.",
+          "sentence_jp": "調査委員会は利害関係者からの懸念にすべて対応した包括的な報告書を提出しました。"
+        },
+        "toeic": {
+          "sentence_en": "The inquiry into the financial discrepancies will conclude next month after thorough examination of all documents.",
+          "sentence_jp": "すべての書類を徹底的に調査した後、財務の不一致に関する調査は来月終了します。"
+        }
+      }
+    }
+  },
+  {
+    "word": "invoice",
+    "phonetic_jp": "インボイス",
+    "stress": "/ˈɪn.vɔɪs/",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A document that lists goods or services provided and the amount of money owed.",
+        "definition_jp": "提供された商品やサービスと支払うべき金額を記載した書類のこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To send a bill for goods or services provided.",
+        "definition_jp": "商品やサービスに対して請求書を送ること"
+      }
+    ],
+    "usage_notes": "主にビジネスや商取引で使われる言葉です。",
+    "synonyms": [
+      "bill",
+      "statement",
+      "account"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I received an invoice for my phone bill.",
+          "sentence_jp": "私は電話料金の請求書を受け取りました。"
+        },
+        "business": {
+          "sentence_en": "Please check the invoice before the payment.",
+          "sentence_jp": "支払い前に請求書を確認してください。"
+        },
+        "toeic": {
+          "sentence_en": "The invoice shows the total amount due.",
+          "sentence_jp": "請求書には支払うべき合計金額が示されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "After the repair, they sent me an invoice by email.",
+          "sentence_jp": "修理の後、彼らは請求書をメールで送ってきました。"
+        },
+        "business": {
+          "sentence_en": "Our accounting department will process the invoice next week.",
+          "sentence_jp": "私たちの経理部門は来週その請求書を処理します。"
+        },
+        "toeic": {
+          "sentence_en": "The company must pay the invoice within 30 days of receipt.",
+          "sentence_jp": "会社は請求書を受け取ってから30日以内に支払う必要があります。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "I always keep a copy of each invoice in case I need to check expenses later.",
+          "sentence_jp": "後で経費を確認する必要がある場合に備えて、私はいつも請求書のコピーを保管しています。"
+        },
+        "business": {
+          "sentence_en": "In order to streamline payments, please ensure that every invoice includes the purchase order number.",
+          "sentence_jp": "支払いを効率化するために、すべての請求書に発注番号を記載してください。"
+        },
+        "toeic": {
+          "sentence_en": "The finance manager stated that discrepancies in the invoice must be reported before the monthly closing date.",
+          "sentence_jp": "財務マネージャーは、請求書の不一致は月次締め切り前に報告しなければならないと述べました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "itinerary",
+    "phonetic_jp": "アイティナラリィ",
+    "stress": "/ɪˈtɪnəˌrɛri/",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A detailed plan or route of a journey.",
+        "definition_jp": "旅行の詳細な計画や経路のこと"
+      }
+    ],
+    "usage_notes": "旅程表として使われることが多いです",
+    "synonyms": [
+      "schedule",
+      "route",
+      "agenda"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I wrote my travel itinerary for next week.",
+          "sentence_jp": "私は来週の旅行日程を書きました。"
+        },
+        "business": {
+          "sentence_en": "Please send the itinerary for the business trip.",
+          "sentence_jp": "出張の旅程を送ってください。"
+        },
+        "toeic": {
+          "sentence_en": "The itinerary shows the meeting times each day.",
+          "sentence_jp": "旅程には毎日の会議時間が示されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Our itinerary includes visiting museums and local markets.",
+          "sentence_jp": "私たちの旅行日程には博物館や地元の市場を訪れることが含まれています。"
+        },
+        "business": {
+          "sentence_en": "The itinerary for the conference was emailed to all participants.",
+          "sentence_jp": "会議の旅程はすべての参加者にメールで送られました。"
+        },
+        "toeic": {
+          "sentence_en": "According to the itinerary, the team will arrive at 9 AM.",
+          "sentence_jp": "旅程によると、チームは午前9時に到着します。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Before our trip, I meticulously planned the itinerary to include every must-see attraction.",
+          "sentence_jp": "旅行前に、絶対に見るべき観光地をすべて含むように旅程を綿密に計画しました。"
+        },
+        "business": {
+          "sentence_en": "The detailed itinerary ensured that all stakeholders were aware of their commitments during the international summit.",
+          "sentence_jp": "詳細な旅程によって、すべての関係者が国際サミット中の予定を把握することができました。"
+        },
+        "toeic": {
+          "sentence_en": "Please review the attached itinerary carefully and confirm your attendance at each scheduled meeting.",
+          "sentence_jp": "添付の旅程を注意深く確認し、予定されている各会議への出席を確認してください。"
+        }
+      }
+    }
+  },
+  {
+    "word": "leverage",
+    "phonetic_jp": "レバレッジ",
+    "stress": "ˈliːvərɪdʒ",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The power to influence or control a situation.",
+        "definition_jp": "影響力を使って何かを支配すること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To use something to achieve a better result.",
+        "definition_jp": "より良い結果を得るために何かを利用すること"
+      }
+    ],
+    "usage_notes": "ビジネスの文脈でよく使われる用語です",
+    "synonyms": [
+      "advantage",
+      "influence",
+      "power"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "He uses his skills as leverage to get a job.",
+          "sentence_jp": "彼は仕事を得るために自分のスキルを利用します。"
+        },
+        "business": {
+          "sentence_en": "The company has leverage in the market.",
+          "sentence_jp": "その会社は市場で影響力があります。"
+        },
+        "toeic": {
+          "sentence_en": "We must leverage our assets to increase sales.",
+          "sentence_jp": "私たちは資産を利用して売上を伸ばさなければなりません。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She leveraged her experience to start a successful business.",
+          "sentence_jp": "彼女は経験を活かして成功したビジネスを始めました。"
+        },
+        "business": {
+          "sentence_en": "We need to leverage our technological advantages in the upcoming project.",
+          "sentence_jp": "今後のプロジェクトで技術的な優位性を生かす必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The firm leveraged its strong brand reputation to attract more clients.",
+          "sentence_jp": "その会社は強いブランド力を活用して顧客を増やしました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "By leveraging her network of contacts, she was able to expedite the process significantly.",
+          "sentence_jp": "彼女は人脈を活用することでプロセスを大幅に早めることができました。"
+        },
+        "business": {
+          "sentence_en": "Effectively leveraging our core competencies will be crucial for maintaining competitive advantage.",
+          "sentence_jp": "コアコンピテンシーを効果的に活用することが競争優位を維持するために重要です。"
+        },
+        "toeic": {
+          "sentence_en": "The company plans to leverage emerging technologies to optimize operations and reduce costs over the next fiscal year.",
+          "sentence_jp": "その会社は次の会計年度に新興技術を活用して業務を最適化し、コストを削減する計画です。"
+        }
+      }
+    }
+  },
+  {
+    "word": "meeting",
+    "phonetic_jp": "ミーティング",
+    "stress": "ˈmiː.tɪŋ",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A gathering of people to discuss something.",
+        "definition_jp": "人々が何かを話し合うために集まること"
+      }
+    ],
+    "usage_notes": "通常、仕事や学校で計画された集まりを指すことが多いです。",
+    "synonyms": [
+      "conference",
+      "assembly",
+      "gathering"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "We have a meeting at noon.",
+          "sentence_jp": "私たちは正午にミーティングがあります。"
+        },
+        "business": {
+          "sentence_en": "The team meeting is in the small room.",
+          "sentence_jp": "チームミーティングは小さな部屋であります。"
+        },
+        "toeic": {
+          "sentence_en": "The meeting starts at 3 PM in conference room B.",
+          "sentence_jp": "ミーティングは午後3時に会議室Bで始まります。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "We had a meeting to plan our summer vacation together.",
+          "sentence_jp": "私たちは一緒に夏休みを計画するためにミーティングを開きました。"
+        },
+        "business": {
+          "sentence_en": "The quarterly meeting will review last quarter’s performance.",
+          "sentence_jp": "四半期ミーティングでは、前四半期の業績を見直すことになっています。"
+        },
+        "toeic": {
+          "sentence_en": "Please confirm your attendance at the project meeting scheduled for Thursday.",
+          "sentence_jp": "木曜日に予定されているプロジェクトミーティングへの出席を確認してください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After the unexpected meeting, we decided to change our weekend plans entirely.",
+          "sentence_jp": "予期せぬミーティングの後、私たちは週末の計画を完全に変更することに決めました。"
+        },
+        "business": {
+          "sentence_en": "The board meeting addressed several critical issues affecting the company’s future growth.",
+          "sentence_jp": "取締役会のミーティングでは、会社の将来の成長に影響を及ぼすいくつかの重要な問題が検討されました。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, the manager outlined detailed strategies to increase sales by 15% next quarter.",
+          "sentence_jp": "ミーティング中、マネージャーは次の四半期に売上を15％増加させるための詳細な戦略を説明しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "negotiate",
+    "phonetic_jp": "ネゴシエイト",
+    "stress": "nɪˈɡoʊʃieɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To discuss and try to reach an agreement.",
+        "definition_jp": "合意に達するために話し合うこと"
+      }
+    ],
+    "usage_notes": "ビジネスシーンでよく使われる動詞です。",
+    "synonyms": [
+      "bargain",
+      "discuss",
+      "mediate"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "We negotiate prices when we shop.",
+          "sentence_jp": "買い物をするときに値段を交渉します。"
+        },
+        "business": {
+          "sentence_en": "They negotiate contracts carefully.",
+          "sentence_jp": "彼らは契約を慎重に交渉します。"
+        },
+        "toeic": {
+          "sentence_en": "The company will negotiate with suppliers next week.",
+          "sentence_jp": "会社は来週、仕入先と交渉します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "After several talks, they negotiated a fair price for the car.",
+          "sentence_jp": "数回の話し合いの後、彼らは車の適正な価格を交渉しました。"
+        },
+        "business": {
+          "sentence_en": "The management team negotiated the terms of the merger with the other company.",
+          "sentence_jp": "経営陣は他社と合併条件を交渉しました。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, they negotiated payment schedules and delivery dates.",
+          "sentence_jp": "会議中に支払いスケジュールと納期を交渉しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "They negotiated a complex agreement that balanced both parties’ interests and long-term goals.",
+          "sentence_jp": "彼らは双方の利益と長期目標を調和させた複雑な合意を交渉しました。"
+        },
+        "business": {
+          "sentence_en": "The executive team skillfully negotiated the contract clauses to mitigate potential risks and protect company interests.",
+          "sentence_jp": "経営陣は契約条項を巧みに交渉し、潜在的なリスクを軽減し会社の利益を守りました。"
+        },
+        "toeic": {
+          "sentence_en": "In the detailed negotiation session, the parties resolved disputes by adjusting service terms and revising payment structures.",
+          "sentence_jp": "詳細な交渉の中で、当事者はサービス条件の調整と支払い構造の改定により紛争を解決しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "neighborhood",
+    "phonetic_jp": "ネイバーフッド",
+    "stress": "ˈneɪbərˌhʊd",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A neighborhood is a district or area where people live.",
+        "definition_jp": "近所とは、人々が住んでいる地域のこと"
+      }
+    ],
+    "usage_notes": "「neighborhood」は住宅地や地区の意味で使われることが多いです。",
+    "synonyms": [
+      "area",
+      "district",
+      "community"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I like my neighborhood because it is quiet.",
+          "sentence_jp": "私は静かなので自分の近所が好きです。"
+        },
+        "business": {
+          "sentence_en": "Our office is located in a busy neighborhood downtown.",
+          "sentence_jp": "当社のオフィスは中心部の賑やかな近所にあります。"
+        },
+        "toeic": {
+          "sentence_en": "The apartment is in a safe neighborhood near the station.",
+          "sentence_jp": "そのアパートは駅の近くの安全な近所にあります。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Many families enjoy living in this neighborhood because of the parks and schools.",
+          "sentence_jp": "多くの家族が公園や学校があるこの近所に住むことを楽しんでいます。"
+        },
+        "business": {
+          "sentence_en": "The company considers the neighborhood's demographics when choosing the new store location.",
+          "sentence_jp": "会社は新しい店舗の場所を選ぶ際に、その近所の人口構成を考慮します。"
+        },
+        "toeic": {
+          "sentence_en": "The real estate agent explained that the neighborhood has many amenities for residents.",
+          "sentence_jp": "不動産業者はその近所に住民向けの多くの施設があると説明しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Living in a neighborhood with a strong sense of community can provide a supportive environment for all residents.",
+          "sentence_jp": "強いコミュニティ意識を持つ近所に住むことは、すべての住民にとって支え合う環境を提供します。"
+        },
+        "business": {
+          "sentence_en": "During the urban development project, the company assessed how changes would impact the neighborhood’s socioeconomic dynamics.",
+          "sentence_jp": "都市開発プロジェクトの間に、会社は変化が近所の社会経済的な動態にどのような影響を与えるかを評価しました。"
+        },
+        "toeic": {
+          "sentence_en": "The meeting focused on improving security within the neighborhood by installing new surveillance systems and increasing patrol frequency.",
+          "sentence_jp": "会議は新しい監視システムの設置と巡回頻度の増加によって近所の安全を向上させることに集中しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "notify",
+    "phonetic_jp": "ノーティファイ",
+    "stress": "ˈnoʊ.t̬ɪ.faɪ",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To inform someone about something officially or formally.",
+        "definition_jp": "正式に誰かに知らせること"
+      }
+    ],
+    "usage_notes": "「notify」は公式な連絡や告知に使われることが多いです。",
+    "synonyms": [
+      "inform",
+      "alert",
+      "advise"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "Please notify me when you arrive.",
+          "sentence_jp": "着いたら教えてください。"
+        },
+        "business": {
+          "sentence_en": "Notify the manager about the meeting.",
+          "sentence_jp": "会議についてマネージャーに知らせてください。"
+        },
+        "toeic": {
+          "sentence_en": "The company will notify employees of any changes.",
+          "sentence_jp": "会社は従業員に変更があれば通知します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I notified my friend about the change in plans yesterday.",
+          "sentence_jp": "昨日本当に計画の変更を友達に知らせました。"
+        },
+        "business": {
+          "sentence_en": "The HR department notified applicants about the interview schedule.",
+          "sentence_jp": "人事部は応募者に面接スケジュールを通知しました。"
+        },
+        "toeic": {
+          "sentence_en": "Please notify the support team immediately if you encounter any issues.",
+          "sentence_jp": "問題があればすぐにサポートチームに通知してください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "She promptly notified everyone involved to avoid any confusion during the event.",
+          "sentence_jp": "彼女はイベント中の混乱を避けるため、関係者全員に速やかに知らせました。"
+        },
+        "business": {
+          "sentence_en": "The legal department must be notified in writing regarding any contractual amendments.",
+          "sentence_jp": "契約の修正については法務部に書面で通知しなければなりません。"
+        },
+        "toeic": {
+          "sentence_en": "Employees are required to notify their supervisors in advance if they need to take extended leave.",
+          "sentence_jp": "従業員は長期休暇が必要な場合、事前に上司に通知する必要があります。"
+        }
+      }
+    }
+  },
+  {
+    "word": "nuance",
+    "phonetic_jp": "ニュアンス",
+    "stress": "ˈnuː.ɑːns",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A subtle difference in meaning or feeling.",
+        "definition_jp": "意味や感情の微妙な違いのこと"
+      }
+    ],
+    "usage_notes": "「ニュアンス」は話や表現の細かな差異を説明するときに使う",
+    "synonyms": [
+      "shade",
+      "hint",
+      "subtlety"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I like the nuance in her voice.",
+          "sentence_jp": "私は彼女の声のニュアンスが好きです。"
+        },
+        "business": {
+          "sentence_en": "Please explain the nuance in this report.",
+          "sentence_jp": "この報告書のニュアンスを説明してください。"
+        },
+        "toeic": {
+          "sentence_en": "The nuance of the message is important.",
+          "sentence_jp": "そのメッセージのニュアンスは重要です。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "He noticed the subtle nuance in her opinion during the discussion.",
+          "sentence_jp": "彼は議論中に彼女の意見の微妙なニュアンスに気づきました。"
+        },
+        "business": {
+          "sentence_en": "Understanding the nuance of client feedback is crucial for product improvement.",
+          "sentence_jp": "顧客のフィードバックのニュアンスを理解することは、製品改善に不可欠です。"
+        },
+        "toeic": {
+          "sentence_en": "The speaker's tone added a nuance that changed the meaning of the statement.",
+          "sentence_jp": "話者の口調が意味を変えるニュアンスを加えました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Appreciating the nuance in complex emotions often requires deep empathy and insight.",
+          "sentence_jp": "複雑な感情のニュアンスを理解するには、深い共感と洞察力が必要なことがあります。"
+        },
+        "business": {
+          "sentence_en": "The nuanced differences between the two marketing strategies led to vastly different customer responses.",
+          "sentence_jp": "二つのマーケティング戦略のニュアンスの違いが顧客の反応に大きな差をもたらしたことです。"
+        },
+        "toeic": {
+          "sentence_en": "Careful attention to the nuanced language in the contract can prevent future misunderstandings.",
+          "sentence_jp": "契約書のニュアンスに注意深く目を向けることで将来の誤解を防げることです。"
+        }
+      }
+    }
+  },
+  {
+    "word": "overwhelm",
+    "phonetic_jp": "オウヴァーホウェルム",
+    "stress": "ˌoʊvərˈwɛlm",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "to give someone too much to deal with emotionally or physically",
+        "definition_jp": "感情的または肉体的に処理しきれないほどの負担を与えること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "to defeat someone completely",
+        "definition_jp": "相手を完全に打ち負かすこと"
+      }
+    ],
+    "usage_notes": "日常会話やビジネスでよく使われる動詞です。",
+    "synonyms": [
+      "overcome",
+      "bury",
+      "submerge"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I feel overwhelmed by my homework.",
+          "sentence_jp": "宿題が多すぎて圧倒されています。"
+        },
+        "business": {
+          "sentence_en": "The manager was overwhelmed with emails.",
+          "sentence_jp": "マネージャーはメールの量に圧倒されました。"
+        },
+        "toeic": {
+          "sentence_en": "The office was overwhelmed after the big project deadline.",
+          "sentence_jp": "大きなプロジェクトの締め切り後、オフィスは混乱しました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She was overwhelmed with emotions after hearing the good news.",
+          "sentence_jp": "良い知らせを聞いて彼女は感情に圧倒されました。"
+        },
+        "business": {
+          "sentence_en": "Our team was overwhelmed by the unexpected increase in workload last month.",
+          "sentence_jp": "先月、予期せぬ仕事量の増加にチームは圧倒されました。"
+        },
+        "toeic": {
+          "sentence_en": "Due to overwhelming demand, the company needed to hire more staff immediately.",
+          "sentence_jp": "圧倒的な需要のため、会社はすぐにスタッフを増員する必要がありました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After the sudden break-up, he was overwhelmed by a flood of mixed feelings and uncertainty about the future.",
+          "sentence_jp": "突然の別れの後、彼は入り混じった感情と将来への不安に圧倒されました。"
+        },
+        "business": {
+          "sentence_en": "The executive expressed being overwhelmed by the sheer volume of complex data required for the quarterly report preparation.",
+          "sentence_jp": "その役員は四半期報告書の準備に必要な複雑なデータの膨大さに圧倒されていると述べました。"
+        },
+        "toeic": {
+          "sentence_en": "In response to the overwhelming response from clients, the company decided to expand its customer service team to maintain satisfaction levels.",
+          "sentence_jp": "顧客からの圧倒的な反応を受けて、会社は満足度を保つためにカスタマーサービスチームを拡大することに決めました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "perspective",
+    "phonetic_jp": "パースペクティブ",
+    "stress": "pərˈspɛktɪv",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A way of thinking about something.",
+        "definition_jp": "物事を考える見方のこと"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The art of showing objects in a realistic way on a flat surface.",
+        "definition_jp": "平らな面に物を現実的に描写する技法のこと"
+      }
+    ],
+    "usage_notes": "主に視点や見方を表すときに使われる。",
+    "synonyms": [
+      "viewpoint",
+      "outlook",
+      "angle"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "She has a positive perspective on life.",
+          "sentence_jp": "彼女は人生に対して前向きな見方を持っています。"
+        },
+        "business": {
+          "sentence_en": "We need a new perspective for this project.",
+          "sentence_jp": "このプロジェクトには新しい見方が必要です。"
+        },
+        "toeic": {
+          "sentence_en": "Please share your perspective in the meeting.",
+          "sentence_jp": "会議であなたの見方を共有してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "From my perspective, the movie was very interesting.",
+          "sentence_jp": "私の見方では、その映画はとても面白かったです。"
+        },
+        "business": {
+          "sentence_en": "The manager offered a different perspective during the discussion.",
+          "sentence_jp": "マネージャーは議論の中で異なる視点を示しました。"
+        },
+        "toeic": {
+          "sentence_en": "The report provides a comprehensive perspective on market trends.",
+          "sentence_jp": "その報告書は市場動向について包括的な見方を提供しています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Gaining perspective often requires stepping back and reflecting on the bigger picture.",
+          "sentence_jp": "見方を得るには、一歩引いて全体像を振り返ることがよく必要です。"
+        },
+        "business": {
+          "sentence_en": "Incorporating diverse perspectives is crucial for innovative problem-solving in a global business environment.",
+          "sentence_jp": "多様な見方を取り入れることは、グローバルなビジネス環境での革新的な問題解決に不可欠です。"
+        },
+        "toeic": {
+          "sentence_en": "The seminar emphasized the importance of understanding customer perspectives to improve service quality.",
+          "sentence_jp": "セミナーではサービス品質向上のために顧客の見方を理解する重要性が強調されました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "pivot",
+    "phonetic_jp": "ピボット",
+    "stress": "'pɪvət",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A central point or shaft on which something turns or balances.",
+        "definition_jp": "物が回転したり、バランスをとったりする中心点や軸のこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To turn or rotate on a central point.",
+        "definition_jp": "中心点を軸に回転すること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To change direction or strategy significantly.",
+        "definition_jp": "方向や戦略を大きく変えること"
+      }
+    ],
+    "usage_notes": "ビジネスでは戦略の転換を指すことが多いです。",
+    "synonyms": [
+      "turn",
+      "rotate",
+      "shift"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The door pivots on strong hinges.",
+          "sentence_jp": "ドアは丈夫なヒンジで回転します。"
+        },
+        "business": {
+          "sentence_en": "Our plan will pivot to focus on new markets.",
+          "sentence_jp": "私たちの計画は新しい市場に集中するために方向転換します。"
+        },
+        "toeic": {
+          "sentence_en": "The meeting will pivot around the sales results.",
+          "sentence_jp": "会議は売上結果を中心に進みます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She quickly pivoted when the conversation changed topic.",
+          "sentence_jp": "話題が変わると彼女は素早く対応しました。"
+        },
+        "business": {
+          "sentence_en": "The company decided to pivot its business model to adapt to the market.",
+          "sentence_jp": "会社は市場に適応するためビジネスモデルを転換することに決めました。"
+        },
+        "toeic": {
+          "sentence_en": "During the conference call, the discussion pivoted to budget concerns.",
+          "sentence_jp": "電話会議中、議論は予算の問題に移りました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "As her interests evolved, she decided to pivot her career toward environmental science.",
+          "sentence_jp": "彼女の興味が変わるにつれて、環境科学の分野にキャリアを転換することにしました。"
+        },
+        "business": {
+          "sentence_en": "Faced with declining sales, the management team strategically pivoted to digital marketing solutions.",
+          "sentence_jp": "売上減少に直面し、経営陣は戦略的にデジタルマーケティングに方向転換しました。"
+        },
+        "toeic": {
+          "sentence_en": "The company’s quarterly report highlighted the need to pivot operations in response to new industry regulations.",
+          "sentence_jp": "会社の四半期報告は、新しい業界規制への対応として事業運営の転換が必要であることを強調しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "premises",
+    "phonetic_jp": "プレミスィズ",
+    "stress": "ˈprɛmɪsɪz",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "Land and buildings owned by a company or person.",
+        "definition_jp": "会社や個人が所有する土地や建物のこと"
+      }
+    ],
+    "usage_notes": "通常複数形で使われることが多いです。",
+    "synonyms": [
+      "property",
+      "site",
+      "facility"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The store is closed today. The premises are empty.",
+          "sentence_jp": "お店は今日閉まっています。敷地内は誰もいません。"
+        },
+        "business": {
+          "sentence_en": "Please do not smoke anywhere on the premises.",
+          "sentence_jp": "敷地内での喫煙はご遠慮ください。"
+        },
+        "toeic": {
+          "sentence_en": "The company will clean the premises tomorrow morning.",
+          "sentence_jp": "会社は明日の朝、敷地内を清掃します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "Our family had a big party at the premises last weekend.",
+          "sentence_jp": "先週末、私たちの家族は敷地内で大きなパーティーをしました。"
+        },
+        "business": {
+          "sentence_en": "The security team regularly inspects all premises for safety hazards.",
+          "sentence_jp": "警備チームは定期的に敷地内の安全上の危険を点検しています。"
+        },
+        "toeic": {
+          "sentence_en": "All employees must wear badges while on company premises.",
+          "sentence_jp": "全従業員は会社の敷地内にいる間、バッジを着用しなければなりません。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After the storm, many residents found damage throughout their premises, causing distress and inconvenience.",
+          "sentence_jp": "嵐の後、多くの住民が敷地内に損害を見つけ、困惑と不便を感じました。"
+        },
+        "business": {
+          "sentence_en": "In accordance with new regulations, the company has upgraded the fire safety equipment across all premises.",
+          "sentence_jp": "新しい規制に従い、会社はすべての敷地内の火災安全設備を改良しました。"
+        },
+        "toeic": {
+          "sentence_en": "The leasing agreement specifies that any alterations to the premises require prior written consent from the property owner.",
+          "sentence_jp": "賃貸契約書には、敷地内の変更には事前に所有者の書面同意が必要と明記されています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "prioritize",
+    "phonetic_jp": "プライオリタイズ",
+    "stress": "ˈpraɪəˌrɪtaɪz",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To arrange tasks or items in order of importance.",
+        "definition_jp": "重要さの順に仕事や物事を整理すること"
+      }
+    ],
+    "usage_notes": "ビジネスや日常生活でよく使われ、効率的な作業管理を示す言葉です。",
+    "synonyms": [
+      "rank",
+      "organize",
+      "arrange"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I prioritize my homework every day.",
+          "sentence_jp": "私は毎日宿題を優先します。"
+        },
+        "business": {
+          "sentence_en": "We should prioritize the urgent emails first.",
+          "sentence_jp": "まず緊急のメールを優先すべきです。"
+        },
+        "toeic": {
+          "sentence_en": "Please prioritize the reports due tomorrow.",
+          "sentence_jp": "明日までのレポートを優先してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She learned to prioritize her tasks to avoid stress.",
+          "sentence_jp": "彼女はストレスを避けるために仕事の優先順位をつけることを学びました。"
+        },
+        "business": {
+          "sentence_en": "The manager asked the team to prioritize projects with the highest ROI.",
+          "sentence_jp": "マネージャーはチームに最も投資利益率の高いプロジェクトを優先するように求めました。"
+        },
+        "toeic": {
+          "sentence_en": "During the meeting, the director instructed us to prioritize cost-cutting measures.",
+          "sentence_jp": "会議中に、部長はコスト削減策を優先するよう指示しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "In order to effectively manage time, it is crucial to prioritize tasks based on deadlines and significance.",
+          "sentence_jp": "時間を効果的に管理するためには、締め切りや重要性に基づいて仕事に優先順位をつけることが重要です。"
+        },
+        "business": {
+          "sentence_en": "To maximize productivity, the executive emphasized the necessity to prioritize strategic initiatives over routine tasks.",
+          "sentence_jp": "生産性を最大化するために、役員は日常業務よりも戦略的な取り組みを優先する必要性を強調しました。"
+        },
+        "toeic": {
+          "sentence_en": "The project coordinator must prioritize deliverables according to client requirements and timeline constraints to ensure timely completion.",
+          "sentence_jp": "プロジェクトコーディネーターはクライアントの要望とタイムラインの制約に従って成果物の優先順位を決め、期限内の完成を確実にしなければなりません。"
+        }
+      }
+    }
+  },
+  {
+    "word": "provision",
+    "phonetic_jp": "プロヴィジョン",
+    "stress": "prəˈvɪʒ.ən",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "the act of providing something that is needed",
+        "definition_jp": "必要なものを用意すること"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "a condition in a legal document or agreement",
+        "definition_jp": "法律文書や契約書における条件のこと"
+      }
+    ],
+    "usage_notes": "「provision」は提供や用意という意味と、契約書の条項という意味の両方があるので注意してください。",
+    "synonyms": [
+      "supply",
+      "stipulation",
+      "arrangement"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "She made provisions for the party.",
+          "sentence_jp": "彼女はパーティーの準備をしました。"
+        },
+        "business": {
+          "sentence_en": "The provision of resources is necessary.",
+          "sentence_jp": "資源の提供は必要です。"
+        },
+        "toeic": {
+          "sentence_en": "The contract has a provision about payment dates.",
+          "sentence_jp": "契約書には支払日の条項があります。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "We need to ensure the provision of enough food during the trip.",
+          "sentence_jp": "旅行中に十分な食べ物の用意を確実にする必要があります。"
+        },
+        "business": {
+          "sentence_en": "This clause is an important provision in the business agreement.",
+          "sentence_jp": "この条項は契約書における重要な規定です。"
+        },
+        "toeic": {
+          "sentence_en": "Please review the provision regarding cancellation policies carefully.",
+          "sentence_jp": "キャンセル規定に関する条項をよく確認してください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Her careful provision of all necessary documents helped the event run smoothly.",
+          "sentence_jp": "彼女が必要な書類をすべて用意したおかげで、イベントは順調に進みました。"
+        },
+        "business": {
+          "sentence_en": "The provision for dispute resolution in the contract helps avoid costly legal battles.",
+          "sentence_jp": "契約書の紛争解決条項は、高額な法律紛争を回避するのに役立ちます。"
+        },
+        "toeic": {
+          "sentence_en": "According to the provision signed last month, the supplier must deliver materials by next Friday.",
+          "sentence_jp": "先月署名された条項によると、供給業者は次の金曜日までに材料を納入しなければなりません。"
+        }
+      }
+    }
+  },
+  {
+    "word": "quiet",
+    "phonetic_jp": "クワイエット",
+    "stress": "ˈkwaɪət",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Making little or no noise.",
+        "definition_jp": "ほとんど音がしないこと"
+      },
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Calm and peaceful with no disturbance.",
+        "definition_jp": "騒がしくなく落ち着いているさま"
+      }
+    ],
+    "usage_notes": "「quiet」は騒音が少ない環境や静かな性格を表しますが、場面によって意味が変わることがあります。",
+    "synonyms": [
+      "silent",
+      "calm",
+      "peaceful"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The library is very quiet.",
+          "sentence_jp": "図書館はとても静かです。"
+        },
+        "business": {
+          "sentence_en": "Please keep the office quiet during meetings.",
+          "sentence_jp": "会議中はオフィスを静かにしてください。"
+        },
+        "toeic": {
+          "sentence_en": "The quiet room is reserved for phone calls.",
+          "sentence_jp": "静かな部屋は電話用に予約されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I like to walk in quiet parks to relax after work.",
+          "sentence_jp": "仕事の後は静かな公園を歩くのが好きです。"
+        },
+        "business": {
+          "sentence_en": "A quiet environment helps employees concentrate on their tasks.",
+          "sentence_jp": "静かな環境は従業員が仕事に集中するのに役立ちます。"
+        },
+        "toeic": {
+          "sentence_en": "During the presentation, please remain quiet to avoid distractions.",
+          "sentence_jp": "発表中は集中を妨げないよう静かにしてください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Despite the city's noise, I found a quiet café where I could read peacefully.",
+          "sentence_jp": "街の騒音にもかかわらず、静かに読書できるカフェを見つけました。"
+        },
+        "business": {
+          "sentence_en": "Ensuring a quiet workspace is essential for boosting employee productivity and maintaining focus.",
+          "sentence_jp": "静かな作業環境を確保することは、従業員の生産性向上と集中維持に不可欠です。"
+        },
+        "toeic": {
+          "sentence_en": "The hotel requests guests to keep their rooms quiet between 10 pm and 7 am to maintain a pleasant stay for everyone.",
+          "sentence_jp": "ホテルはすべての宿泊客が快適に過ごせるよう、午後10時から午前7時までの間は部屋を静かにするようお願いしています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "receipt",
+    "phonetic_jp": "レシート",
+    "stress": "rɪˈsiːt",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A paper that shows you paid for something.",
+        "definition_jp": "何かを支払ったことを示す紙のこと"
+      },
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The act of receiving something.",
+        "definition_jp": "何かを受け取ることのさま"
+      }
+    ],
+    "usage_notes": "販売や取引の証明として使われることが多いです。",
+    "synonyms": [
+      "proof of purchase",
+      "bill",
+      "invoice"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I kept the receipt after buying the book.",
+          "sentence_jp": "本を買った後、レシートをとっておきました。"
+        },
+        "business": {
+          "sentence_en": "Please send me the receipt for the office supplies.",
+          "sentence_jp": "事務用品のレシートを送ってください。"
+        },
+        "toeic": {
+          "sentence_en": "The receipt shows the total price and date.",
+          "sentence_jp": "レシートには合計金額と日付が表示されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She checked the receipt to make sure the price was correct.",
+          "sentence_jp": "彼女は値段が正しいかどうかレシートで確認しました。"
+        },
+        "business": {
+          "sentence_en": "All employees must keep receipts for their travel expenses.",
+          "sentence_jp": "すべての従業員は出張費用のレシートを保管しなければなりません。"
+        },
+        "toeic": {
+          "sentence_en": "After the meeting, the manager reviewed the receipt and approved the payment.",
+          "sentence_jp": "会議の後、マネージャーはレシートを確認し支払いを承認しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "I always save my receipts in case I want to return something or check my spending.",
+          "sentence_jp": "返品したり支出を確認したりするために、いつもレシートを保存しています。"
+        },
+        "business": {
+          "sentence_en": "The accounting department requested receipts for all transactions made last quarter to ensure compliance.",
+          "sentence_jp": "経理部はコンプライアンスを確認するため、前四半期に行われたすべての取引のレシートを求めました。"
+        },
+        "toeic": {
+          "sentence_en": "During the audit, the finance team meticulously examined every receipt to verify the accuracy of reported expenses.",
+          "sentence_jp": "監査の間、財務チームは報告された経費の正確性を確認するため、すべてのレシートを綿密に調査しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "reimburse",
+    "phonetic_jp": "リインバース",
+    "stress": "ˌriː.ɪmˈbɜːrs",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To pay back money to someone for expenses they have paid.",
+        "definition_jp": "支払った費用を返金すること"
+      }
+    ],
+    "usage_notes": "主にビジネスや会計の文脈で使われることが多いです。",
+    "synonyms": [
+      "repay",
+      "refund",
+      "compensate"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I will reimburse you for the taxi fare.",
+          "sentence_jp": "私はあなたのタクシー代を払い戻します。"
+        },
+        "business": {
+          "sentence_en": "The company will reimburse your travel expenses.",
+          "sentence_jp": "会社はあなたの交通費を払い戻します。"
+        },
+        "toeic": {
+          "sentence_en": "Please submit your receipts to get reimbursed.",
+          "sentence_jp": "払い戻しを受けるために領収書を提出してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "After paying for the dinner, she reimbursed me the money the next day.",
+          "sentence_jp": "夕食代を支払った後、彼女は翌日に私にそのお金を払い戻しました。"
+        },
+        "business": {
+          "sentence_en": "Employees need to fill out the reimbursement form for any expenses incurred during business trips.",
+          "sentence_jp": "従業員は出張中に発生した費用について払い戻し申請書を記入する必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The finance department reimburses costs after verifying all submitted documents carefully.",
+          "sentence_jp": "経理部は提出された書類を慎重に確認した後、費用を払い戻します。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Since I had to cover the registration fees upfront, the organizer promised to reimburse me promptly.",
+          "sentence_jp": "先に登録料を立て替えたので、主催者はすぐに返金することを約束しました。"
+        },
+        "business": {
+          "sentence_en": "Our company policy clearly states that any out-of-pocket expenditures must be reimbursed within thirty days of submission.",
+          "sentence_jp": "当社の方針は、いかなる自己負担経費も提出後30日以内に払い戻されることを明確に規定しています。"
+        },
+        "toeic": {
+          "sentence_en": "During the quarterly meeting, the manager reminded employees that all reimbursement claims require original receipts and proper documentation to be processed.",
+          "sentence_jp": "四半期会議でマネージャーは、すべての払い戻し請求には元の領収書と適切な書類が必要であると社員に再確認しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "renovation",
+    "phonetic_jp": "リノベーション",
+    "stress": "ˌrenəˈveɪʃən",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The process of improving or repairing a building.",
+        "definition_jp": "建物を改良または修理すること"
+      }
+    ],
+    "usage_notes": "リフォームとほぼ同じ意味で使われることが多いです。",
+    "synonyms": [
+      "remodeling",
+      "restoration",
+      "refurbishment"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "We are doing a renovation at our house.",
+          "sentence_jp": "私たちは家でリノベーションをしています。"
+        },
+        "business": {
+          "sentence_en": "The renovation of the office will finish next week.",
+          "sentence_jp": "オフィスのリノベーションは来週に終了します。"
+        },
+        "toeic": {
+          "sentence_en": "Please note the renovation starts on July 1st.",
+          "sentence_jp": "リノベーションは7月1日に始まることにご注意ください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "After the renovation, the kitchen looks much more modern.",
+          "sentence_jp": "リノベーションの後、キッチンはずっと現代的に見えます。"
+        },
+        "business": {
+          "sentence_en": "Due to renovation, some departments will temporarily relocate.",
+          "sentence_jp": "リノベーションのため、一部の部署は一時的に移転します。"
+        },
+        "toeic": {
+          "sentence_en": "The company announced its renovation plan during the meeting.",
+          "sentence_jp": "会議中に会社はリノベーション計画を発表しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "The extensive renovation has transformed the old building into a vibrant community center.",
+          "sentence_jp": "大規模なリノベーションによって、古い建物が活気あるコミュニティセンターに変わりました。"
+        },
+        "business": {
+          "sentence_en": "Our strategy to increase productivity includes a thorough renovation of the workspace to enhance collaboration.",
+          "sentence_jp": "生産性向上の戦略には、協力を促進するための作業空間の徹底的なリノベーションが含まれています。"
+        },
+        "toeic": {
+          "sentence_en": "The renovation project, scheduled to begin next month, aims to update all mechanical systems by year-end.",
+          "sentence_jp": "来月開始予定のリノベーションプロジェクトは、年末までに全ての機械設備の更新を目指しています。"
+        }
+      }
+    }
+  },
+  {
+    "word": "report",
+    "phonetic_jp": "リポート",
+    "stress": "rɪˈpɔːrt",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A report is a written or spoken description of an event or situation.",
+        "definition_jp": "出来事や状況について書かれたり話されたりすること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To report means to give information about something to others.",
+        "definition_jp": "他の人に情報を伝えること"
+      }
+    ],
+    "usage_notes": "「report」は書類や口頭の説明の両方に使えます。",
+    "synonyms": [
+      "account",
+      "statement",
+      "record"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I will write a report about the trip.",
+          "sentence_jp": "旅行についてレポートを書きます。"
+        },
+        "business": {
+          "sentence_en": "Please send the sales report by Monday.",
+          "sentence_jp": "月曜日までに売上報告書を送ってください。"
+        },
+        "toeic": {
+          "sentence_en": "The report shows increased profits this quarter.",
+          "sentence_jp": "その報告書は今四半期の利益増加を示しています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She reported the accident to the police last night.",
+          "sentence_jp": "彼女は昨夜事故を警察に報告しました。"
+        },
+        "business": {
+          "sentence_en": "The manager will report on the project status at the meeting.",
+          "sentence_jp": "マネージャーは会議でプロジェクトの状況を報告します。"
+        },
+        "toeic": {
+          "sentence_en": "According to the report, customer complaints have decreased recently.",
+          "sentence_jp": "報告によると、最近顧客からの苦情が減っています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After visiting the site, she reported her observations in detail.",
+          "sentence_jp": "現地を訪れた後、彼女は自分の観察結果を詳しく報告しました。"
+        },
+        "business": {
+          "sentence_en": "The quarterly financial report outlines key performance metrics and challenges faced.",
+          "sentence_jp": "四半期ごとの財務報告書は主要な業績指標と直面した課題をまとめています。"
+        },
+        "toeic": {
+          "sentence_en": "The investigation report, completed last week, provides critical insights for future safety measures.",
+          "sentence_jp": "先週完成した調査報告書は、今後の安全対策に重要な洞察を提供します。"
+        }
+      }
+    }
+  },
+  {
+    "word": "resonate",
+    "phonetic_jp": "レゾネイト",
+    "stress": "ˈrɛz.ə.neɪt",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To produce a deep, clear, and continuing sound.",
+        "definition_jp": "深くはっきりと続く音を出すこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To have a strong emotional effect or connection.",
+        "definition_jp": "強い感情的な影響や結びつきを持つこと"
+      }
+    ],
+    "usage_notes": "「resonate」は音が共鳴すること、または感情などが共感することに使われます。",
+    "synonyms": [
+      "echo",
+      "reverberate",
+      "connect"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "The bell resonates loudly in the hall.",
+          "sentence_jp": "ベルはホールで大きく響きます。"
+        },
+        "business": {
+          "sentence_en": "His ideas resonate well with our team.",
+          "sentence_jp": "彼のアイデアは私たちのチームに良く響きます。"
+        },
+        "toeic": {
+          "sentence_en": "The speaker's message resonated with many attendees.",
+          "sentence_jp": "講演者のメッセージは多くの参加者に共感されました。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "The music resonates deeply in my heart, making me feel nostalgic.",
+          "sentence_jp": "その音楽は心に深く響き、懐かしい気持ちにさせます。"
+        },
+        "business": {
+          "sentence_en": "Our marketing strategy must resonate with customers’ needs to increase sales.",
+          "sentence_jp": "売上を伸ばすためには、マーケティング戦略がお客様のニーズに響く必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The new brand message resonates strongly with the target demographic, according to the survey.",
+          "sentence_jp": "調査によれば、新しいブランドメッセージはターゲット層に強く響いています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "The themes of friendship and loss in the novel resonate universally across different cultures.",
+          "sentence_jp": "小説の友情と喪失のテーマは、異なる文化の間で普遍的に響きます。"
+        },
+        "business": {
+          "sentence_en": "To ensure long-term success, our corporate vision must resonate authentically with both employees and stakeholders.",
+          "sentence_jp": "長期的な成功のためには、企業ビジョンが従業員と利害関係者の双方に真摯に響く必要があります。"
+        },
+        "toeic": {
+          "sentence_en": "The keynote speaker's compelling arguments resonated throughout the conference, inspiring many participants to take action.",
+          "sentence_jp": "基調講演者の説得力ある議論は会議全体に響き、多くの参加者が行動を起こすよう促されました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "scalable",
+    "phonetic_jp": "スケーラブル",
+    "stress": "ˈskeɪ.lə.bəl",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Able to be changed in size or amount easily without losing quality.",
+        "definition_jp": "質を失わずにサイズや量を簡単に変えられること"
+      }
+    ],
+    "usage_notes": "主にビジネスや技術の文脈で使われる形容詞です。",
+    "synonyms": [
+      "expandable",
+      "adjustable",
+      "flexible"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "This computer can handle more tasks because it is scalable.",
+          "sentence_jp": "このコンピューターはスケーラブルなので、多くの作業を処理できます。"
+        },
+        "business": {
+          "sentence_en": "Our new system is scalable to support future growth.",
+          "sentence_jp": "当社の新システムは将来の成長を支えるためにスケーラブルです。"
+        },
+        "toeic": {
+          "sentence_en": "The company needs a scalable solution for its expanding network.",
+          "sentence_jp": "会社は拡大するネットワークのためにスケーラブルな解決策が必要です。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I like this app because it is scalable and can work on different devices.",
+          "sentence_jp": "このアプリはスケーラブルで異なるデバイスで動作するので好きです。"
+        },
+        "business": {
+          "sentence_en": "Our product is scalable, allowing businesses to increase capacity without extra cost.",
+          "sentence_jp": "当社の製品はスケーラブルで、追加コストなしに容量を増やせます。"
+        },
+        "toeic": {
+          "sentence_en": "The scalable software can be customized to meet the needs of various departments.",
+          "sentence_jp": "スケーラブルなソフトウェアは様々な部署のニーズに合わせてカスタマイズできます。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Because the platform is highly scalable, it easily adapts to the user's growing demands over time.",
+          "sentence_jp": "プラットフォームは非常にスケーラブルなので、時間の経過とともにユーザーの増大する要求に簡単に適応できます。"
+        },
+        "business": {
+          "sentence_en": "Investing in scalable infrastructure enables companies to efficiently manage increasing workloads while minimizing operational disruptions.",
+          "sentence_jp": "スケーラブルなインフラへの投資は、業務の中断を最小限にしながら増大する作業負荷を効率的に管理できることを企業にもたらします。"
+        },
+        "toeic": {
+          "sentence_en": "The project’s scalable design ensures that the expanded operations will not compromise system performance or security standards.",
+          "sentence_jp": "このプロジェクトのスケーラブルな設計は、拡大された事業がシステムの性能やセキュリティ基準を損なわないことを保証します。"
+        }
+      }
+    }
+  },
+  {
+    "word": "schedule",
+    "phonetic_jp": "スケジュール",
+    "stress": "ˈskɛdʒʊl",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A plan that shows the times when tasks or events will happen.",
+        "definition_jp": "作業やイベントが行われる時間を示す計画のこと"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To arrange for something to happen at a particular time.",
+        "definition_jp": "何かを特定の時間に行うように予定を立てること"
+      }
+    ],
+    "usage_notes": "「スケジュールを立てる」は日常でもビジネスでもよく使います。",
+    "synonyms": [
+      "plan",
+      "timetable",
+      "agenda"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I wrote my schedule for the week.",
+          "sentence_jp": "私は1週間のスケジュールを書きました。"
+        },
+        "business": {
+          "sentence_en": "Please check the meeting schedule.",
+          "sentence_jp": "会議のスケジュールを確認してください。"
+        },
+        "toeic": {
+          "sentence_en": "The schedule shows all flight times today.",
+          "sentence_jp": "スケジュールには今日のすべてのフライト時間が表示されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I adjusted my schedule to meet my friend's new plans.",
+          "sentence_jp": "私は友達の新しい予定に合わせてスケジュールを調整しました。"
+        },
+        "business": {
+          "sentence_en": "The project schedule must be updated regularly to track progress.",
+          "sentence_jp": "プロジェクトのスケジュールは進捗を追跡するために定期的に更新しなければなりません。"
+        },
+        "toeic": {
+          "sentence_en": "According to the schedule, the conference starts at 9 a.m. tomorrow.",
+          "sentence_jp": "スケジュールによると、会議は明日午前9時に始まります。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Despite my busy schedule, I always make time for daily exercise and meditation.",
+          "sentence_jp": "忙しいスケジュールにもかかわらず、私は毎日の運動と瞑想の時間を必ず作ります。"
+        },
+        "business": {
+          "sentence_en": "We should review the project schedule thoroughly to identify any potential delays or bottlenecks.",
+          "sentence_jp": "潜在的な遅れやボトルネックを特定するために、プロジェクトのスケジュールを入念に見直すべきです。"
+        },
+        "toeic": {
+          "sentence_en": "Please be advised that the maintenance schedule has been modified to minimize disruption during business hours.",
+          "sentence_jp": "営業時間中の混乱を最小限に抑えるために、メンテナンスのスケジュールが変更されたことをお知らせします。"
+        }
+      }
+    }
+  },
+  {
+    "word": "stakeholder",
+    "phonetic_jp": "ステークホルダー",
+    "stress": "ˈsteɪkˌhoʊldər",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "A person or group that has an interest or concern in something.",
+        "definition_jp": "何かに関心や利益を持っている人や集団のこと"
+      }
+    ],
+    "usage_notes": "ビジネスやプロジェクト管理でよく使われる用語です。",
+    "synonyms": [
+      "shareholder",
+      "investor",
+      "participant"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "My friend is a stakeholder in the school project.",
+          "sentence_jp": "友達は学校のプロジェクトのステークホルダーです。"
+        },
+        "business": {
+          "sentence_en": "We invited all stakeholders to the meeting.",
+          "sentence_jp": "私たちは全てのステークホルダーを会議に招待しました。"
+        },
+        "toeic": {
+          "sentence_en": "The stakeholders will review the report tomorrow.",
+          "sentence_jp": "ステークホルダーは明日報告書を確認します。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "As a stakeholder, she cares deeply about the community’s future.",
+          "sentence_jp": "彼女はステークホルダーとして、地域社会の未来を深く気にかけています。"
+        },
+        "business": {
+          "sentence_en": "Stakeholders expect transparent communication during the project timeline.",
+          "sentence_jp": "ステークホルダーはプロジェクト期間中の透明なコミュニケーションを期待しています。"
+        },
+        "toeic": {
+          "sentence_en": "The project manager informed the stakeholders about the new deadlines.",
+          "sentence_jp": "プロジェクトマネージャーはステークホルダーに新しい期限について知らせました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "Stakeholders often have diverse opinions, which makes decision-making a complex process.",
+          "sentence_jp": "ステークホルダーはしばしば様々な意見を持ち、意思決定を複雑な過程にします。"
+        },
+        "business": {
+          "sentence_en": "The board meeting focused on aligning the objectives among key stakeholders to ensure project success.",
+          "sentence_jp": "取締役会はプロジェクト成功のため、主要なステークホルダー間の目標調整に集中しました。"
+        },
+        "toeic": {
+          "sentence_en": "During the conference call, the stakeholders debated the financial implications of the proposed strategy.",
+          "sentence_jp": "電話会議中、ステークホルダーは提案された戦略の財務的影響について議論しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "streamline",
+    "phonetic_jp": "ストリームライン",
+    "stress": "ˈstriːm.laɪn",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To improve a process by making it simpler and more efficient.",
+        "definition_jp": "プロセスを簡単で効率的にすること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To design something with smooth, flowing shapes to reduce air or water resistance.",
+        "definition_jp": "空気や水の抵抗を減らすために滑らかな形状に設計すること"
+      }
+    ],
+    "usage_notes": "主に業務や設計の効率化の文脈で使われることが多い。",
+    "synonyms": [
+      "simplify",
+      "rationalize",
+      "optimize"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "We want to streamline our daily tasks.",
+          "sentence_jp": "私たちは日々の作業を効率化したいです。"
+        },
+        "business": {
+          "sentence_en": "The company will streamline its work processes next month.",
+          "sentence_jp": "会社は来月仕事の流れを効率化します。"
+        },
+        "toeic": {
+          "sentence_en": "Please streamline the inventory system by Friday.",
+          "sentence_jp": "金曜日までに在庫管理システムを効率化してください。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I tried to streamline my morning routine to save time.",
+          "sentence_jp": "時間を節約するために朝のルーチンを効率化しようとしました。"
+        },
+        "business": {
+          "sentence_en": "Our department is working hard to streamline communication among teams.",
+          "sentence_jp": "私たちの部署はチーム間のコミュニケーションを効率化するために努力しています。"
+        },
+        "toeic": {
+          "sentence_en": "The manager announced plans to streamline the production line to increase efficiency.",
+          "sentence_jp": "マネージャーは効率を上げるために生産ラインの合理化計画を発表しました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "By adopting new software, she was able to streamline her workflow and reduce mistakes significantly.",
+          "sentence_jp": "新しいソフトウェアを導入することで、彼女は作業の流れを効率化しミスを大幅に減らしました。"
+        },
+        "business": {
+          "sentence_en": "To remain competitive in the market, the corporation must continually streamline its operations and embrace innovative technologies.",
+          "sentence_jp": "市場で競争力を保つために、企業は業務を常に効率化し革新的技術を取り入れることが不可欠です。"
+        },
+        "toeic": {
+          "sentence_en": "During the quarterly meeting, executives discussed ways to streamline customer service protocols to improve satisfaction ratings.",
+          "sentence_jp": "四半期ごとの会議で、経営陣は顧客サービスの手順を効率化して満足度評価を上げる方法を議論しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "tired",
+    "phonetic_jp": "タイアード",
+    "stress": "ˈtaɪərd",
+    "definitions": [
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Feeling a need to rest or sleep.",
+        "definition_jp": "休息や睡眠が必要だと感じること"
+      },
+      {
+        "part_of_speech": "adjective",
+        "definition_en": "Bored or annoyed by something because it is repeated or uninteresting.",
+        "definition_jp": "繰り返しやつまらないことで退屈や嫌気がさすさま"
+      }
+    ],
+    "usage_notes": "「tired」は主に疲れている状態を表すが、比喩的に飽きたという意味も持つ",
+    "synonyms": [
+      "weary",
+      "exhausted",
+      "fatigued"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I am tired after walking all day.",
+          "sentence_jp": "一日中歩いたので疲れました。"
+        },
+        "business": {
+          "sentence_en": "She felt tired after the long meeting.",
+          "sentence_jp": "長い会議の後で彼女は疲れていました。"
+        },
+        "toeic": {
+          "sentence_en": "The staff are tired after working overtime.",
+          "sentence_jp": "スタッフは残業の後で疲れています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "I'm tired of eating the same food every day.",
+          "sentence_jp": "毎日同じ食べ物を食べるのに飽きています。"
+        },
+        "business": {
+          "sentence_en": "The team is tired of repeated errors in the project report.",
+          "sentence_jp": "チームはプロジェクト報告書で繰り返されるミスに疲れています。"
+        },
+        "toeic": {
+          "sentence_en": "Employees expressed that they were tired after completing the quarterly audit.",
+          "sentence_jp": "従業員は四半期監査を終えて疲れたと述べました。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After a long journey across the country, she felt mentally and physically tired.",
+          "sentence_jp": "長い国内旅行の後で、彼女は精神的にも肉体的にも疲れていました。"
+        },
+        "business": {
+          "sentence_en": "The executives appeared visibly tired due to the continuous strategic planning sessions held over several days.",
+          "sentence_jp": "数日にわたる継続的な戦略会議のために、経営陣は明らかに疲れている様子でした。"
+        },
+        "toeic": {
+          "sentence_en": "The manager informed the staff that they might feel tired after adjusting to the new software implementation this quarter.",
+          "sentence_jp": "マネージャーは、今四半期の新しいソフトウェア導入に慣れるためにスタッフは疲れるかもしれないと伝えました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "unwind",
+    "phonetic_jp": "アンワインド",
+    "stress": "ʌnˈwaɪnd",
+    "definitions": [
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To relax after a period of work or stress.",
+        "definition_jp": "仕事やストレスの後にリラックスすること"
+      },
+      {
+        "part_of_speech": "verb",
+        "definition_en": "To undo or loosen something that is wound or twisted.",
+        "definition_jp": "巻かれたりねじれたりしたものをほどくこと"
+      }
+    ],
+    "usage_notes": "よくストレス解消の文脈で使われますが、物理的に巻いたものをほどく意味もあります。",
+    "synonyms": [
+      "relax",
+      "loosen",
+      "release"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I like to unwind by reading a book.",
+          "sentence_jp": "私は本を読んでリラックスするのが好きです。"
+        },
+        "business": {
+          "sentence_en": "After work, I unwind by listening to music.",
+          "sentence_jp": "仕事の後、音楽を聴いてリラックスします。"
+        },
+        "toeic": {
+          "sentence_en": "Employees can unwind in the lounge after meetings.",
+          "sentence_jp": "従業員は会議後にラウンジでリラックスできます。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "She needed some time to unwind after a busy day at school.",
+          "sentence_jp": "彼女は学校で忙しい一日の後にリラックスする時間が必要でした。"
+        },
+        "business": {
+          "sentence_en": "It's important to unwind properly to maintain productivity at work.",
+          "sentence_jp": "仕事の生産性を保つために、適切にリラックスすることが重要です。"
+        },
+        "toeic": {
+          "sentence_en": "Please unwind the cables carefully before setting up the new equipment.",
+          "sentence_jp": "新しい機器を設置する前に、ケーブルを注意してほどいてください。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After the stressful trip, he spent the weekend at home trying to unwind and recuperate.",
+          "sentence_jp": "ストレスの多い旅行の後、彼は週末を家でリラックスして回復しようと過ごしました。"
+        },
+        "business": {
+          "sentence_en": "The management encourages employees to unwind regularly to prevent burnout and maintain high morale.",
+          "sentence_jp": "経営陣は、従業員が燃え尽き症候群を防ぎ、高い士気を維持するために定期的にリラックスすることを奨励しています。"
+        },
+        "toeic": {
+          "sentence_en": "During the training session, the instructor demonstrated how to safely unwind the wires to avoid damage.",
+          "sentence_jp": "研修中、講師は損傷を避けるためにワイヤーを安全にほどく方法を示しました。"
+        }
+      }
+    }
+  },
+  {
+    "word": "weekend",
+    "phonetic_jp": "ウィークエンド",
+    "stress": "ˈwiːkˌɛnd",
+    "definitions": [
+      {
+        "part_of_speech": "noun",
+        "definition_en": "The part of the week when most people don't work, usually Saturday and Sunday.",
+        "definition_jp": "多くの人が仕事をしない週の部分、通常は土曜日と日曜日であること"
+      }
+    ],
+    "usage_notes": "日本では週末が土日ですが、国によって異なることがあります",
+    "synonyms": [
+      "holiday",
+      "days off",
+      "break"
+    ],
+    "examples": {
+      "beginner": {
+        "casual": {
+          "sentence_en": "I like to rest on the weekend.",
+          "sentence_jp": "私は週末に休むのが好きです。"
+        },
+        "business": {
+          "sentence_en": "The office will be closed during the weekend.",
+          "sentence_jp": "オフィスは週末に閉まります。"
+        },
+        "toeic": {
+          "sentence_en": "The meeting is scheduled for the weekend.",
+          "sentence_jp": "会議は週末に予定されています。"
+        }
+      },
+      "intermediate": {
+        "casual": {
+          "sentence_en": "We often go hiking on the weekend to enjoy nature.",
+          "sentence_jp": "私たちは週末に自然を楽しむためにハイキングに行くことがよくあります。"
+        },
+        "business": {
+          "sentence_en": "Please submit your reports by Friday to avoid working on the weekend.",
+          "sentence_jp": "週末に働かないように、金曜日までにレポートを提出してください。"
+        },
+        "toeic": {
+          "sentence_en": "Our company policy states that employees should not work over the weekend unless urgent.",
+          "sentence_jp": "当社の方針では、緊急でない限り、従業員は週末に働かないことになっています。"
+        }
+      },
+      "advanced": {
+        "casual": {
+          "sentence_en": "After a hectic week, spending the weekend relaxing at home helps recharge my energy.",
+          "sentence_jp": "忙しい週の後、家でリラックスして週末を過ごすことがエネルギーを回復するのに役立ちます。"
+        },
+        "business": {
+          "sentence_en": "To improve productivity, the management encourages employees to fully disconnect from work during the weekend.",
+          "sentence_jp": "生産性向上のため、経営陣は従業員が週末に仕事から完全に離れることを奨励しています。"
+        },
+        "toeic": {
+          "sentence_en": "The weekend sales event exceeded expectations, resulting in a 30% increase in revenue compared to last quarter.",
+          "sentence_jp": "週末の販売イベントは予想を超え、前四半期比で売上が30％増加しました。"
+        }
+      }
+    }
+  }
+]
