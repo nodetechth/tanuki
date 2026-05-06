@@ -20,7 +20,10 @@ create table if not exists public.submissions (
   ),
   source_id text not null,
   tutor_id text not null default 'a_san',
-  access_type text not null default 'free' check (access_type in ('free', 'subscriber')),
+  access_type text not null default 'free'
+    check (access_type in ('free', 'subscriber', 'admin_test')),
+  is_test boolean not null default false,
+  test_label text,
   audio_url text not null,
   r2_object_key text not null,
   duration numeric not null default 0,
@@ -109,6 +112,9 @@ create table if not exists public.word_requests (
 
 create index if not exists submissions_user_created_idx
   on public.submissions(user_id, created_at desc);
+
+create index if not exists submissions_user_test_created_idx
+  on public.submissions(user_id, is_test, created_at desc);
 
 create index if not exists submissions_source_user_created_idx
   on public.submissions(source_type, source_id, user_id, created_at desc);

@@ -73,7 +73,9 @@ export async function processSubmissionAssessment(input: {
     });
     await wait(650);
 
-    const previousSubmissions = await listUserSubmissions(submission.userId, 50);
+    const previousSubmissions = await listUserSubmissions(submission.userId, 50, {
+      includeTest: submission.isTest,
+    });
     const previousSubmission =
       previousSubmissions.find(
         (item) =>
@@ -81,6 +83,7 @@ export async function processSubmissionAssessment(input: {
           item.sourceType === submission.sourceType &&
           item.sourceId === submission.sourceId &&
           item.status === "completed" &&
+          item.isTest === submission.isTest &&
           Boolean(item.feedback),
       ) ?? null;
 
@@ -99,13 +102,15 @@ export async function processSubmissionAssessment(input: {
       status: "completed",
       llmRawJson: feedback.rawJson,
     });
-    await markFreeSubmissionUsed(submission.userId);
-    await markListeningShadowingCompleted({
-      userId: submission.userId,
-      sourceType: submission.sourceType,
-      sourceId: submission.sourceId,
-      submissionId: submission.id,
-    });
+    if (!submission.isTest) {
+      await markFreeSubmissionUsed(submission.userId);
+      await markListeningShadowingCompleted({
+        userId: submission.userId,
+        sourceType: submission.sourceType,
+        sourceId: submission.sourceId,
+        submissionId: submission.id,
+      });
+    }
 
     const completed = await getSubmission(submission.id);
     if (!completed) {

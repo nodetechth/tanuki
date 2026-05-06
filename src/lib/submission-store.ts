@@ -27,6 +27,13 @@ function demoStore() {
 }
 
 function fromSupabaseSubmission(row: Record<string, unknown>): Submission {
+  const accessType =
+    row.access_type === "admin_test"
+      ? "admin_test"
+      : row.access_type === "subscriber"
+        ? "subscriber"
+        : "free";
+
   return {
     id: String(row.id),
     userId: String(row.user_id),
@@ -34,7 +41,9 @@ function fromSupabaseSubmission(row: Record<string, unknown>): Submission {
     sourceType: row.source_type === "listening_article" ? "listening_article" : "material",
     sourceId: String(row.source_id ?? row.material_id ?? ""),
     tutorId: String(row.tutor_id ?? "a_san"),
-    accessType: row.access_type === "subscriber" ? "subscriber" : "free",
+    accessType,
+    isTest: Boolean(row.is_test),
+    testLabel: row.test_label ? String(row.test_label) : null,
     audioUrl: String(row.audio_url ?? ""),
     r2ObjectKey: String(row.r2_object_key ?? ""),
     duration: Number(row.duration ?? 0),
@@ -112,7 +121,9 @@ export async function createSubmission(input: {
   sourceType?: Submission["sourceType"];
   sourceId: string;
   tutorId?: string;
-  accessType: "free" | "subscriber";
+  accessType: Submission["accessType"];
+  isTest?: boolean;
+  testLabel?: string | null;
   audioUrl: string;
   r2ObjectKey: string;
   duration: number;
@@ -128,6 +139,8 @@ export async function createSubmission(input: {
       source_id: input.sourceId,
       tutor_id: input.tutorId ?? "a_san",
       access_type: input.accessType,
+      is_test: Boolean(input.isTest),
+      test_label: input.testLabel ?? null,
       audio_url: input.audioUrl,
       r2_object_key: input.r2ObjectKey,
       duration: input.duration,
@@ -151,6 +164,8 @@ export async function createSubmission(input: {
         delete legacyPayload.source_type;
         delete legacyPayload.source_id;
         delete legacyPayload.tutor_id;
+        delete legacyPayload.is_test;
+        delete legacyPayload.test_label;
         const { data: legacyData, error: legacyError } = await supabase
           .from("submissions")
           .insert(legacyPayload)
@@ -178,6 +193,8 @@ export async function createSubmission(input: {
     sourceId: input.sourceId,
     tutorId: input.tutorId ?? "a_san",
     accessType: input.accessType,
+    isTest: Boolean(input.isTest),
+    testLabel: input.testLabel ?? null,
     audioUrl: input.audioUrl,
     r2ObjectKey: input.r2ObjectKey,
     duration: input.duration,
@@ -232,16 +249,23 @@ export async function getSubmission(id: string): Promise<SubmissionWithFeedback 
 export async function listUserSubmissions(
   userId: string,
   limit = 20,
+  options: { includeTest?: boolean } = {},
 ): Promise<SubmissionWithFeedback[]> {
   const supabase = getSupabaseAdmin();
 
   if (supabase) {
-    const { data, error } = await supabase
+    let query = supabase
       .from("submissions")
       .select("*, feedback(*)")
       .eq("user_id", userId)
       .order("created_at", { ascending: false })
       .limit(limit);
+
+    if (!options.includeTest) {
+      query = query.eq("is_test", false);
+    }
+
+    const { data, error } = await query;
 
     if (error || !data) {
       throw new Error(error?.message ?? "Failed to load submissions");
@@ -261,6 +285,7 @@ export async function listUserSubmissions(
   const store = demoStore();
   return Array.from(store.submissions.values())
     .filter((submission) => submission.userId === userId)
+    .filter((submission) => options.includeTest || !submission.isTest)
     .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
     .slice(0, limit)
     .map((submission) => ({

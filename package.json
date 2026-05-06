@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "tts:eval": "node scripts/tts-eval/generate.mjs"
+    "tts:eval": "node scripts/tts-eval/generate.mjs",
+    "tts:articles": "node scripts/content/generate-article-audio.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",

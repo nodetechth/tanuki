@@ -60,6 +60,7 @@ type SpeakView = "home" | "level" | "article" | "history";
 type ArticleBackView = Exclude<SpeakView, "article">;
 type ListeningTextMode = "both" | "english" | "japanese";
 type ListeningWpmSort = "asc" | "desc";
+type AdminCompletionPreview = "actual" | "completed" | "open";
 
 type ProblemWord = {
   word: string;
@@ -106,6 +107,7 @@ type BillingState = {
   dailySubmissionLimit: number;
   canSubmit: boolean;
   isSubscriber: boolean;
+  isAdmin: boolean;
   denialReason: string | null;
 };
 
@@ -604,6 +606,9 @@ export function TanukiApp() {
   const [history, setHistory] = useState<SubmissionWithFeedback[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [billing, setBilling] = useState<BillingState | null>(null);
+  const [adminTestMode, setAdminTestMode] = useState(false);
+  const [adminCompletionPreview, setAdminCompletionPreview] =
+    useState<AdminCompletionPreview>("actual");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [tutorSubmitOpen, setTutorSubmitOpen] = useState(false);
@@ -736,6 +741,19 @@ export function TanukiApp() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authUser?.id]);
+
+  useEffect(() => {
+    if (!authUser || !billing?.isAdmin) {
+      window.setTimeout(() => {
+        setAdminTestMode(false);
+        setAdminCompletionPreview("actual");
+      }, 0);
+      return;
+    }
+
+    void loadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminTestMode, authUser?.id, billing?.isAdmin]);
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -1430,7 +1448,11 @@ export function TanukiApp() {
 
     setHistoryLoading(true);
     try {
-      const response = await fetch("/api/submissions?scope=mine", {
+      const params = new URLSearchParams({ scope: "mine" });
+      if (billing?.isAdmin && adminTestMode) {
+        params.set("includeTest", "true");
+      }
+      const response = await fetch(`/api/submissions?${params.toString()}`, {
         headers: await authHeaders(),
       });
       if (!response.ok) {
@@ -1544,8 +1566,8 @@ export function TanukiApp() {
       return;
     }
 
-    if (billing && !billing.canSubmit) {
-      setError(billing.denialReason ?? "3日間無料体験を開始してください。");
+    if (!canSubmitToday) {
+      setError(billing?.denialReason ?? "3日間無料体験を開始してください。");
       return;
     }
 
@@ -1570,8 +1592,8 @@ export function TanukiApp() {
         return;
       }
 
-      if (billing && !billing.canSubmit) {
-        setError(billing.denialReason ?? "3日間無料体験を開始してください。");
+      if (!canSubmitToday) {
+        setError(billing?.denialReason ?? "3日間無料体験を開始してください。");
         return;
       }
 
@@ -1608,6 +1630,10 @@ export function TanukiApp() {
       }
       formData.append("tutorId", input.tutorId);
       formData.append("duration", String(input.duration));
+      if (billing?.isAdmin && adminTestMode) {
+        formData.append("isTest", "true");
+        formData.append("testLabel", "admin-test");
+      }
       formData.append(
         "audio",
         new File([input.audioBlob], "shadowing.wav", { type: input.audioBlob.type }),
@@ -1749,20 +1775,29 @@ export function TanukiApp() {
     () => materials.filter((material) => material.wpmRange === selectedWpmRange),
     [selectedWpmRange],
   );
+  const productionHistory = useMemo(
+    () => history.filter((item) => !item.isTest),
+    [history],
+  );
+  const testHistory = useMemo(
+    () => history.filter((item) => item.isTest),
+    [history],
+  );
+  const activeHistory = billing?.isAdmin && adminTestMode ? testHistory : productionHistory;
   const completedSourceKeys = useMemo(
     () =>
       new Set(
-        history
+        activeHistory
           .filter((item) => item.status === "completed" && item.feedback)
           .map((item) => `${item.sourceType}:${item.sourceId}`),
       ),
-    [history],
+    [activeHistory],
   );
   const practicedListeningArticleIds = useMemo(
     () =>
       new Set(
         [
-          ...history
+          ...productionHistory
             .filter(
               (item) =>
                 item.status === "completed" &&
@@ -1775,7 +1810,7 @@ export function TanukiApp() {
             .map((state) => state.articleId),
         ],
       ),
-    [history, listeningArticleStates],
+    [productionHistory, listeningArticleStates],
   );
   const visibleListeningArticles = useMemo(
     () => {
@@ -1842,14 +1877,14 @@ export function TanukiApp() {
   }, [submission?.feedback?.problemWords]);
   const visibleHistory = useMemo(
     () =>
-      history.filter(
+      activeHistory.filter(
         (item) => item.status !== "failed" || !hiddenFailedSubmissionIds.has(item.id),
       ),
-    [hiddenFailedSubmissionIds, history],
+    [activeHistory, hiddenFailedSubmissionIds],
   );
   const completedHistory = useMemo(
-    () => visibleHistory.filter((item) => item.status === "completed" && item.feedback),
-    [visibleHistory],
+    () => productionHistory.filter((item) => item.status === "completed" && item.feedback),
+    [productionHistory],
   );
   const completedWpmValues = useMemo(
     () =>
@@ -1870,7 +1905,14 @@ export function TanukiApp() {
   const streak = calculateStreak(loginDays);
   const calendarDays = buildCalendarDays(calendarMonth);
   const markedLoginDays = new Set(loginDays);
-  const canSubmitToday = billing ? billing.canSubmit : true;
+  const actualCanSubmitToday =
+    billing?.isAdmin && adminTestMode ? true : billing ? billing.canSubmit : true;
+  const canSubmitToday =
+    billing?.isAdmin && adminCompletionPreview === "completed"
+      ? false
+      : billing?.isAdmin && adminCompletionPreview === "open"
+        ? true
+        : actualCanSubmitToday;
   const homeBillingMessage = billing?.trialEndsAt
     ? `3日間無料体験中: ${formatJapaneseMonthDay(billing.trialEndsAt)}から有料プランに移行`
     : billing?.isSubscriber
@@ -2134,6 +2176,55 @@ export function TanukiApp() {
           <section className="speak-screen">
             {speakView === "home" ? (
               <>
+                {billing?.isAdmin ? (
+                  <section className="admin-test-panel" aria-label="管理者テスト">
+                    <div>
+                      <span>Admin test</span>
+                      <strong>{adminTestMode ? "テストモード" : "通常モード"}</strong>
+                      <p>
+                        通常モードでは本番の見え方だけを表示します。テストモードの提出は進捗や本日の添削回数に含まれません。
+                      </p>
+                    </div>
+                    <div className="admin-test-controls">
+                      <button
+                        className={!adminTestMode ? "is-active" : ""}
+                        onClick={() => {
+                          setAdminTestMode(false);
+                          setAdminCompletionPreview("actual");
+                        }}
+                        type="button"
+                      >
+                        通常モード
+                      </button>
+                      <button
+                        className={adminTestMode ? "is-active" : ""}
+                        onClick={() => setAdminTestMode(true)}
+                        type="button"
+                      >
+                        テストモード
+                      </button>
+                    </div>
+                    <div className="admin-preview-controls">
+                      <span>本日の表示</span>
+                      {[
+                        ["actual", "実データ"],
+                        ["open", "未完了表示"],
+                        ["completed", "完了済み表示"],
+                      ].map(([value, label]) => (
+                        <button
+                          className={adminCompletionPreview === value ? "is-active" : ""}
+                          key={value}
+                          onClick={() =>
+                            setAdminCompletionPreview(value as AdminCompletionPreview)
+                          }
+                          type="button"
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
                 <section className="speak-card speak-progress-card">
                   <div className="panel-heading">
                     <span>進捗</span>
@@ -2210,6 +2301,7 @@ export function TanukiApp() {
                             <Clock3 size={16} />
                             <span>
                               <strong>{source?.title ?? item.sourceId}</strong>
+                              {item.isTest ? <small>管理者テスト</small> : null}
                               <small>
                                 {new Intl.DateTimeFormat("ja-JP", {
                                   month: "2-digit",

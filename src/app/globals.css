@@ -1382,6 +1382,81 @@ button:disabled {
   font-size: 12px;
 }
 
+.admin-test-panel {
+  align-items: start;
+  background: #eef6ff;
+  border: 1px solid #bdd8f6;
+  border-radius: 18px;
+  color: var(--text);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.admin-test-panel span {
+  color: var(--blue);
+  display: block;
+  font-family: var(--font-geist-mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.admin-test-panel strong {
+  color: var(--text);
+  display: block;
+  font-size: 20px;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.admin-test-panel p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+.admin-test-controls,
+.admin-preview-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.admin-preview-controls {
+  align-items: center;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+}
+
+.admin-preview-controls span {
+  margin-right: 4px;
+}
+
+.admin-test-controls button,
+.admin-preview-controls button {
+  background: #ffffff;
+  border: 1px solid #cbd9e8;
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 850;
+  min-height: 38px;
+  padding: 0 14px;
+}
+
+.admin-test-controls button.is-active,
+.admin-preview-controls button.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #ffffff;
+}
+
 .status-list {
   display: grid;
   gap: 11px;
@@ -2180,6 +2255,15 @@ nav.mobile-footer button.is-active {
   .billing-strip {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .admin-test-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-test-controls,
+  .admin-preview-controls {
+    justify-content: flex-start;
   }
 
   .topbar-actions,

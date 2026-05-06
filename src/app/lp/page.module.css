@@ -1,0 +1,493 @@
+.page {
+  --ink: #3d2b21;
+  --muted: #796b5f;
+  --orange: #ff8a1f;
+  --orange-dark: #f17313;
+  --green: #62b979;
+  --blue: #4d9fe5;
+  --pink: #ff7b77;
+  --cream: #fff8ec;
+  --line: rgba(89, 62, 38, 0.12);
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fff9ef 0%, #fffaf4 45%, #ffffff 100%);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 22px 44px;
+}
+
+.brand {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  margin-bottom: 38px;
+  font-size: 31px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding-top: 10px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(34px, 10.4vw, 54px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.28;
+}
+
+.heroLead {
+  margin: 34px 0 0;
+  color: var(--ink);
+  font-size: clamp(26px, 7.4vw, 38px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.heroLead span {
+  color: var(--orange);
+}
+
+.heroText {
+  max-width: 520px;
+  margin: 34px 0 0;
+  color: var(--muted);
+  font-size: clamp(15px, 4vw, 19px);
+  font-weight: 700;
+  line-height: 1.85;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 8px 0 var(--orange-dark), 0 18px 30px rgba(255, 128, 24, 0.22);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.ctaButton:hover {
+  background: #ff962e;
+  box-shadow: 0 5px 0 var(--orange-dark), 0 14px 24px rgba(255, 128, 24, 0.2);
+  transform: translateY(3px);
+}
+
+.ctaIcon {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--orange);
+  font-weight: 1000;
+}
+
+.ctaNote {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: clamp(11px, 2.8vw, 16px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.heroAction {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  margin-top: 34px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  max-width: 680px;
+  margin: 0 auto 58px;
+  padding: 0 18px;
+}
+
+.featureCard {
+  display: grid;
+  min-height: 92px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(91, 62, 35, 0.07);
+  text-align: center;
+}
+
+.featureCard img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.featureCard strong {
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.featureCard span {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.storyGrid {
+  display: grid;
+  gap: 14px;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 18px 58px;
+}
+
+.storyCard {
+  position: relative;
+  min-height: 134px;
+  border: 1px solid rgba(255, 138, 31, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fffdf8 0%, #fff8ed 100%);
+  box-shadow: 0 14px 36px rgba(104, 74, 40, 0.08);
+  padding: 18px;
+}
+
+.storyNumber {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 1000;
+  margin-bottom: 14px;
+}
+
+.storyCard h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.storyCard p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.stepsSection,
+.comparisonSection,
+.pricingSection {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 18px 58px;
+}
+
+.sectionKicker {
+  margin: 0 0 20px;
+  color: var(--orange);
+  font-size: 22px;
+  font-weight: 1000;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.steps {
+  display: grid;
+  gap: 14px;
+}
+
+.stepCard {
+  min-height: 168px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 38px rgba(91, 62, 35, 0.08);
+  padding: 20px;
+}
+
+.stepNumber {
+  display: inline-block;
+  border-radius: 999px;
+  background: #ffd99b;
+  color: #b46416;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 1000;
+}
+
+.stepCard h2 {
+  margin: 14px 0 8px;
+  color: var(--orange);
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+.stepCard p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.tableWrap {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 38px rgba(91, 62, 35, 0.08);
+}
+
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.tableWrap th,
+.tableWrap td {
+  border-bottom: 1px solid rgba(111, 82, 55, 0.1);
+  padding: 12px 7px;
+}
+
+.tableWrap th {
+  background: #fff5e6;
+  color: var(--muted);
+}
+
+.tableWrap th:first-child,
+.tableWrap td:first-child {
+  text-align: left;
+}
+
+.tableWrap tr:last-child td {
+  border-bottom: 0;
+}
+
+.tanukiCell {
+  color: var(--orange);
+  font-weight: 1000;
+}
+
+.pricingGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.priceCard {
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(91, 62, 35, 0.08);
+}
+
+.priceCard strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 22px;
+  font-weight: 1000;
+}
+
+.priceCard span {
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.priceCard p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.green {
+  background: #ecfbf0;
+  color: #3b9260;
+}
+
+.blue {
+  background: #eef7ff;
+  color: #397fcc;
+}
+
+.orange {
+  background: #fff1d8;
+  color: var(--orange-dark);
+}
+
+.finalCta {
+  max-width: 940px;
+  margin: 0 auto 72px;
+  background: linear-gradient(180deg, #ffd68a 0%, #ffae48 100%);
+  padding: 34px 20px;
+  text-align: center;
+}
+
+.finalCta p {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 1000;
+  line-height: 1.25;
+}
+
+.finalCta span {
+  display: block;
+  margin-top: 14px;
+  color: rgba(82, 48, 20, 0.72);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (min-width: 760px) {
+  .hero {
+    max-width: 1060px;
+    min-height: auto;
+    padding: 42px 42px 58px;
+  }
+
+  .brand {
+    margin-bottom: 32px;
+    font-size: 34px;
+  }
+
+  .brand img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero h1 {
+    font-size: 72px;
+  }
+
+  .heroLead {
+    font-size: 44px;
+  }
+
+  .heroText {
+    max-width: 430px;
+    font-size: 21px;
+  }
+
+  .features {
+    margin-top: 0;
+  }
+
+  .storyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .steps,
+  .pricingGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tableWrap table {
+    font-size: 14px;
+  }
+
+  .tableWrap th,
+  .tableWrap td {
+    padding: 16px 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 9.2vw, 40px);
+  }
+
+  .heroLead {
+    font-size: clamp(25px, 7.4vw, 31px);
+  }
+
+  .heroText {
+    max-width: 100%;
+    margin-top: 30px;
+    font-size: 14px;
+  }
+
+  .heroAction .ctaButton {
+    width: min(100%, 340px);
+    min-height: 58px;
+    font-size: 16px;
+  }
+
+  .features {
+    gap: 8px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .tableWrap {
+    overflow-x: auto;
+  }
+
+  .tableWrap table {
+    min-width: 560px;
+  }
+
+  .finalCta {
+    margin-right: 18px;
+    margin-left: 18px;
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "batchId": "2026-05-listening-seed-001",
+  "notes": "contentType=shadowing は30秒前後、contentType=listening は2-3分前後を目安に作成する。",
+  "ttsDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "coral",
+    "responseFormat": "mp3",
+    "speed": 1,
+    "instructions": "Speak clearly in natural American English for an English-learning exercise. Keep a calm, friendly, professional tone. Use natural sentence stress and short pauses between paragraphs."
+  },
+  "articles": [
+    {
+      "id": "shadowing-sample-short-update",
+      "contentType": "shadowing",
+      "category": "ビジネス",
+      "level": "intermediate",
+      "levelLabel": "中級",
+      "publishedAt": "2026-05-05",
+      "title": "A Short Project Update",
+      "description": "進捗、課題、次の一手を短く共有する練習。",
+      "targetDurationSeconds": 30,
+      "wordCount": 68,
+      "wpm": 135,
+      "audioUrl": null,
+      "tts": {
+        "status": "pending",
+        "voice": "coral",
+        "instructions": "Speak clearly for a shadowing exercise. Keep the rhythm steady and leave a brief pause after each sentence."
+      },
+      "keyWords": ["update", "review", "schedule", "testing"],
+      "paragraphs": [
+        {
+          "en": "Here is a short update on the project. The design review is finished, and we agreed on the main layout. We still need final copy for the pricing page, so I will ask marketing for it today. If we receive it tomorrow morning, we can test the new flow in the afternoon.",
+          "ja": "プロジェクトの短い進捗共有です。デザインレビューは完了し、主要なレイアウトに合意しました。料金ページの最終文言がまだ必要なので、今日マーケティングに依頼します。明日の朝に受け取れれば、午後に新しい導線をテストできます。"
+        }
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "listening-sample-library-spaces",
+      "contentType": "listening",
+      "category": "生活",
+      "level": "intermediate",
+      "levelLabel": "中級",
+      "publishedAt": "2026-05-05",
+      "title": "Why Public Spaces Matter",
+      "description": "公共スペースが地域の学びとつながりを支える理由。",
+      "targetDurationSeconds": 150,
+      "wordCount": 330,
+      "wpm": 132,
+      "audioUrl": null,
+      "tts": {
+        "status": "pending",
+        "voice": "coral",
+        "instructions": "Speak clearly for a listening exercise. Keep a calm pace and use natural pauses between paragraphs."
+      },
+      "keyWords": ["public", "community", "access", "learning"],
+      "paragraphs": [
+        {
+          "en": "Public spaces are important because they give people a place to learn, rest, and meet others without needing to buy anything. A library, a park, or a community center can support people who need a quiet place to study or a safe place to spend time.",
+          "ja": "公共スペースは、人々がお金を使わずに学び、休み、人と会える場所を提供するため重要です。図書館、公園、地域センターは、静かに勉強したい人や安全に過ごせる場所が必要な人を支えます。"
+        },
+        {
+          "en": "These spaces also help communities stay connected. A new resident can learn about local services, an older person can join a small event, and a student can ask for help finding reliable information. Each interaction may seem small, but it can build trust over time.",
+          "ja": "こうした場所は地域のつながりも支えます。引っ越してきた人は地域サービスを知ることができ、高齢者は小さなイベントに参加でき、学生は信頼できる情報の探し方を相談できます。一つ一つの交流は小さく見えても、時間をかけて信頼を育てます。"
+        },
+        {
+          "en": "As more services move online, shared physical places may become even more valuable. They remind us that access to knowledge and community should not depend only on income, age, or background. A good public space gives people room to focus and feel welcome.",
+          "ja": "多くのサービスがオンライン化するほど、共有できる物理的な場所はさらに価値を持つかもしれません。知識や地域へのアクセスは、収入、年齢、背景だけに左右されるべきではないと教えてくれるからです。良い公共スペースは、人が集中し、歓迎されていると感じられる余白を与えます。"
+        }
+      ],
+      "status": "draft"
+    }
+  ]
+}

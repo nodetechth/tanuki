@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import type { User } from "@supabase/supabase-js";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 export const DEMO_USER_ID = "00000000-0000-0000-0000-000000000000";
@@ -27,4 +28,17 @@ export async function getRequestUser(request: NextRequest) {
 export async function getRequestUserId(request: NextRequest) {
   const user = await getRequestUser(request);
   return user?.id ?? null;
+}
+
+export function isAdminUser(user: Pick<User, "email"> | null | undefined) {
+  const email = user?.email?.trim().toLowerCase();
+  if (!email) {
+    return false;
+  }
+
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean)
+    .includes(email);
 }

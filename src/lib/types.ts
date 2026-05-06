@@ -69,7 +69,9 @@ export type Submission = {
   sourceType: SubmissionSourceType;
   sourceId: string;
   tutorId: string;
-  accessType: "free" | "subscriber";
+  accessType: "free" | "subscriber" | "admin_test";
+  isTest: boolean;
+  testLabel: string | null;
   audioUrl: string;
   r2ObjectKey: string;
   duration: number;

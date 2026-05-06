@@ -14,6 +14,7 @@
 # testing
 /coverage
 /scripts/tts-eval/output/
+/scripts/content/audio-output/
 
 # next.js
 /.next/

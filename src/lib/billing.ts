@@ -19,6 +19,7 @@ export type BillingState = BillingRow & {
   dailySubmissionLimit: number;
   canSubmit: boolean;
   isSubscriber: boolean;
+  isAdmin: boolean;
   denialReason: string | null;
 };
 
@@ -116,7 +117,8 @@ async function getCompletedSubmissionCount(userId: string) {
     .from("submissions")
     .select("id", { count: "exact", head: true })
     .eq("user_id", userId)
-    .eq("status", "completed");
+    .eq("status", "completed")
+    .eq("is_test", false);
 
   if (error) {
     throw new Error(error.message);
@@ -155,6 +157,7 @@ async function getTodaySubscriberSubmissionCount(userId: string) {
     .eq("user_id", userId)
     .eq("status", "completed")
     .eq("access_type", "subscriber")
+    .eq("is_test", false)
     .gte("created_at", range.start)
     .lt("created_at", range.end);
 
@@ -165,7 +168,10 @@ async function getTodaySubscriberSubmissionCount(userId: string) {
   return count ?? 0;
 }
 
-export async function getBillingState(userId: string): Promise<BillingState> {
+export async function getBillingState(
+  userId: string,
+  options: { isAdmin?: boolean } = {},
+): Promise<BillingState> {
   const row = await getOrCreateBillingRow(userId);
   const completedSubmissionCount = await getCompletedSubmissionCount(userId);
   const todaySubscriberSubmissionCount = await getTodaySubscriberSubmissionCount(userId);
@@ -188,6 +194,7 @@ export async function getBillingState(userId: string): Promise<BillingState> {
     dailySubmissionLimit,
     canSubmit,
     isSubscriber,
+    isAdmin: Boolean(options.isAdmin),
     denialReason: canSubmit
       ? null
       : isSubscriber
