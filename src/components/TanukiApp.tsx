@@ -3527,69 +3527,71 @@ export function TanukiApp() {
                 </div>
               </header>
 
-              <section className="listening-player">
-                <button
-                  onClick={() => playListeningArticle(selectedListeningArticle)}
-                  type="button"
-                >
-                  <Play size={22} />
-                  再生
-                </button>
-                <button onClick={stopListeningArticle} type="button">
-                  <Pause size={22} />
-                  停止
-                </button>
-                <div className="listening-progress" aria-hidden="true">
-                  <span style={{ width: `${Math.max(4, listeningPlaybackProgress || 38)}%` }} />
-                </div>
-                {selectedListeningArticle.contentType === "listening" && selectedListeningAudioUrl ? (
-                  <audio
-                    key={`${selectedListeningArticle.id}-${effectiveListeningAccent}`}
-                    ref={listeningAudioRef}
-                    onEnded={() => {
-                      setActiveListeningSentenceId(null);
-                      setListeningPlaybackProgress(0);
-                    }}
-                    onTimeUpdate={() => updateListeningAudioProgress(selectedListeningArticle)}
-                    preload="metadata"
-                    src={selectedListeningAudioUrl}
+              <section className="listening-control-panel" aria-label="再生と保存">
+                <div className="listening-player">
+                  <button
+                    onClick={() => playListeningArticle(selectedListeningArticle)}
+                    type="button"
                   >
-                    <track kind="captions" />
-                  </audio>
-                ) : null}
-              </section>
-
-              <section className="listening-premium-tools" aria-label="リスニング拡張機能">
-                <div className="listening-speed-control">
-                  <div>
-                    <span>再生速度</span>
-                    <strong>{formatPlaybackRate(listeningPlaybackRate)}</strong>
+                    <Play size={22} />
+                    再生
+                  </button>
+                  <button onClick={stopListeningArticle} type="button">
+                    <Pause size={22} />
+                    停止
+                  </button>
+                  <div className="listening-progress" aria-hidden="true">
+                    <span style={{ width: `${Math.max(4, listeningPlaybackProgress || 38)}%` }} />
                   </div>
-                  <div className="listening-speed-buttons" aria-label="再生速度を調整">
-                    <button
-                      aria-label="再生速度を下げる"
-                      onClick={() => changeListeningPlaybackRate(-1)}
-                      type="button"
+                  {selectedListeningArticle.contentType === "listening" && selectedListeningAudioUrl ? (
+                    <audio
+                      key={`${selectedListeningArticle.id}-${effectiveListeningAccent}`}
+                      ref={listeningAudioRef}
+                      onEnded={() => {
+                        setActiveListeningSentenceId(null);
+                        setListeningPlaybackProgress(0);
+                      }}
+                      onTimeUpdate={() => updateListeningAudioProgress(selectedListeningArticle)}
+                      preload="metadata"
+                      src={selectedListeningAudioUrl}
                     >
-                      -
-                    </button>
-                    <button
-                      aria-label="再生速度を上げる"
-                      onClick={() => changeListeningPlaybackRate(1)}
-                      type="button"
-                    >
-                      +
-                    </button>
-                  </div>
+                      <track kind="captions" />
+                    </audio>
+                  ) : null}
                 </div>
-                <button
-                  className="listening-save-cta"
-                  onClick={openListeningSaveNotice}
-                  type="button"
-                >
-                  <BookmarkPlus size={20} />
-                  保存する
-                </button>
+
+                <div className="listening-premium-tools" aria-label="リスニング拡張機能">
+                  <div className="listening-speed-control">
+                    <div>
+                      <span>再生速度</span>
+                      <strong>{formatPlaybackRate(listeningPlaybackRate)}</strong>
+                    </div>
+                    <div className="listening-speed-buttons" aria-label="再生速度を調整">
+                      <button
+                        aria-label="再生速度を下げる"
+                        onClick={() => changeListeningPlaybackRate(-1)}
+                        type="button"
+                      >
+                        -
+                      </button>
+                      <button
+                        aria-label="再生速度を上げる"
+                        onClick={() => changeListeningPlaybackRate(1)}
+                        type="button"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    className="listening-save-cta"
+                    onClick={openListeningSaveNotice}
+                    type="button"
+                  >
+                    <BookmarkPlus size={20} />
+                    保存する
+                  </button>
+                </div>
               </section>
 
               {selectedListeningArticle.contentType === "listening" ? (

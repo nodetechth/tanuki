@@ -4411,15 +4411,23 @@ nav.mobile-footer button {
   font-size: 12px;
 }
 
-.listening-player {
-  align-items: center;
+.listening-control-panel {
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 20px;
+  box-shadow: 0 16px 34px rgba(33, 72, 120, 0.07);
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+
+.listening-player {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
   display: grid;
   gap: 12px;
   grid-template-columns: auto auto 1fr;
-  padding: 14px;
+  padding: 0 0 14px;
 }
 
 .listening-player button {
@@ -4468,10 +4476,9 @@ nav.mobile-footer button {
 
 .listening-speed-control,
 .listening-save-cta {
-  background: #ffffff;
+  background: #f8fbff;
   border: 1px solid var(--line);
   border-radius: 18px;
-  box-shadow: 0 14px 30px rgba(33, 72, 120, 0.06);
   min-height: 62px;
 }
 
@@ -4528,6 +4535,7 @@ nav.mobile-footer button {
 
 .listening-save-cta {
   align-items: center;
+  background: #ffffff;
   color: var(--text);
   display: inline-flex;
   font-size: 15px;
@@ -5097,8 +5105,16 @@ nav.mobile-footer button {
     font-size: 13px;
   }
 
+  .listening-control-panel {
+    border-radius: 18px;
+    gap: 12px;
+    padding: 12px;
+  }
+
   .listening-player {
+    gap: 10px;
     grid-template-columns: 1fr 1fr;
+    padding-bottom: 12px;
   }
 
   .listening-progress {
@@ -5110,12 +5126,32 @@ nav.mobile-footer button {
   }
 
   .listening-premium-tools {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(112px, auto);
+  }
+
+  .listening-speed-control {
+    min-height: 58px;
+    padding: 9px 10px 9px 12px;
+  }
+
+  .listening-speed-control strong {
+    font-size: 20px;
+  }
+
+  .listening-speed-buttons {
+    gap: 4px;
+    grid-template-columns: repeat(2, 34px);
+    padding: 4px;
+  }
+
+  .listening-speed-buttons button {
+    font-size: 20px;
+    height: 32px;
   }
 
   .listening-save-cta {
     min-height: 58px;
-    min-width: 118px;
+    min-width: 112px;
   }
 
   .listening-accent-toggle {
