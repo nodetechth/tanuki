@@ -1,7 +1,39 @@
 # CHANGELOG
 
+## 2026-05-09
+
+- 単語検索UI修正: スマホ表示で検索カードと単語フォルダが画面幅を超えて崩れないよう、ボックス計算と検索フォーム/フォルダカードの幅制約を調整。
+- 添削ページUI: 進捗カードの「練習したWPM」を月別平均WPMのコンパクトな折れ線グラフに変更し、「今週の練習」の下へ移動。
+- 管理者登録: 本番Supabaseの `admin_users` に `takehiro.h@me.com` を `owner` として登録。
+- 管理者運用: Supabase管理画面から `admin_users` へ直接登録する場合の手順を `docs/content/admin-management.md` に追記。
+- Supabase本番反映: `tanuki` プロジェクトの既存スキーマを確認し、未適用だった `admin_users` と `user_word_folders` / `user_saved_words` / リスニング保存カラムのmigrationをSupabaseへ適用。適用後に必要カラムとRLS policyを確認。
+
+## 2026-05-08
+
+- 記事投入安全性: リスニング記事upsert前のバリデーションを強化し、ID重複、公開前audioSources/timings、wordCount/WPM、keyWords、draft拒否、seed/rollback方針を手順化。
+- 単語検索: 不規則変化の正規化マップに `went/gone -> go`、`children -> child`、`better/best -> good`、`worse/worst -> bad` を追加。
+
+## 2026-05-07
+
+- 管理者権限: `admin_users` を正本、`ADMIN_EMAILS` を緊急フォールバックとする運用に確定し、管理者の追加/無効化/一覧確認用 `db:admin-users` スクリプトと手順書を追加。
+- 管理者権限: `admin_users` テーブルを追加し、admin判定をDB優先・`ADMIN_EMAILS` フォールバックに変更。API側の管理者判定も非同期DB確認へ更新。
+- 未登録単語運用: `word_requests` をCSV/JSONで集計出力し、追加済み/却下へステータス更新できる `db:word-requests` スクリプトと運用手順を追加。
+- DB設計: 単語フォルダ/保存単語をDB化する `user_word_folders` / `user_saved_words` migrationを追加し、リスニング保存/オフライン保存/優先アクセント用に `user_listening_articles` へ `saved_at` / `offline_saved_at` / `preferred_accent` を追加。
+- 単語DB投入: 既存の単語生成JSON/JSONLを `words` / `word_examples` へdry-run確認後にupsertできる `db:upsert-words` と、9例文欠損を検出する `db:check-word-examples` を追加。
+- R2音声配信: 教材音声のR2配置パス、CORS、Range確認、`audioSources.us/uk` URLルール、有料配信の将来方針を手順化し、配信確認用の `audio:check-delivery` スクリプトを追加。
+- 記事DB投入: 記事JSON/ElevenLabs生成後JSONをSupabase `listening_articles` へdry-run確認後にupsertできる `db:upsert-listening-articles` スクリプトを追加し、非エンジニア向け手順を更新。
+- Listening DB化: `listening_articles.audio_sources` 追加migrationを用意し、リスニング/シャドーイング記事を `/api/listening/articles` 経由でSupabaseから取得する実装に変更。DB未設定時は既存ローカル記事へフォールバック。
+- 添削連携: DBから取得したshadowing記事でも添削提出/非同期評価時に練習本文を解決できるよう、サーバー側のPracticeSource取得をSupabase対応に変更。
+
 ## 2026-05-06
 
+- DB確認: 本番Supabaseの既存migration適用状況を確認する `db:check-schema` スクリプトを追加し、未適用だった `submissions.is_test/test_label` と `listening_articles.audio_sources` を検出。Listening US/UK音声用の `audio_sources` migrationを追加。
+- 記事運用: ElevenLabsのtimestamps付きTTSでリスニング教材のUS/UK音声を生成し、文単位のアクセント別タイムスタンプをJSONへ反映する `tts:listening:elevenlabs` スクリプトと非エンジニア向け手順を追加。
+- Listening更新: リスニング教材のみアメリカ英語/イギリス英語の音声URL切り替えに対応し、有料ユーザー向けの音声選択UIと無料ユーザー向けCTAを追加。ElevenLabs生成後の文タイムスタンプもアクセント別に保持できるようにテンプレートと運用手順を更新。
+- Listening更新: リスニング教材のみ文単位タイムスタンプ構造に対応し、音声URLがある場合は文タップで該当位置へシーク再生できるように変更。シャドーイング教材は従来どおりOpenAI TTS前提のまま分離。
+- 単語復習追加: 保存済み単語を定着度で絞り込み、表示中/個別選択した単語をフラッシュカード形式で復習できるUIと、○△×の定着度更新・サマリー・×のみ再復習を追加。
+- Listening更新: リスニング詳細に0.7x〜1.5xの0.1刻み再生速度調整と保存CTAを追加。無料ユーザーには有料案内、保存機能はアプリ版提供予定の案内に整理。
+- 単語検索更新: `wink-lemmatizer` を導入し、活用形検索で複数候補がある場合は日本語訳プレビュー付きの候補選択画面を挟む形に変更。
 - LP追加: `/lp` にTanukiのランディングページを追加し、提供画像を使ったヒーロー、機能紹介、比較表、料金、CTAのレスポンシブ表示を実装。
 - LP修正: ヒーロー画像を差し替え、Hero以外の大きなイラスト画像を削除。ベースLPに合わせて文言と構成を整理。
 - LP Hero修正: スマホHeroをベースデザインに寄せ、ロゴ画像への差し替え、Tanuki表記、左右コピー/スマホ画像/CTAの配置を調整。

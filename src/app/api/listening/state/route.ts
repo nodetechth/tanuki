@@ -7,6 +7,9 @@ const postSchema = z.object({
   articleId: z.string().min(1),
   readCompleted: z.boolean().optional(),
   favorite: z.boolean().optional(),
+  saved: z.boolean().optional(),
+  offlineSaved: z.boolean().optional(),
+  preferredAccent: z.enum(["us", "uk"]).nullable().optional(),
 });
 
 export async function GET(request: NextRequest) {
@@ -35,6 +38,9 @@ export async function GET(request: NextRequest) {
       favorite: Boolean(row.is_favorite),
       readCompletedAt: row.read_completed_at ?? row.completed_at ?? null,
       shadowingCompletedAt: row.shadowing_completed_at ?? null,
+      savedAt: row.saved_at ?? null,
+      offlineSavedAt: row.offline_saved_at ?? null,
+      preferredAccent: row.preferred_accent ?? null,
     })),
   });
 }
@@ -70,6 +76,18 @@ export async function POST(request: NextRequest) {
 
   if (parsed.data.favorite !== undefined) {
     payload.is_favorite = parsed.data.favorite;
+  }
+
+  if (parsed.data.saved !== undefined) {
+    payload.saved_at = parsed.data.saved ? now : null;
+  }
+
+  if (parsed.data.offlineSaved !== undefined) {
+    payload.offline_saved_at = parsed.data.offlineSaved ? now : null;
+  }
+
+  if (parsed.data.preferredAccent !== undefined) {
+    payload.preferred_accent = parsed.data.preferredAccent;
   }
 
   const { error } = await supabase.from("user_listening_articles").upsert(payload);

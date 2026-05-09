@@ -82,6 +82,13 @@
 - 話題の導入、具体例、まとめがある構成
 - 長すぎる一文を避ける
 - 語彙学習に使いやすい自然な本文
+- `audioSources` は `{ "us": null, "uk": null }`
+- `tts.provider` は `elevenlabs`
+- `tts.voices.us.voiceId` は `ELEVENLABS_US_VOICE_ID`
+- `tts.voices.uk.voiceId` は `ELEVENLABS_UK_VOICE_ID`
+- 各段落に `sentences` を入れ、英日を文単位に分割する
+- 各sentenceは `start`, `end`, `timings.us`, `timings.uk` を `null` で持つ
+- ElevenLabs生成後、アメリカ英語とイギリス英語で別々の開始/終了秒を `timings` に埋める
 
 ## WPMとTTS
 
@@ -128,6 +135,52 @@
         {
           "en": "English paragraph here.",
           "ja": "日本語訳をここに入れる。"
+        }
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "listening-example-id",
+      "contentType": "listening",
+      "category": "生活",
+      "level": "intermediate",
+      "levelLabel": "中級",
+      "publishedAt": "2026-05-05",
+      "title": "Example Listening Title",
+      "description": "日本語の短い説明。",
+      "targetDurationSeconds": 150,
+      "wordCount": 330,
+      "wpm": 132,
+      "audioUrl": null,
+      "audioSources": { "us": null, "uk": null },
+      "tts": {
+        "status": "pending",
+        "provider": "elevenlabs",
+        "model": "eleven_multilingual_v2",
+        "voices": {
+          "us": { "voiceId": "ELEVENLABS_US_VOICE_ID", "label": "American English" },
+          "uk": { "voiceId": "ELEVENLABS_UK_VOICE_ID", "label": "British English" }
+        },
+        "instructions": "Speak clearly for a listening exercise. Keep a calm pace and use natural pauses between paragraphs."
+      },
+      "keyWords": ["public", "community", "access"],
+      "paragraphs": [
+        {
+          "en": "English sentence one. English sentence two.",
+          "ja": "日本語訳の一文目。日本語訳の二文目。",
+          "sentences": [
+            {
+              "id": "p1-s1",
+              "en": "English sentence one.",
+              "ja": "日本語訳の一文目。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
         }
       ],
       "status": "draft"

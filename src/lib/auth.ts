@@ -30,15 +30,44 @@ export async function getRequestUserId(request: NextRequest) {
   return user?.id ?? null;
 }
 
-export function isAdminUser(user: Pick<User, "email"> | null | undefined) {
+export async function isAdminUser(user: Pick<User, "id" | "email"> | null | undefined) {
   const email = user?.email?.trim().toLowerCase();
   if (!email) {
     return false;
   }
 
+  const supabase = getSupabaseAdmin();
+  if (supabase && user?.id) {
+    const { data, error } = await supabase
+      .from("admin_users")
+      .select("user_id, is_active")
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .maybeSingle();
+
+    if (!error && data) {
+      return true;
+    }
+
+    const emailResult = await supabase
+      .from("admin_users")
+      .select("email, is_active")
+      .eq("email", email)
+      .eq("is_active", true)
+      .maybeSingle();
+
+    if (!emailResult.error && emailResult.data) {
+      return true;
+    }
+  }
+
+  return isAdminEmailConfigured(email);
+}
+
+export function isAdminEmailConfigured(email: string) {
   return (process.env.ADMIN_EMAILS ?? "")
     .split(",")
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean)
-    .includes(email);
+    .includes(email.trim().toLowerCase());
 }

@@ -1,4 +1,5 @@
 import { listeningArticles } from "@/lib/listening-articles";
+import type { ListeningArticle } from "@/lib/listening-articles";
 import { materials } from "@/lib/materials";
 import type { Material, Submission } from "@/lib/types";
 
@@ -41,6 +42,12 @@ export function listeningArticleToPracticeSource(
     return null;
   }
 
+  return listeningArticleToPracticeSourceFromArticle(article);
+}
+
+export function listeningArticleToPracticeSourceFromArticle(
+  article: ListeningArticle,
+): PracticeSource {
   return {
     id: article.id,
     sourceType: "listening_article",

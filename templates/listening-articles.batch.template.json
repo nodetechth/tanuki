@@ -21,15 +21,15 @@
       "title": "A Short Project Update",
       "description": "進捗、課題、次の一手を短く共有する練習。",
       "targetDurationSeconds": 30,
-      "wordCount": 68,
-      "wpm": 135,
+      "wordCount": 52,
+      "wpm": 104,
       "audioUrl": null,
       "tts": {
         "status": "pending",
         "voice": "coral",
         "instructions": "Speak clearly for a shadowing exercise. Keep the rhythm steady and leave a brief pause after each sentence."
       },
-      "keyWords": ["update", "review", "schedule", "testing"],
+      "keyWords": ["update", "review", "copy", "testing"],
       "paragraphs": [
         {
           "en": "Here is a short update on the project. The design review is finished, and we agreed on the main layout. We still need final copy for the pricing page, so I will ask marketing for it today. If we receive it tomorrow morning, we can test the new flow in the afternoon.",
@@ -47,28 +47,276 @@
       "publishedAt": "2026-05-05",
       "title": "Why Public Spaces Matter",
       "description": "公共スペースが地域の学びとつながりを支える理由。",
-      "targetDurationSeconds": 150,
-      "wordCount": 330,
+      "targetDurationSeconds": 130,
+      "wordCount": 286,
       "wpm": 132,
       "audioUrl": null,
+      "audioSources": {
+        "us": null,
+        "uk": null
+      },
       "tts": {
         "status": "pending",
-        "voice": "coral",
+        "provider": "elevenlabs",
+        "model": "eleven_multilingual_v2",
+        "voices": {
+          "us": {
+            "voiceId": "ELEVENLABS_US_VOICE_ID",
+            "label": "American English"
+          },
+          "uk": {
+            "voiceId": "ELEVENLABS_UK_VOICE_ID",
+            "label": "British English"
+          }
+        },
         "instructions": "Speak clearly for a listening exercise. Keep a calm pace and use natural pauses between paragraphs."
       },
       "keyWords": ["public", "community", "access", "learning"],
       "paragraphs": [
         {
           "en": "Public spaces are important because they give people a place to learn, rest, and meet others without needing to buy anything. A library, a park, or a community center can support people who need a quiet place to study or a safe place to spend time.",
-          "ja": "公共スペースは、人々がお金を使わずに学び、休み、人と会える場所を提供するため重要です。図書館、公園、地域センターは、静かに勉強したい人や安全に過ごせる場所が必要な人を支えます。"
+          "ja": "公共スペースは、人々がお金を使わずに学び、休み、人と会える場所を提供するため重要です。図書館、公園、地域センターは、静かに勉強したい人や安全に過ごせる場所が必要な人を支えます。",
+          "sentences": [
+            {
+              "id": "p1-s1",
+              "en": "Public spaces are important because they give people a place to learn, rest, and meet others without needing to buy anything.",
+              "ja": "公共スペースは、人々がお金を使わずに学び、休み、人と会える場所を提供するため重要です。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p1-s2",
+              "en": "A library, a park, or a community center can support people who need a quiet place to study or a safe place to spend time.",
+              "ja": "図書館、公園、地域センターは、静かに勉強したい人や安全に過ごせる場所が必要な人を支えます。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
         },
         {
           "en": "These spaces also help communities stay connected. A new resident can learn about local services, an older person can join a small event, and a student can ask for help finding reliable information. Each interaction may seem small, but it can build trust over time.",
-          "ja": "こうした場所は地域のつながりも支えます。引っ越してきた人は地域サービスを知ることができ、高齢者は小さなイベントに参加でき、学生は信頼できる情報の探し方を相談できます。一つ一つの交流は小さく見えても、時間をかけて信頼を育てます。"
+          "ja": "こうした場所は地域のつながりも支えます。引っ越してきた人は地域サービスを知ることができ、高齢者は小さなイベントに参加でき、学生は信頼できる情報の探し方を相談できます。一つ一つの交流は小さく見えても、時間をかけて信頼を育てます。",
+          "sentences": [
+            {
+              "id": "p2-s1",
+              "en": "These spaces also help communities stay connected.",
+              "ja": "こうした場所は地域のつながりも支えます。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p2-s2",
+              "en": "A new resident can learn about local services, an older person can join a small event, and a student can ask for help finding reliable information.",
+              "ja": "引っ越してきた人は地域サービスを知ることができ、高齢者は小さなイベントに参加でき、学生は信頼できる情報の探し方を相談できます。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p2-s3",
+              "en": "Each interaction may seem small, but it can build trust over time.",
+              "ja": "一つ一つの交流は小さく見えても、時間をかけて信頼を育てます。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
         },
         {
           "en": "As more services move online, shared physical places may become even more valuable. They remind us that access to knowledge and community should not depend only on income, age, or background. A good public space gives people room to focus and feel welcome.",
-          "ja": "多くのサービスがオンライン化するほど、共有できる物理的な場所はさらに価値を持つかもしれません。知識や地域へのアクセスは、収入、年齢、背景だけに左右されるべきではないと教えてくれるからです。良い公共スペースは、人が集中し、歓迎されていると感じられる余白を与えます。"
+          "ja": "多くのサービスがオンライン化するほど、共有できる物理的な場所はさらに価値を持つかもしれません。知識や地域へのアクセスは、収入、年齢、背景だけに左右されるべきではないと教えてくれるからです。良い公共スペースは、人が集中し、歓迎されていると感じられる余白を与えます。",
+          "sentences": [
+            {
+              "id": "p3-s1",
+              "en": "As more services move online, shared physical places may become even more valuable.",
+              "ja": "多くのサービスがオンライン化するほど、共有できる物理的な場所はさらに価値を持つかもしれません。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p3-s2",
+              "en": "They remind us that access to knowledge and community should not depend only on income, age, or background.",
+              "ja": "知識や地域へのアクセスは、収入、年齢、背景だけに左右されるべきではないと教えてくれるからです。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p3-s3",
+              "en": "A good public space gives people room to focus and feel welcome.",
+              "ja": "良い公共スペースは、人が集中し、歓迎されていると感じられる余白を与えます。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
+        },
+        {
+          "en": "However, public spaces need regular care. A comfortable library does not happen by accident. Staff members choose useful books, repair old chairs, organize events, and answer questions from many different people. When local governments cut support, these small services can disappear quietly.",
+          "ja": "しかし、公共スペースには継続的な手入れが必要です。居心地の良い図書館は偶然に生まれるものではありません。職員は役に立つ本を選び、古い椅子を修理し、イベントを企画し、さまざまな人からの質問に答えています。自治体が支援を削ると、こうした小さなサービスは静かに失われることがあります。",
+          "sentences": [
+            {
+              "id": "p4-s1",
+              "en": "However, public spaces need regular care.",
+              "ja": "しかし、公共スペースには継続的な手入れが必要です。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p4-s2",
+              "en": "A comfortable library does not happen by accident.",
+              "ja": "居心地の良い図書館は偶然に生まれるものではありません。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p4-s3",
+              "en": "Staff members choose useful books, repair old chairs, organize events, and answer questions from many different people.",
+              "ja": "職員は役に立つ本を選び、古い椅子を修理し、イベントを企画し、さまざまな人からの質問に答えています。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p4-s4",
+              "en": "When local governments cut support, these small services can disappear quietly.",
+              "ja": "自治体が支援を削ると、こうした小さなサービスは静かに失われることがあります。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
+        },
+        {
+          "en": "Good design also matters. Clear signs, clean tables, reliable internet, and open entrances make a place easier to use. If a space feels confusing or unwelcoming, people may stop visiting even when the service is technically available.",
+          "ja": "良いデザインも重要です。分かりやすい案内、清潔な机、安定したインターネット、開かれた入口は、その場所を使いやすくします。場所が分かりにくかったり歓迎されていないように感じたりすると、サービス自体は利用可能でも、人々は訪れなくなるかもしれません。",
+          "sentences": [
+            {
+              "id": "p5-s1",
+              "en": "Good design also matters.",
+              "ja": "良いデザインも重要です。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p5-s2",
+              "en": "Clear signs, clean tables, reliable internet, and open entrances make a place easier to use.",
+              "ja": "分かりやすい案内、清潔な机、安定したインターネット、開かれた入口は、その場所を使いやすくします。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p5-s3",
+              "en": "If a space feels confusing or unwelcoming, people may stop visiting even when the service is technically available.",
+              "ja": "場所が分かりにくかったり歓迎されていないように感じたりすると、サービス自体は利用可能でも、人々は訪れなくなるかもしれません。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
+        },
+        {
+          "en": "Public spaces are not only about buildings. They are about giving people permission to stay, ask, read, and think at their own pace. In a busy city, that kind of permission can change how people feel about learning and belonging. That is why many communities protect these places even when budgets are tight.",
+          "ja": "公共スペースは建物だけの話ではありません。人々が自分のペースで滞在し、質問し、読み、考えることを許される場所です。忙しい都市では、そのような許可が、学びや所属に対する人々の感じ方を変えることがあります。だからこそ、多くの地域は予算が厳しいときでも、こうした場所を守ろうとします。",
+          "sentences": [
+            {
+              "id": "p6-s1",
+              "en": "Public spaces are not only about buildings.",
+              "ja": "公共スペースは建物だけの話ではありません。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p6-s2",
+              "en": "They are about giving people permission to stay, ask, read, and think at their own pace.",
+              "ja": "人々が自分のペースで滞在し、質問し、読み、考えることを許される場所です。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p6-s3",
+              "en": "In a busy city, that kind of permission can change how people feel about learning and belonging.",
+              "ja": "忙しい都市では、そのような許可が、学びや所属に対する人々の感じ方を変えることがあります。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            },
+            {
+              "id": "p6-s4",
+              "en": "That is why many communities protect these places even when budgets are tight.",
+              "ja": "だからこそ、多くの地域は予算が厳しいときでも、こうした場所を守ろうとします。",
+              "start": null,
+              "end": null,
+              "timings": {
+                "us": { "start": null, "end": null },
+                "uk": { "start": null, "end": null }
+              }
+            }
+          ]
         }
       ],
       "status": "draft"

@@ -3,7 +3,7 @@ import { assessPronunciation } from "@/lib/assessment/pronunciation";
 import { markFreeSubmissionUsed } from "@/lib/billing";
 import { generateFeedback } from "@/lib/feedback/generate";
 import { addImprovementComparison } from "@/lib/feedback/improvements";
-import { getPracticeSourceFromSubmission } from "@/lib/practice-sources";
+import { getPracticeSourceFromSubmissionServer } from "@/lib/practice-sources-server";
 import { createAudioReadUrl } from "@/lib/storage/r2";
 import {
   getSubmission,
@@ -33,7 +33,7 @@ export async function processSubmissionAssessment(input: {
     throw new Error("Forbidden");
   }
 
-  const practiceSource = getPracticeSourceFromSubmission(submission);
+  const practiceSource = await getPracticeSourceFromSubmissionServer(submission);
   if (!practiceSource) {
     throw new Error("Practice source not found");
   }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestUser, isAdminUser } from "@/lib/auth";
 import { getBillingState } from "@/lib/billing";
-import { getPracticeSource } from "@/lib/practice-sources";
+import { getPracticeSourceServer } from "@/lib/practice-sources-server";
 import {
   createSubmission,
   getSubmission,
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "ログインしてください。" }, { status: 401 });
     }
     const authenticatedUserId = user.id;
-    const isAdmin = isAdminUser(user);
+    const isAdmin = await isAdminUser(user);
 
     const formData = await request.formData();
     const requestedIsTest = formData.get("isTest");
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     });
     const resolvedSourceId = parsed.sourceId ?? parsed.materialId;
     const source = resolvedSourceId
-      ? getPracticeSource(parsed.sourceType, resolvedSourceId)
+      ? await getPracticeSourceServer(parsed.sourceType, resolvedSourceId)
       : null;
     const audio = formData.get("audio");
 
@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
     }
 
     const includeTest = request.nextUrl.searchParams.get("includeTest") === "true";
-    if (includeTest && !isAdminUser(user)) {
+    if (includeTest && !(await isAdminUser(user))) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

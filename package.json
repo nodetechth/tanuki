@@ -8,7 +8,16 @@
     "start": "next start",
     "lint": "eslint",
     "tts:eval": "node scripts/tts-eval/generate.mjs",
-    "tts:articles": "node scripts/content/generate-article-audio.mjs"
+    "tts:articles": "node scripts/content/generate-article-audio.mjs",
+    "tts:listening:elevenlabs": "node scripts/content/generate-elevenlabs-listening-audio.mjs",
+    "db:validate-listening-articles": "node scripts/content/upsert-listening-articles.mjs --strict true",
+    "db:upsert-listening-articles": "node scripts/content/upsert-listening-articles.mjs",
+    "db:upsert-words": "node scripts/content/upsert-word-dictionary.mjs",
+    "db:check-word-examples": "node scripts/content/upsert-word-dictionary.mjs --check-db true",
+    "db:word-requests": "node scripts/content/manage-word-requests.mjs",
+    "db:admin-users": "node scripts/supabase/manage-admin-users.mjs",
+    "audio:check-delivery": "node scripts/content/check-audio-delivery.mjs",
+    "db:check-schema": "node scripts/supabase/check-schema.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
@@ -23,6 +32,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "stripe": "^22.1.0",
+    "wink-lemmatizer": "^3.0.4",
     "zod": "^4.4.2"
   },
   "devDependencies": {

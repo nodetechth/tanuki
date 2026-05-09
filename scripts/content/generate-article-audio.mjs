@@ -95,6 +95,22 @@ async function generateArticleAudio({ article, defaults, model, openai, outputDi
   const startedAt = Date.now();
   try {
     validateArticle(article);
+    const provider = article.tts?.provider ?? defaults.provider ?? "openai";
+    if (provider !== "openai") {
+      const accentCount =
+        provider === "elevenlabs" && article.contentType === "listening"
+          ? Object.keys(article.tts?.voices ?? {}).length
+          : 0;
+      return {
+        id: article.id,
+        status: "skipped",
+        durationMs: Date.now() - startedAt,
+        provider,
+        accentCount,
+        reason:
+          "This script generates OpenAI TTS only. Use the ElevenLabs timestamp workflow for listening articles and generate both us/uk audio files.",
+      };
+    }
     const format = options.format ?? article.tts?.responseFormat ?? defaults.responseFormat ?? DEFAULT_FORMAT;
     const voice = options.voice ?? article.tts?.voice ?? defaults.voice ?? process.env.OPENAI_TTS_VOICE ?? DEFAULT_VOICE;
     const targetWpm = Number(options.wpm ?? article.wpm);
@@ -106,7 +122,13 @@ async function generateArticleAudio({ article, defaults, model, openai, outputDi
           ? Number(article.tts.speed)
           : speedFromWpm(targetWpm, baseWpm);
     const clampedSpeed = clamp(speed, DEFAULT_MIN_SPEED, DEFAULT_MAX_SPEED);
-    const text = article.paragraphs.map((paragraph) => paragraph.en.trim()).join("\n\n");
+    const text = article.paragraphs
+      .map((paragraph) =>
+        article.contentType === "listening" && Array.isArray(paragraph.sentences) && paragraph.sentences.length
+          ? paragraph.sentences.map((sentence) => sentence.en.trim()).join(" ")
+          : paragraph.en.trim(),
+      )
+      .join("\n\n");
     const expectedSeconds = Math.round((Number(article.wordCount) / targetWpm) * 60);
     const instructions = buildInstructions({ article, defaults, targetWpm });
     const relativeFilePath = path.join(
@@ -182,6 +204,36 @@ function validateArticle(article) {
     if (!paragraph.en?.trim()) {
       throw new Error(`Paragraph ${index + 1} is missing English text.`);
     }
+    if (article.contentType === "listening") {
+      if (!Array.isArray(paragraph.sentences) || paragraph.sentences.length === 0) {
+        throw new Error(`Listening paragraph ${index + 1} must include sentences[].`);
+      }
+      for (const [sentenceIndex, sentence] of paragraph.sentences.entries()) {
+        if (!sentence.id || !sentence.en?.trim() || !sentence.ja?.trim()) {
+          throw new Error(
+            `Listening paragraph ${index + 1}, sentence ${sentenceIndex + 1} is missing id/en/ja.`,
+          );
+        }
+        if (!("start" in sentence) || !("end" in sentence)) {
+          throw new Error(
+            `Listening paragraph ${index + 1}, sentence ${sentenceIndex + 1} is missing start/end.`,
+          );
+        }
+        if (sentence.timings) {
+          for (const accent of ["us", "uk"]) {
+            if (
+              !sentence.timings[accent] ||
+              !("start" in sentence.timings[accent]) ||
+              !("end" in sentence.timings[accent])
+            ) {
+              throw new Error(
+                `Listening paragraph ${index + 1}, sentence ${sentenceIndex + 1} has invalid timings.${accent}.`,
+              );
+            }
+          }
+        }
+      }
+    }
   }
   if (!Number.isFinite(Number(article.wpm)) || Number(article.wpm) <= 0) {
     throw new Error(`Invalid wpm: ${article.wpm}`);
@@ -229,6 +281,8 @@ function printSummary(manifest) {
       console.log(
         `OK      ${result.id} -> ${result.relativeFilePath} (${result.targetWpm} WPM, speed ${result.speed}, ${result.bytes} bytes)`,
       );
+    } else if (result.status === "skipped") {
+      console.log(`SKIP    ${result.id}: ${result.reason}`);
     } else if (result.status === "dry-run") {
       console.log(
         `DRYRUN  ${result.id} -> ${result.relativeFilePath} (${result.targetWpm} WPM, speed ${result.speed}, ${result.characterCount} chars)`,

@@ -38,10 +38,19 @@ import {
 import type { User } from "@supabase/supabase-js";
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { listeningArticles } from "@/lib/listening-articles";
-import type { ListeningArticle, ListeningContentType } from "@/lib/listening-articles";
+import { listeningArticles as fallbackListeningArticles } from "@/lib/listening-articles";
+import type {
+  ListeningArticle,
+  ListeningAccent,
+  ListeningContentType,
+  ListeningSentence,
+} from "@/lib/listening-articles";
 import { materials } from "@/lib/materials";
-import { getPracticeSource, getPracticeSourceFromSubmission } from "@/lib/practice-sources";
+import {
+  getPracticeSource,
+  getPracticeSourceFromSubmission,
+  listeningArticleToPracticeSourceFromArticle,
+} from "@/lib/practice-sources";
 import type { PracticeSource, PracticeSourceType } from "@/lib/practice-sources";
 import { getSupabaseBrowser } from "@/lib/supabase/browser";
 import { tutorProfiles } from "@/lib/tutors";
@@ -60,6 +69,7 @@ type SpeakView = "home" | "level" | "article" | "history";
 type ArticleBackView = Exclude<SpeakView, "article">;
 type ListeningTextMode = "both" | "english" | "japanese";
 type ListeningWpmSort = "asc" | "desc";
+type ListeningFeatureNotice = "speed" | "accent" | "saveFree" | "savePaid";
 type AdminCompletionPreview = "actual" | "completed" | "open";
 
 type ProblemWord = {
@@ -67,12 +77,19 @@ type ProblemWord = {
   reason: string;
 };
 
+type WordReviewStatus = "unreviewed" | "good" | "fair" | "bad";
+type WordReviewFilter = WordReviewStatus;
+
 type SavedWordEntry = {
   word: string;
   level: WordLevel;
   purpose: WordPurpose;
   savedAt: string;
   note?: string;
+  status?: WordReviewStatus;
+  lastReviewedAt?: string;
+  reviewCount?: number;
+  isArchived?: boolean;
 };
 
 type WordFolder = {
@@ -81,17 +98,44 @@ type WordFolder = {
   words: SavedWordEntry[];
 };
 
+type WordReviewSession = {
+  cards: SavedWordEntry[];
+  index: number;
+  revealed: boolean;
+  results: Array<{
+    word: string;
+    status: Exclude<WordReviewStatus, "unreviewed">;
+  }>;
+  completed: boolean;
+};
+
 type ListeningArticleState = {
   articleId: string;
   favorite: boolean;
   readCompletedAt: string | null;
   shadowingCompletedAt: string | null;
+  savedAt?: string | null;
+  offlineSavedAt?: string | null;
+  preferredAccent?: ListeningAccent | null;
 };
 
 type WordLookupNormalization = {
   input: string;
   headword: string;
-  relation: "past_tense" | "past_participle";
+  relation:
+    | "past_tense"
+    | "past_participle"
+    | "present_participle"
+    | "third_person_singular"
+    | "plural"
+    | "comparative"
+    | "superlative"
+    | "inflected";
+  label: string;
+};
+
+type WordLookupCandidate = WordLookupNormalization & {
+  definitionPreview: string;
 };
 
 type BillingState = {
@@ -152,6 +196,17 @@ const searchPurposeOptions: Array<{
   { id: "toeic", label: "試験", description: "TOEIC / 資格出題傾向に沿った文体" },
 ];
 
+const wordReviewStatusOptions: Array<{
+  id: WordReviewStatus;
+  label: string;
+  mark: string;
+}> = [
+  { id: "unreviewed", label: "未学習", mark: "-" },
+  { id: "good", label: "覚えた", mark: "○" },
+  { id: "fair", label: "うろ覚え", mark: "△" },
+  { id: "bad", label: "忘れた", mark: "×" },
+];
+
 function loadSearchPreferences() {
   const fallback: { level: WordLevel; purpose: WordPurpose } = {
     level: "intermediate",
@@ -206,6 +261,12 @@ function normalizeWordPurpose(value: unknown): WordPurpose {
     : "business";
 }
 
+function normalizeWordReviewStatus(value: unknown): WordReviewStatus {
+  return wordReviewStatusOptions.some((option) => option.id === value)
+    ? (value as WordReviewStatus)
+    : "unreviewed";
+}
+
 function loadWordFolders(): WordFolder[] {
   if (typeof window === "undefined") {
     return defaultWordFolders;
@@ -226,6 +287,14 @@ function loadWordFolders(): WordFolder[] {
                 purpose: normalizeWordPurpose(entry.purpose),
                 savedAt: String(entry.savedAt ?? new Date().toISOString()),
                 note: typeof entry.note === "string" ? entry.note : undefined,
+                status: normalizeWordReviewStatus(entry.status),
+                lastReviewedAt:
+                  typeof entry.lastReviewedAt === "string" ? entry.lastReviewedAt : undefined,
+                reviewCount:
+                  typeof entry.reviewCount === "number" && Number.isFinite(entry.reviewCount)
+                    ? entry.reviewCount
+                    : 0,
+                isArchived: Boolean(entry.isArchived),
               }))
             : [],
         }))
@@ -246,6 +315,9 @@ function loadWordFolders(): WordFolder[] {
             level: "intermediate",
             purpose: "business",
             savedAt: new Date().toISOString(),
+            status: "unreviewed",
+            reviewCount: 0,
+            isArchived: false,
           })),
         },
         defaultWordFolders[1],
@@ -271,6 +343,15 @@ function loadCompletedListeningArticles() {
     window.localStorage.removeItem("tanuki-completed-listening");
     return new Set<string>();
   }
+}
+
+function loadListeningAccent(): ListeningAccent {
+  if (typeof window === "undefined") {
+    return "us";
+  }
+
+  const accent = window.localStorage.getItem("tanuki-listening-accent");
+  return accent === "uk" ? "uk" : "us";
 }
 
 function loadHiddenFailedSubmissionIds() {
@@ -308,10 +389,65 @@ const listeningContentTabs: Array<{
   { id: "listening", label: "リスニング", description: "3分前後の記事" },
 ];
 
+const listeningPlaybackRates = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5];
+const listeningAccentOptions: Array<{
+  id: ListeningAccent;
+  label: string;
+}> = [
+  { id: "us", label: "アメリカ英語" },
+  { id: "uk", label: "イギリス英語" },
+];
+
 function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60);
   const rest = Math.floor(seconds % 60);
   return `${minutes}:${rest.toString().padStart(2, "0")}`;
+}
+
+function formatPlaybackRate(rate: number) {
+  return `${rate.toFixed(1)}x`;
+}
+
+function getWordReviewStatus(entry: SavedWordEntry): WordReviewStatus {
+  return entry.status ?? "unreviewed";
+}
+
+function getListeningSentences(article: ListeningArticle) {
+  return article.paragraphs.flatMap((paragraph, paragraphIndex) =>
+    getParagraphListeningSentences(article, paragraph, paragraphIndex),
+  );
+}
+
+function getParagraphListeningSentences(
+  article: ListeningArticle,
+  paragraph: ListeningArticle["paragraphs"][number],
+  paragraphIndex: number,
+): ListeningSentence[] {
+  return paragraph.sentences?.length
+    ? paragraph.sentences
+    : [
+        {
+          id: `${article.id}-p${paragraphIndex + 1}`,
+          en: paragraph.en,
+          ja: paragraph.ja,
+          start: null,
+          end: null,
+        },
+      ];
+}
+
+function audioUrlForListeningArticle(article: ListeningArticle, accent: ListeningAccent) {
+  if (article.contentType !== "listening") {
+    return article.audioUrl;
+  }
+  return article.audioSources?.[accent] ?? article.audioUrl;
+}
+
+function sentenceTimingForAccent(sentence: ListeningSentence, accent: ListeningAccent) {
+  return sentence.timings?.[accent] ?? {
+    start: sentence.start,
+    end: sentence.end,
+  };
 }
 
 function dateKey(date: Date) {
@@ -361,6 +497,21 @@ function calculateStreak(loginDays: string[]) {
   }
 
   return streak;
+}
+
+function monthKeyFromDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+  }).format(date);
+}
+
+function compactMonthLabel(monthKey: string) {
+  const [, month] = monthKey.split("-");
+  return `${Number(month)}月`;
 }
 
 function scoreTone(score: number) {
@@ -516,7 +667,10 @@ function ListeningParagraph({
         return (
           <button
             key={`${part}-${index}`}
-            onClick={() => onWordClick(word)}
+            onClick={(event) => {
+              event.stopPropagation();
+              onWordClick(word);
+            }}
             type="button"
           >
             {part}
@@ -585,12 +739,29 @@ export function TanukiApp() {
   const [selectedSourceType, setSelectedSourceType] =
     useState<PracticeSourceType>("material");
   const [selectedSourceId, setSelectedSourceId] = useState(materials[0].id);
+  const [selectedArticlePracticeSource, setSelectedArticlePracticeSource] =
+    useState<PracticeSource | null>(null);
   const selectedMaterial = useMemo(
-    () =>
-      getPracticeSource(selectedSourceType, selectedSourceId) ??
-      getPracticeSource("material", selectedMaterialId) ??
-      getPracticeSource("material", materials[0].id)!,
-    [selectedMaterialId, selectedSourceId, selectedSourceType],
+    () => {
+      if (
+        selectedSourceType === "listening_article" &&
+        selectedArticlePracticeSource?.sourceId === selectedSourceId
+      ) {
+        return selectedArticlePracticeSource;
+      }
+
+      return (
+        getPracticeSource(selectedSourceType, selectedSourceId) ??
+        getPracticeSource("material", selectedMaterialId) ??
+        getPracticeSource("material", materials[0].id)!
+      );
+    },
+    [
+      selectedArticlePracticeSource,
+      selectedMaterialId,
+      selectedSourceId,
+      selectedSourceType,
+    ],
   );
   const [selectedTutorId, setSelectedTutorId] = useState<TutorId>(tutorProfiles[0].id);
   const [recorderState, setRecorderState] = useState<RecorderState>("idle");
@@ -630,12 +801,23 @@ export function TanukiApp() {
   const [listeningCategory, setListeningCategory] = useState("ALL");
   const [listeningContentType, setListeningContentType] =
     useState<ListeningContentType>("shadowing");
+  const [listeningArticles, setListeningArticles] = useState<ListeningArticle[]>(
+    fallbackListeningArticles,
+  );
   const [selectedListeningArticleId, setSelectedListeningArticleId] = useState<string | null>(
     null,
   );
   const [listeningTextMode, setListeningTextMode] = useState<ListeningTextMode>("both");
   const [listeningFavoritesFirst, setListeningFavoritesFirst] = useState(false);
   const [listeningWpmSort, setListeningWpmSort] = useState<ListeningWpmSort>("asc");
+  const [listeningPlaybackRate, setListeningPlaybackRate] = useState(1);
+  const [listeningAccent, setListeningAccent] = useState<ListeningAccent>(
+    () => loadListeningAccent(),
+  );
+  const [listeningPlaybackProgress, setListeningPlaybackProgress] = useState(0);
+  const [activeListeningSentenceId, setActiveListeningSentenceId] = useState<string | null>(null);
+  const [listeningFeatureNotice, setListeningFeatureNotice] =
+    useState<ListeningFeatureNotice | null>(null);
   const [selectedListeningWord, setSelectedListeningWord] = useState<string | null>(null);
   const [completedListeningArticles, setCompletedListeningArticles] = useState<Set<string>>(
     () => loadCompletedListeningArticles(),
@@ -646,7 +828,7 @@ export function TanukiApp() {
   const [likedListeningArticles, setLikedListeningArticles] = useState<Set<string>>(
     () =>
       new Set(
-        listeningArticles
+        fallbackListeningArticles
           .filter((article) => article.liked)
           .map((article) => article.id),
       ),
@@ -654,6 +836,7 @@ export function TanukiApp() {
   const [searchTerm, setSearchTerm] = useState("");
   const [wordResult, setWordResult] = useState<WordEntry | null>(null);
   const [wordLookup, setWordLookup] = useState<WordLookupNormalization | null>(null);
+  const [wordLookupCandidates, setWordLookupCandidates] = useState<WordLookupCandidate[]>([]);
   const [missingWordQuery, setMissingWordQuery] = useState("");
   const [missingWordSaveMessage, setMissingWordSaveMessage] = useState<string | null>(null);
   const [wordMemo, setWordMemo] = useState("");
@@ -671,6 +854,9 @@ export function TanukiApp() {
   const [folderEditModal, setFolderEditModal] = useState<WordFolder | null>(null);
   const [folderDraftName, setFolderDraftName] = useState("");
   const [folderActionMessage, setFolderActionMessage] = useState<string | null>(null);
+  const [wordReviewFilters, setWordReviewFilters] = useState<Set<WordReviewFilter>>(new Set());
+  const [wordReviewSession, setWordReviewSession] = useState<WordReviewSession | null>(null);
+  const [wordReviewDetails, setWordReviewDetails] = useState<Record<string, WordEntry | null>>({});
   const [saveWordModalOpen, setSaveWordModalOpen] = useState(false);
   const [removeWordModalOpen, setRemoveWordModalOpen] = useState(false);
   const [createFolderOpen, setCreateFolderOpen] = useState(false);
@@ -686,6 +872,7 @@ export function TanukiApp() {
   const [email, setEmail] = useState("");
   const [authMessage, setAuthMessage] = useState<string | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const listeningAudioRef = useRef<HTMLAudioElement | null>(null);
   const processorRef = useRef<ScriptProcessorNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const pcmChunksRef = useRef<Float32Array[]>([]);
@@ -703,6 +890,10 @@ export function TanukiApp() {
 
     return () => window.clearInterval(timer);
   }, [recorderState]);
+
+  useEffect(() => {
+    void loadListeningArticles();
+  }, []);
 
   useEffect(() => {
     if (!supabase) {
@@ -767,6 +958,31 @@ export function TanukiApp() {
   }, [wordFolders]);
 
   useEffect(() => {
+    const entry = wordReviewSession?.cards[wordReviewSession.index];
+    const key = entry ? normalizeSavedWord(entry.word) : "";
+    if (!entry || !key || !wordReviewSession.revealed || key in wordReviewDetails) {
+      return;
+    }
+
+    let cancelled = false;
+    const reviewWord = entry.word;
+    async function loadReviewWord() {
+      const word = await fetchWordEntryForReview(reviewWord);
+      if (!cancelled) {
+        setWordReviewDetails((current) => ({
+          ...current,
+          [key]: word,
+        }));
+      }
+    }
+
+    void loadReviewWord();
+    return () => {
+      cancelled = true;
+    };
+  }, [wordReviewDetails, wordReviewSession]);
+
+  useEffect(() => {
     window.localStorage.setItem(
       "tanuki-hidden-failed-submissions",
       JSON.stringify(Array.from(hiddenFailedSubmissionIds)),
@@ -789,6 +1005,10 @@ export function TanukiApp() {
       JSON.stringify(Array.from(completedListeningArticles)),
     );
   }, [completedListeningArticles]);
+
+  useEffect(() => {
+    window.localStorage.setItem("tanuki-listening-accent", listeningAccent);
+  }, [listeningAccent]);
 
   useEffect(() => {
     return () => {
@@ -867,6 +1087,9 @@ export function TanukiApp() {
   function selectPracticeSource(sourceType: PracticeSourceType, sourceId: string) {
     setSelectedSourceType(sourceType);
     setSelectedSourceId(sourceId);
+    if (sourceType !== "listening_article") {
+      setSelectedArticlePracticeSource(null);
+    }
     if (sourceType === "material") {
       setSelectedMaterialId(sourceId);
     }
@@ -888,15 +1111,162 @@ export function TanukiApp() {
     window.speechSynthesis.speak(utterance);
   }
 
-  function playListeningArticle(article: ListeningArticle) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(
-      article.paragraphs.map((paragraph) => paragraph.en).join("\n\n"),
-    );
-    utterance.lang = "en-US";
-    utterance.rate =
+  function speechRateForListeningArticle(article: ListeningArticle, playbackRate = listeningPlaybackRate) {
+    const baseRate =
       article.level === "beginner" ? 0.82 : article.level === "intermediate" ? 0.9 : 0.96;
+    return Math.min(1.5, Math.max(0.1, baseRate * playbackRate));
+  }
+
+  function speakListeningText(article: ListeningArticle, text: string, playbackRate = listeningPlaybackRate) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = effectiveListeningAccent === "uk" ? "en-GB" : "en-US";
+    utterance.rate = speechRateForListeningArticle(article, playbackRate);
     window.speechSynthesis.speak(utterance);
+  }
+
+  function playListeningArticle(article: ListeningArticle, playbackRate = listeningPlaybackRate) {
+    window.speechSynthesis.cancel();
+    const audio = listeningAudioRef.current;
+    if (
+      article.contentType === "listening" &&
+      audioUrlForListeningArticle(article, effectiveListeningAccent) &&
+      audio
+    ) {
+      audio.playbackRate = playbackRate;
+      void audio.play();
+      return;
+    }
+
+    speakListeningText(
+      article,
+      article.paragraphs.map((paragraph) => paragraph.en).join("\n\n"),
+      playbackRate,
+    );
+  }
+
+  function stopListeningArticle() {
+    window.speechSynthesis.cancel();
+    const audio = listeningAudioRef.current;
+    if (audio) {
+      audio.pause();
+    }
+  }
+
+  function playListeningSentence(article: ListeningArticle, sentence: ListeningSentence) {
+    window.speechSynthesis.cancel();
+    setActiveListeningSentenceId(sentence.id);
+    const audio = listeningAudioRef.current;
+    const timing = sentenceTimingForAccent(sentence, effectiveListeningAccent);
+    if (
+      article.contentType === "listening" &&
+      audioUrlForListeningArticle(article, effectiveListeningAccent) &&
+      audio &&
+      typeof timing.start === "number"
+    ) {
+      audio.currentTime = timing.start;
+      audio.playbackRate = listeningPlaybackRate;
+      void audio.play();
+      return;
+    }
+
+    speakListeningText(article, sentence.en);
+  }
+
+  function updateListeningAudioProgress(article: ListeningArticle) {
+    const audio = listeningAudioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    setListeningPlaybackProgress(
+      audio.duration ? Math.min(100, (audio.currentTime / audio.duration) * 100) : 0,
+    );
+
+    const activeSentence = getListeningSentences(article).find(
+      (sentence) => {
+        const timing = sentenceTimingForAccent(sentence, effectiveListeningAccent);
+        return (
+          typeof timing.start === "number" &&
+          typeof timing.end === "number" &&
+          audio.currentTime >= timing.start &&
+          audio.currentTime < timing.end
+        );
+      },
+    );
+    setActiveListeningSentenceId(activeSentence?.id ?? null);
+  }
+
+  function canUseListeningPremiumFeature() {
+    return Boolean(billing?.isSubscriber || billing?.isAdmin);
+  }
+
+  function selectListeningAccent(accent: ListeningAccent) {
+    if (accent === effectiveListeningAccent) {
+      return;
+    }
+    if (!canUseListeningPremiumFeature()) {
+      setListeningFeatureNotice("accent");
+      return;
+    }
+
+    stopListeningArticle();
+    setActiveListeningSentenceId(null);
+    setListeningPlaybackProgress(0);
+    setListeningAccent(accent);
+    if (selectedListeningArticle) {
+      void saveListeningState({
+        articleId: selectedListeningArticle.id,
+        preferredAccent: accent,
+      });
+    }
+  }
+
+  function changeListeningPlaybackRate(direction: -1 | 1) {
+    if (!canUseListeningPremiumFeature()) {
+      setListeningFeatureNotice("speed");
+      return;
+    }
+
+    const currentIndex = listeningPlaybackRates.findIndex((rate) => rate === listeningPlaybackRate);
+    const nextIndex = Math.max(
+      0,
+      Math.min(listeningPlaybackRates.length - 1, currentIndex + direction),
+    );
+    const nextRate = listeningPlaybackRates[nextIndex] ?? 1;
+    setListeningPlaybackRate(nextRate);
+    if (listeningAudioRef.current) {
+      listeningAudioRef.current.playbackRate = nextRate;
+    }
+
+    if (selectedListeningArticle && window.speechSynthesis.speaking && nextRate !== listeningPlaybackRate) {
+      playListeningArticle(selectedListeningArticle, nextRate);
+    }
+  }
+
+  function openListeningSaveNotice() {
+    setListeningFeatureNotice(canUseListeningPremiumFeature() ? "savePaid" : "saveFree");
+  }
+
+  async function loadListeningArticles() {
+    const response = await fetch("/api/listening/articles");
+    if (!response.ok) {
+      return;
+    }
+
+    const data = (await response.json()) as { articles: ListeningArticle[] };
+    if (!data.articles.length) {
+      return;
+    }
+
+    setListeningArticles(data.articles);
+    setLikedListeningArticles((current) => {
+      const next = new Set(current);
+      data.articles.forEach((article) => {
+        if (article.liked) next.add(article.id);
+      });
+      return next;
+    });
   }
 
   function toggleListeningLike(articleId: string) {
@@ -943,6 +1313,9 @@ export function TanukiApp() {
     articleId: string;
     readCompleted?: boolean;
     favorite?: boolean;
+    saved?: boolean;
+    offlineSaved?: boolean;
+    preferredAccent?: ListeningAccent | null;
   }) {
     if (!authUser) {
       return;
@@ -959,6 +1332,7 @@ export function TanukiApp() {
   }
 
   function startShadowingArticle(article: ListeningArticle) {
+    setSelectedArticlePracticeSource(listeningArticleToPracticeSourceFromArticle(article));
     setCompletedListeningArticles((current) => new Set([...current, article.id]));
     void saveListeningState({ articleId: article.id, readCompleted: true });
     selectPracticeSource("listening_article", article.id);
@@ -996,7 +1370,18 @@ export function TanukiApp() {
     setArticlePracticeOpen(true);
   }
 
-  async function loadWord(query: string) {
+  function resetWordSearchState() {
+    setWordResult(null);
+    setWordLookup(null);
+    setWordLookupCandidates([]);
+    setMissingWordQuery("");
+    setMissingWordSaveMessage(null);
+    setWordMemo("");
+    setWordMemoMessage(null);
+    setWordSearchError(null);
+  }
+
+  async function loadWord(query: string, candidate?: Pick<WordLookupCandidate, "headword" | "relation">) {
     const normalizedQuery = query.trim();
     if (!normalizedQuery) {
       setWordSearchError("検索する単語を入力してください。");
@@ -1006,16 +1391,36 @@ export function TanukiApp() {
     setWordSearchLoading(true);
     setWordSearchError(null);
     try {
-      const response = await fetch(`/api/words?word=${encodeURIComponent(normalizedQuery)}`);
+      const params = new URLSearchParams({ word: normalizedQuery });
+      if (candidate) {
+        params.set("headword", candidate.headword);
+        params.set("relation", candidate.relation);
+      }
+      const response = await fetch(`/api/words?${params.toString()}`);
       const payload = (await response.json()) as {
+        status?: "single" | "candidates" | "missing";
         word?: WordEntry;
         lookup?: WordLookupNormalization | null;
+        candidates?: WordLookupCandidate[];
+        query?: string;
         error?: string;
       };
+      if (response.ok && payload.status === "candidates" && payload.candidates?.length) {
+        setWordResult(null);
+        setWordLookup(null);
+        setWordLookupCandidates(payload.candidates);
+        setMissingWordQuery("");
+        setMissingWordSaveMessage(null);
+        setWordMemo("");
+        setWordMemoMessage(null);
+        setWordSearchError(null);
+        return;
+      }
       if (!response.ok || !payload.word) {
         const missingWord = normalizeSavedWord(normalizedQuery);
         setWordResult(null);
         setWordLookup(null);
+        setWordLookupCandidates([]);
         setMissingWordQuery(missingWord);
         setMissingWordSaveMessage(null);
         setWordMemo("");
@@ -1028,6 +1433,7 @@ export function TanukiApp() {
       }
       setWordResult(payload.word);
       setWordLookup(payload.lookup ?? null);
+      setWordLookupCandidates([]);
       setMissingWordQuery("");
       setMissingWordSaveMessage(null);
       setSearchTerm(payload.word.word);
@@ -1047,6 +1453,29 @@ export function TanukiApp() {
   async function searchWord(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault();
     await loadWord(searchTerm);
+  }
+
+  async function fetchWordEntryForReview(word: string) {
+    const normalizedWord = normalizeSavedWord(word);
+    if (!normalizedWord) {
+      return null;
+    }
+
+    try {
+      const params = new URLSearchParams({
+        word: normalizedWord,
+        headword: normalizedWord,
+        relation: "exact",
+      });
+      const response = await fetch(`/api/words?${params.toString()}`);
+      const payload = (await response.json()) as {
+        status?: "single" | "candidates" | "missing";
+        word?: WordEntry;
+      };
+      return response.ok && payload.status === "single" && payload.word ? payload.word : null;
+    } catch {
+      return null;
+    }
   }
 
   async function requestMissingWord(word: string) {
@@ -1072,6 +1501,9 @@ export function TanukiApp() {
       purpose: searchPurpose,
       savedAt: new Date().toISOString(),
       note: "",
+      status: "unreviewed",
+      reviewCount: 0,
+      isArchived: false,
     };
 
     setWordFolders((current) =>
@@ -1100,12 +1532,19 @@ export function TanukiApp() {
     }
 
     const normalizedWord = normalizeSavedWord(wordResult.word);
+    const existingEntry = wordFolders
+      .flatMap((folder) => folder.words)
+      .find((entry) => normalizeSavedWord(entry.word) === normalizedWord);
     const entry: SavedWordEntry = {
       word: normalizedWord || wordResult.word,
       level: searchLevel,
       purpose: searchPurpose,
       savedAt: new Date().toISOString(),
       note: wordMemo.trim(),
+      status: existingEntry?.status ?? "unreviewed",
+      lastReviewedAt: existingEntry?.lastReviewedAt,
+      reviewCount: existingEntry?.reviewCount ?? 0,
+      isArchived: existingEntry?.isArchived ?? false,
     };
 
     setWordFolders((current) =>
@@ -1173,11 +1612,22 @@ export function TanukiApp() {
 
     const savedAt = new Date().toISOString();
     const entries: SavedWordEntry[] = selectedEntries.map(({ item, key }) => ({
-      word: key || item.word,
-      level: searchLevel,
-      purpose: searchPurpose,
-      savedAt,
-      note: item.reason,
+      ...(() => {
+        const existingEntry = wordFolders
+          .flatMap((folder) => folder.words)
+          .find((entry) => normalizeSavedWord(entry.word) === key);
+        return {
+          word: key || item.word,
+          level: searchLevel,
+          purpose: searchPurpose,
+          savedAt,
+          note: item.reason,
+          status: existingEntry?.status ?? "unreviewed",
+          lastReviewedAt: existingEntry?.lastReviewedAt,
+          reviewCount: existingEntry?.reviewCount ?? 0,
+          isArchived: existingEntry?.isArchived ?? false,
+        };
+      })(),
     }));
     const entryKeys = new Set(entries.map((entry) => normalizeSavedWord(entry.word)));
 
@@ -1369,6 +1819,123 @@ export function TanukiApp() {
     );
     setSelectedFolderWordKeys(new Set());
     setFolderActionMessage(`${count}件の単語を削除しました。`);
+  }
+
+  function toggleWordReviewFilter(filter: WordReviewFilter) {
+    setWordReviewFilters((current) => {
+      const next = new Set(current);
+      if (next.has(filter)) {
+        next.delete(filter);
+      } else {
+        next.add(filter);
+      }
+      return next;
+    });
+    setSelectedFolderWordKeys(new Set());
+  }
+
+  function startWordReviewSession(cards: SavedWordEntry[]) {
+    const reviewCards = cards.filter((entry) => !entry.isArchived);
+    if (!reviewCards.length) {
+      setFolderActionMessage("復習する単語がありません。");
+      return;
+    }
+
+    setWordReviewSession({
+      cards: reviewCards,
+      index: 0,
+      revealed: false,
+      results: [],
+      completed: false,
+    });
+    setFolderWordEditing(false);
+    setSelectedFolderWordKeys(new Set());
+    setFolderActionMessage(null);
+    resetWordSearchState();
+  }
+
+  function reviewSelectedFolderWords() {
+    if (!openWordFolder || !selectedFolderWordKeys.size) {
+      setFolderActionMessage("復習する単語を選択してください。");
+      return;
+    }
+
+    startWordReviewSession(
+      openWordFolder.words.filter((entry) => selectedFolderWordKeys.has(wordEntryKey(entry))),
+    );
+  }
+
+  function updateReviewedWordStatus(
+    targetWord: string,
+    status: Exclude<WordReviewStatus, "unreviewed">,
+  ) {
+    const targetKey = normalizeSavedWord(targetWord);
+    const reviewedAt = new Date().toISOString();
+    setWordFolders((current) =>
+      current.map((folder) => ({
+        ...folder,
+        words: folder.words.map((entry) =>
+          normalizeSavedWord(entry.word) === targetKey
+            ? {
+                ...entry,
+                status,
+                lastReviewedAt: reviewedAt,
+                reviewCount: (entry.reviewCount ?? 0) + 1,
+              }
+            : entry,
+        ),
+      })),
+    );
+  }
+
+  function answerWordReview(status: Exclude<WordReviewStatus, "unreviewed">) {
+    if (!wordReviewSession) {
+      return;
+    }
+
+    const currentCard = wordReviewSession.cards[wordReviewSession.index];
+    if (!currentCard) {
+      return;
+    }
+
+    updateReviewedWordStatus(currentCard.word, status);
+    const results = [
+      ...wordReviewSession.results,
+      { word: currentCard.word, status },
+    ];
+    const nextIndex = wordReviewSession.index + 1;
+    setWordReviewSession({
+      ...wordReviewSession,
+      index: nextIndex,
+      revealed: false,
+      results,
+      completed: nextIndex >= wordReviewSession.cards.length,
+    });
+  }
+
+  function restartBadWordReview() {
+    if (!wordReviewSession) {
+      return;
+    }
+
+    const badWords = new Set(
+      wordReviewSession.results
+        .filter((result) => result.status === "bad")
+        .map((result) => normalizeSavedWord(result.word)),
+    );
+    startWordReviewSession(
+      wordReviewSession.cards.filter((entry) => badWords.has(normalizeSavedWord(entry.word))),
+    );
+  }
+
+  async function openReviewedWordDetails(entry: SavedWordEntry) {
+    setSearchLevel(entry.level);
+    setSearchPurpose(entry.purpose);
+    setSearchTerm(entry.word);
+    setWordMemo(entry.note ?? "");
+    setWordMemoMessage(null);
+    setWordReviewSession(null);
+    await loadWord(entry.word);
   }
 
   function errorCodeForSubmission(item: SubmissionWithFeedback) {
@@ -1836,6 +2403,7 @@ export function TanukiApp() {
     },
     [
       likedListeningArticles,
+      listeningArticles,
       listeningCategory,
       listeningContentType,
       listeningFavoritesFirst,
@@ -1893,10 +2461,62 @@ export function TanukiApp() {
         .filter((value): value is number => typeof value === "number"),
     [completedHistory],
   );
+  const monthlyWpmAverages = useMemo(() => {
+    const byMonth = new Map<string, number[]>();
+    for (const item of completedHistory) {
+      const wpm = getPracticeSourceFromSubmission(item)?.wpm;
+      const month = monthKeyFromDate(item.createdAt);
+      if (typeof wpm !== "number" || !month) {
+        continue;
+      }
+      byMonth.set(month, [...(byMonth.get(month) ?? []), wpm]);
+    }
+
+    return Array.from(byMonth.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([month, values]) => ({
+        month,
+        label: compactMonthLabel(month),
+        average: Math.round(values.reduce((sum, value) => sum + value, 0) / values.length),
+        count: values.length,
+      }));
+  }, [completedHistory]);
+  const monthlyWpmChart = useMemo(() => {
+    const width = 300;
+    const height = 96;
+    const paddingX = 20;
+    const paddingY = 18;
+    const values = monthlyWpmAverages.map((item) => item.average);
+    const min = values.length ? Math.min(...values) : 0;
+    const max = values.length ? Math.max(...values) : 0;
+    const range = Math.max(1, max - min);
+    const usableWidth = width - paddingX * 2;
+    const usableHeight = height - paddingY * 2;
+    const points = monthlyWpmAverages.map((item, index) => {
+      const x =
+        monthlyWpmAverages.length === 1
+          ? width / 2
+          : paddingX + (usableWidth * index) / (monthlyWpmAverages.length - 1);
+      const y = paddingY + ((max - item.average) / range) * usableHeight;
+      return { ...item, x, y };
+    });
+
+    return {
+      width,
+      height,
+      min,
+      max,
+      points,
+      line: points.map((point) => `${point.x},${point.y}`).join(" "),
+    };
+  }, [monthlyWpmAverages]);
   const progressSummary = {
     total: completedHistory.length,
-    wpmStart: completedWpmValues.length ? Math.min(...completedWpmValues) : null,
-    wpmCurrent: completedWpmValues.length ? Math.max(...completedWpmValues) : null,
+    averageWpm: completedWpmValues.length
+      ? Math.round(
+          completedWpmValues.reduce((sum, value) => sum + value, 0) / completedWpmValues.length,
+        )
+      : null,
     weekCount: completedHistory.filter(
       (item) => Date.now() - Date.parse(item.createdAt) < 7 * 24 * 60 * 60 * 1000,
     ).length,
@@ -1920,6 +2540,42 @@ export function TanukiApp() {
       : billing?.freeSubmissionsRemaining
         ? "無料添削が1回使えます"
         : "無料添削を利用済みです";
+  const effectiveListeningAccent: ListeningAccent = canUseListeningPremiumFeature()
+    ? listeningAccent
+    : "us";
+  const selectedListeningAudioUrl = selectedListeningArticle
+    ? audioUrlForListeningArticle(selectedListeningArticle, effectiveListeningAccent)
+    : null;
+  const openFolderActiveWords = openWordFolder?.words.filter((entry) => !entry.isArchived) ?? [];
+  const openFolderReviewCounts = wordReviewStatusOptions.reduce(
+    (acc, option) => ({
+      ...acc,
+      [option.id]: openFolderActiveWords.filter(
+        (entry) => getWordReviewStatus(entry) === option.id,
+      ).length,
+    }),
+    {} as Record<WordReviewStatus, number>,
+  );
+  const openFolderVisibleWords = openFolderActiveWords.filter(
+    (entry) =>
+      !wordReviewFilters.size || wordReviewFilters.has(getWordReviewStatus(entry)),
+  );
+  const currentReviewCard =
+    wordReviewSession && !wordReviewSession.completed
+      ? wordReviewSession.cards[wordReviewSession.index] ?? null
+      : null;
+  const currentReviewKey = currentReviewCard ? normalizeSavedWord(currentReviewCard.word) : "";
+  const currentReviewWord =
+    currentReviewKey && currentReviewKey in wordReviewDetails
+      ? wordReviewDetails[currentReviewKey]
+      : undefined;
+  const reviewSummary = wordReviewSession
+    ? {
+        good: wordReviewSession.results.filter((result) => result.status === "good").length,
+        fair: wordReviewSession.results.filter((result) => result.status === "fair").length,
+        bad: wordReviewSession.results.filter((result) => result.status === "bad").length,
+      }
+    : { good: 0, fair: 0, bad: 0 };
 
   function handleCalendarTouchEnd(endX: number) {
     if (touchStartX === null) {
@@ -2230,23 +2886,62 @@ export function TanukiApp() {
                     <span>進捗</span>
                     <strong>Shadowing</strong>
                   </div>
-                  <div className="progress-summary-grid">
+                  <div className="progress-summary-grid is-two-column">
                     <div>
                       <span>総添削回数</span>
                       <strong>{progressSummary.total}回</strong>
                     </div>
                     <div>
-                      <span>練習したWPM</span>
-                      <strong>
-                        {progressSummary.wpmStart && progressSummary.wpmCurrent
-                          ? `${progressSummary.wpmStart} -> ${progressSummary.wpmCurrent}`
-                          : "-"}
-                      </strong>
-                    </div>
-                    <div>
                       <span>今週の練習</span>
                       <strong>{progressSummary.weekCount}回</strong>
                     </div>
+                  </div>
+                  <div className="monthly-wpm-card" aria-label="月別の平均WPM">
+                    <div className="monthly-wpm-header">
+                      <div>
+                        <span>練習した記事の平均WPM</span>
+                        <strong>
+                          {progressSummary.averageWpm ? `${progressSummary.averageWpm} WPM` : "-"}
+                        </strong>
+                      </div>
+                      <small>月別平均</small>
+                    </div>
+                    {monthlyWpmChart.points.length ? (
+                      <div className="monthly-wpm-chart">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          viewBox={`0 0 ${monthlyWpmChart.width} ${monthlyWpmChart.height}`}
+                        >
+                          <line
+                            className="monthly-wpm-axis"
+                            x1="20"
+                            x2="280"
+                            y1="78"
+                            y2="78"
+                          />
+                          {monthlyWpmChart.points.length > 1 ? (
+                            <polyline
+                              className="monthly-wpm-line"
+                              points={monthlyWpmChart.line}
+                            />
+                          ) : null}
+                          {monthlyWpmChart.points.map((point) => (
+                            <g key={point.month}>
+                              <circle className="monthly-wpm-dot" cx={point.x} cy={point.y} r="4" />
+                              <text className="monthly-wpm-value" x={point.x} y={point.y - 9}>
+                                {point.average}
+                              </text>
+                              <text className="monthly-wpm-label" x={point.x} y="92">
+                                {point.label}
+                              </text>
+                            </g>
+                          ))}
+                        </svg>
+                      </div>
+                    ) : (
+                      <p className="monthly-wpm-empty">練習データが増えると月別平均を表示します。</p>
+                    )}
                   </div>
                   {canSubmitToday ? (
                     <button
@@ -2778,7 +3473,9 @@ export function TanukiApp() {
                   onClick={() => {
                     setSelectedListeningArticleId(null);
                     setSelectedListeningWord(null);
-                    window.speechSynthesis.cancel();
+                    setActiveListeningSentenceId(null);
+                    setListeningPlaybackProgress(0);
+                    stopListeningArticle();
                   }}
                   type="button"
                 >
@@ -2830,14 +3527,89 @@ export function TanukiApp() {
                   <Play size={22} />
                   再生
                 </button>
-                <button onClick={() => window.speechSynthesis.cancel()} type="button">
+                <button onClick={stopListeningArticle} type="button">
                   <Pause size={22} />
                   停止
                 </button>
                 <div className="listening-progress" aria-hidden="true">
-                  <span />
+                  <span style={{ width: `${Math.max(4, listeningPlaybackProgress || 38)}%` }} />
                 </div>
+                {selectedListeningArticle.contentType === "listening" && selectedListeningAudioUrl ? (
+                  <audio
+                    key={`${selectedListeningArticle.id}-${effectiveListeningAccent}`}
+                    ref={listeningAudioRef}
+                    onEnded={() => {
+                      setActiveListeningSentenceId(null);
+                      setListeningPlaybackProgress(0);
+                    }}
+                    onTimeUpdate={() => updateListeningAudioProgress(selectedListeningArticle)}
+                    preload="metadata"
+                    src={selectedListeningAudioUrl}
+                  >
+                    <track kind="captions" />
+                  </audio>
+                ) : null}
               </section>
+
+              <section className="listening-premium-tools" aria-label="リスニング拡張機能">
+                <div className="listening-speed-control">
+                  <div>
+                    <span>再生速度</span>
+                    <strong>{formatPlaybackRate(listeningPlaybackRate)}</strong>
+                  </div>
+                  <div className="listening-speed-buttons" aria-label="再生速度を調整">
+                    <button
+                      aria-label="再生速度を下げる"
+                      onClick={() => changeListeningPlaybackRate(-1)}
+                      type="button"
+                    >
+                      -
+                    </button>
+                    <button
+                      aria-label="再生速度を上げる"
+                      onClick={() => changeListeningPlaybackRate(1)}
+                      type="button"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <button
+                  className="listening-save-cta"
+                  onClick={openListeningSaveNotice}
+                  type="button"
+                >
+                  <BookmarkPlus size={20} />
+                  保存する
+                </button>
+              </section>
+
+              {selectedListeningArticle.contentType === "listening" ? (
+                <section className="listening-accent-toggle" aria-label="英語音声の種類">
+                  <div>
+                    <span>音声</span>
+                    <strong>
+                      {
+                        listeningAccentOptions.find(
+                          (option) => option.id === effectiveListeningAccent,
+                        )?.label
+                      }
+                    </strong>
+                  </div>
+                  <div>
+                    {listeningAccentOptions.map((option) => (
+                      <button
+                        className={effectiveListeningAccent === option.id ? "is-active" : ""}
+                        key={option.id}
+                        onClick={() => selectListeningAccent(option.id)}
+                        type="button"
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
 
               <div className="listening-view-toggle" aria-label="本文表示切替">
                 {[
@@ -2860,13 +3632,65 @@ export function TanukiApp() {
                 {selectedListeningArticle.paragraphs.map((paragraph, index) => (
                   <section className="listening-reader-block" key={`${paragraph.en}-${index}`}>
                     {listeningTextMode !== "japanese" ? (
-                      <ListeningParagraph
-                        onWordClick={(word) => setSelectedListeningWord(word)}
-                        text={paragraph.en}
-                      />
+                      selectedListeningArticle.contentType === "listening" ? (
+                        <div className="listening-sentence-list">
+                          {getParagraphListeningSentences(
+                            selectedListeningArticle,
+                            paragraph,
+                            index,
+                          ).map((sentence) => (
+                            <div
+                              className={
+                                activeListeningSentenceId === sentence.id ? "is-active" : ""
+                              }
+                              key={sentence.id}
+                              onClick={() => playListeningSentence(selectedListeningArticle, sentence)}
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                  event.preventDefault();
+                                  playListeningSentence(selectedListeningArticle, sentence);
+                                }
+                              }}
+                              role="button"
+                              tabIndex={0}
+                            >
+                              <ListeningParagraph
+                                onWordClick={(word) => setSelectedListeningWord(word)}
+                                text={sentence.en}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <ListeningParagraph
+                          onWordClick={(word) => setSelectedListeningWord(word)}
+                          text={paragraph.en}
+                        />
+                      )
                     ) : null}
                     {listeningTextMode !== "english" ? (
-                      <p className="listening-japanese-text">{paragraph.ja}</p>
+                      selectedListeningArticle.contentType === "listening" ? (
+                        <div className="listening-sentence-translation-list">
+                          {getParagraphListeningSentences(
+                            selectedListeningArticle,
+                            paragraph,
+                            index,
+                          ).map((sentence) => (
+                            <p
+                              className={
+                                activeListeningSentenceId === sentence.id
+                                  ? "listening-japanese-text is-active"
+                                  : "listening-japanese-text"
+                              }
+                              key={`${sentence.id}-ja`}
+                            >
+                              {sentence.ja}
+                            </p>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="listening-japanese-text">{paragraph.ja}</p>
+                      )
                     ) : null}
                   </section>
                 ))}
@@ -3108,12 +3932,7 @@ export function TanukiApp() {
               onClick={() => {
                 const word = selectedListeningWord;
                 setSelectedListeningWord(null);
-                setWordResult(null);
-                setWordLookup(null);
-                setMissingWordQuery("");
-                setMissingWordSaveMessage(null);
-                setWordMemo("");
-                setWordMemoMessage(null);
+                resetWordSearchState();
                 setSearchTerm(word);
                 setActiveTab("search");
                 void loadWord(word);
@@ -3195,21 +4014,187 @@ export function TanukiApp() {
           </div>
         ) : null}
 
+        {listeningFeatureNotice ? (
+          <div className="word-modal-backdrop" role="presentation">
+            <section className="word-modal is-compact listening-feature-modal" aria-label="リスニング機能">
+              <div className="word-modal-heading">
+                <div>
+                  <span>
+                    {listeningFeatureNotice === "savePaid" ? "coming soon" : "premium"}
+                  </span>
+                  <h2>
+                    {listeningFeatureNotice === "speed"
+                      ? "再生速度の調整は有料機能です"
+                      : listeningFeatureNotice === "accent"
+                        ? "音声の切り替えは有料機能です"
+                      : listeningFeatureNotice === "saveFree"
+                        ? "保存機能は有料ユーザー限定です"
+                        : "保存機能はアプリ版で提供予定です"}
+                  </h2>
+                  <p>
+                    {listeningFeatureNotice === "speed"
+                      ? "0.7xから1.5xまで、0.1刻みで聞き取りやすい速度に調整できます。"
+                      : listeningFeatureNotice === "accent"
+                        ? "有料ユーザーはアメリカ英語とイギリス英語の音声を切り替えて学習できます。"
+                      : listeningFeatureNotice === "saveFree"
+                        ? "アプリ版では記事と音声を保存して、オフラインでも学習できる予定です。"
+                        : "現在はWeb版のため、オンラインでご利用ください。"}
+                  </p>
+                </div>
+                <button
+                  aria-label="閉じる"
+                  onClick={() => setListeningFeatureNotice(null)}
+                  type="button"
+                >
+                  <X size={22} />
+                </button>
+              </div>
+              <div className="listening-feature-modal-actions">
+                {listeningFeatureNotice === "savePaid" ? (
+                  <button
+                    className="ghost-button"
+                    onClick={() => setListeningFeatureNotice(null)}
+                    type="button"
+                  >
+                    閉じる
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      className="ghost-button"
+                      onClick={() => setListeningFeatureNotice(null)}
+                      type="button"
+                    >
+                      あとで
+                    </button>
+                    <button className="checkout-button" onClick={startCheckout} type="button">
+                      <CreditCard size={18} />
+                      3日間無料体験
+                    </button>
+                  </>
+                )}
+              </div>
+            </section>
+          </div>
+        ) : null}
+
         {activeTab === "search" ? (
-          wordResult ? (
+          wordReviewSession ? (
+            <section className="word-review-screen">
+              <div className="word-result-nav">
+                <button
+                  aria-label="単語一覧へ戻る"
+                  onClick={() => setWordReviewSession(null)}
+                  type="button"
+                >
+                  <ArrowLeft size={28} />
+                </button>
+                <strong>単語復習</strong>
+                <span />
+              </div>
+
+              {wordReviewSession.completed ? (
+                <section className="word-review-summary">
+                  <span>review completed</span>
+                  <h2>復習おつかれさまでした</h2>
+                  <div className="word-review-summary-grid">
+                    <div>
+                      <strong>○</strong>
+                      <span>覚えた</span>
+                      <b>{reviewSummary.good}語</b>
+                    </div>
+                    <div>
+                      <strong>△</strong>
+                      <span>うろ覚え</span>
+                      <b>{reviewSummary.fair}語</b>
+                    </div>
+                    <div>
+                      <strong>×</strong>
+                      <span>忘れた</span>
+                      <b>{reviewSummary.bad}語</b>
+                    </div>
+                  </div>
+                  <div className="word-review-summary-actions">
+                    {reviewSummary.bad > 0 ? (
+                      <button onClick={restartBadWordReview} type="button">
+                        ×の単語をもう一度復習する
+                      </button>
+                    ) : null}
+                    <button onClick={() => setWordReviewSession(null)} type="button">
+                      一覧に戻る
+                    </button>
+                  </div>
+                </section>
+              ) : currentReviewCard ? (
+                <section
+                  className={wordReviewSession.revealed ? "word-review-card is-revealed" : "word-review-card"}
+                >
+                  <button
+                    className="word-review-card-main"
+                    onClick={() =>
+                      setWordReviewSession((current) =>
+                        current ? { ...current, revealed: true } : current,
+                      )
+                    }
+                    type="button"
+                  >
+                    <span>
+                      {wordReviewSession.index + 1} / {wordReviewSession.cards.length}
+                    </span>
+                    <h2>{currentReviewCard.word}</h2>
+                    {wordReviewSession.revealed ? (
+                      currentReviewWord === undefined ? (
+                        <p>意味を確認しています...</p>
+                      ) : currentReviewWord ? (
+                        <>
+                          <small>{formatIpa(currentReviewWord.stress)}</small>
+                          <p>
+                            {currentReviewWord.definitions[0]?.definition_jp ??
+                              "意味はまだ準備中です"}
+                          </p>
+                        </>
+                      ) : (
+                        <p>この単語はまだ意味が登録されていません</p>
+                      )
+                    ) : (
+                      <p>タップして意味を確認</p>
+                    )}
+                  </button>
+
+                  {wordReviewSession.revealed ? (
+                    <div className="word-review-back-actions">
+                      {currentReviewWord ? (
+                        <button onClick={() => openReviewedWordDetails(currentReviewCard)} type="button">
+                          詳細を確認する
+                          <ChevronRight size={18} />
+                        </button>
+                      ) : (
+                        <button disabled type="button">
+                          詳細はまだ表示できません
+                        </button>
+                      )}
+                      <div className="word-review-answer-grid">
+                        <button onClick={() => answerWordReview("bad")} type="button">
+                          × 忘れた
+                        </button>
+                        <button onClick={() => answerWordReview("fair")} type="button">
+                          △ うろ覚え
+                        </button>
+                        <button onClick={() => answerWordReview("good")} type="button">
+                          ○ 覚えた
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+                </section>
+              ) : null}
+            </section>
+          ) : wordResult ? (
             <section className="word-result-page">
               <div className="word-result-nav">
                 <button
                   aria-label="検索へ戻る"
-                  onClick={() => {
-                    setWordResult(null);
-                    setWordLookup(null);
-                    setMissingWordQuery("");
-                    setMissingWordSaveMessage(null);
-                    setWordMemo("");
-                    setWordMemoMessage(null);
-                    setWordSearchError(null);
-                  }}
+                  onClick={resetWordSearchState}
                   type="button"
                 >
                   <ArrowLeft size={28} />
@@ -3225,8 +4210,7 @@ export function TanukiApp() {
                   <h2>{wordResult.word}</h2>
                   {wordLookup ? (
                     <div className="word-lookup-note">
-                      {wordLookup.input} は {wordLookup.headword} の
-                      {wordLookup.relation === "past_tense" ? "過去形" : "過去分詞"}です
+                      {wordLookup.input} は {wordLookup.label}です
                     </div>
                   ) : null}
                   <p>{formatIpa(wordResult.stress)}</p>
@@ -3299,13 +4283,9 @@ export function TanukiApp() {
                       <button
                         key={synonym}
                         onClick={() => {
+                          resetWordSearchState();
                           setSearchTerm(synonym);
-                          setWordResult(null);
-                          setWordLookup(null);
-                          setMissingWordQuery("");
-                          setMissingWordSaveMessage(null);
-                          setWordMemo("");
-                          setWordMemoMessage(null);
+                          void loadWord(synonym);
                         }}
                         type="button"
                       >
@@ -3351,6 +4331,40 @@ export function TanukiApp() {
               </div>
               {wordMemoMessage ? <p className="word-memo-message">{wordMemoMessage}</p> : null}
             </section>
+          ) : wordLookupCandidates.length ? (
+            <section className="word-result-page word-candidate-page">
+              <div className="word-result-nav">
+                <button
+                  aria-label="検索へ戻る"
+                  onClick={resetWordSearchState}
+                  type="button"
+                >
+                  <ArrowLeft size={28} />
+                </button>
+                <strong>{wordLookupCandidates[0]?.input}</strong>
+                <span />
+              </div>
+              <div className="word-candidate-copy">
+                <span>候補が複数あります</span>
+                <h2>どの意味で調べますか？</h2>
+                <p>近い意味を選ぶと、対応する単語ページを表示します。</p>
+              </div>
+              <div className="word-candidate-list">
+                {wordLookupCandidates.map((candidate) => (
+                  <button
+                    key={`${candidate.headword}-${candidate.relation}`}
+                    onClick={() => {
+                      setSearchTerm(candidate.input);
+                      void loadWord(candidate.input, candidate);
+                    }}
+                    type="button"
+                  >
+                    <strong>{candidate.label}</strong>
+                    <span>{candidate.definitionPreview || "意味を表示します"}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
           ) : openWordFolder ? (
             <section className="search-screen">
               <div className="folder-detail-nav">
@@ -3384,19 +4398,57 @@ export function TanukiApp() {
               {openWordFolder.words.length ? (
                 <div className="folder-word-list is-page">
 	                  <div className="folder-word-list-heading">
-	                    <h3>保存した単語</h3>
+	                    <div>
+	                      <h3>保存した単語</h3>
+	                      <span>{openFolderVisibleWords.length}件表示中</span>
+	                    </div>
+	                    <div className="folder-word-heading-actions">
+	                      <button
+	                        disabled={!openFolderVisibleWords.length}
+	                        onClick={() => startWordReviewSession(openFolderVisibleWords)}
+	                        type="button"
+	                      >
+	                        表示中の単語を復習
+	                      </button>
+	                      <button
+	                        onClick={() => {
+	                          setFolderWordEditing((value) => !value);
+	                          setSelectedFolderWordKeys(new Set());
+	                        }}
+	                        type="button"
+	                      >
+	                        {folderWordEditing ? "完了" : "選択して復習"}
+	                      </button>
+	                    </div>
+	                  </div>
+	                  <div className="word-review-filter-row" aria-label="定着度フィルター">
 	                    <button
+	                      className={!wordReviewFilters.size ? "is-active" : ""}
 	                      onClick={() => {
-	                        setFolderWordEditing((value) => !value);
+	                        setWordReviewFilters(new Set());
 	                        setSelectedFolderWordKeys(new Set());
 	                      }}
 	                      type="button"
 	                    >
-	                      {folderWordEditing ? "完了" : "編集"}
+	                      すべて {openFolderActiveWords.length}語
 	                    </button>
+	                    {wordReviewStatusOptions.map((option) => (
+	                      <button
+	                        className={wordReviewFilters.has(option.id) ? "is-active" : ""}
+	                        key={option.id}
+	                        onClick={() => toggleWordReviewFilter(option.id)}
+	                        type="button"
+	                      >
+	                        {option.mark} {option.label} {openFolderReviewCounts[option.id]}語
+	                      </button>
+	                    ))}
 	                  </div>
 	                  <div className="folder-word-items">
-	                    {openWordFolder.words.map((entry) => (
+	                    {openFolderVisibleWords.map((entry) => {
+	                      const status = wordReviewStatusOptions.find(
+	                        (option) => option.id === getWordReviewStatus(entry),
+	                      );
+	                      return (
 	                      <button
 	                        className={
 	                          selectedFolderWordKeys.has(wordEntryKey(entry))
@@ -3412,10 +4464,17 @@ export function TanukiApp() {
 	                        type="button"
 	                      >
 	                        <strong>{entry.word}</strong>
+	                        <span className={`word-review-status-badge is-${getWordReviewStatus(entry)}`}>
+	                          {status?.mark} {status?.label}
+	                        </span>
 	                        {entry.note ? <small>{entry.note}</small> : null}
 	                      </button>
-	                    ))}
+	                    );
+	                    })}
 	                  </div>
+	                  {!openFolderVisibleWords.length ? (
+	                    <p className="folder-empty-text">この条件に合う単語はありません。</p>
+	                  ) : null}
 	                  {folderWordEditing ? (
 	                    <div className="folder-bulk-actions">
 	                      <span>{selectedFolderWordKeys.size}件選択中</span>
@@ -3436,6 +4495,13 @@ export function TanukiApp() {
 	                            </option>
 	                          ))}
 	                      </select>
+	                      <button
+	                        disabled={!selectedFolderWordKeys.size}
+	                        onClick={reviewSelectedFolderWords}
+	                        type="button"
+	                      >
+	                        復習する
+	                      </button>
 	                      <button
 	                        disabled={!selectedFolderWordKeys.size}
 	                        onClick={moveSelectedFolderWords}

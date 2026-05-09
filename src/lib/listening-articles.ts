@@ -1,5 +1,20 @@
 export type ListeningLevel = "beginner" | "intermediate" | "advanced";
 export type ListeningContentType = "shadowing" | "listening";
+export type ListeningAccent = "us" | "uk";
+
+export type ListeningSentenceTiming = {
+  start: number | null;
+  end: number | null;
+};
+
+export type ListeningSentence = {
+  id: string;
+  en: string;
+  ja: string;
+  start: number | null;
+  end: number | null;
+  timings?: Partial<Record<ListeningAccent, ListeningSentenceTiming>>;
+};
 
 export type ListeningArticle = {
   id: string;
@@ -15,9 +30,11 @@ export type ListeningArticle = {
   wpm: number;
   liked: boolean;
   audioUrl: string | null;
+  audioSources?: Partial<Record<ListeningAccent, string | null>>;
   paragraphs: Array<{
     en: string;
     ja: string;
+    sentences?: ListeningSentence[];
   }>;
   keyWords: string[];
 };

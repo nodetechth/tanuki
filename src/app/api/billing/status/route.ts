@@ -8,6 +8,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "ログインしてください。" }, { status: 401 });
   }
 
-  const billing = await getBillingState(user.id, { isAdmin: isAdminUser(user) });
+  const billing = await getBillingState(user.id, { isAdmin: await isAdminUser(user) });
   return NextResponse.json({ billing });
 }
