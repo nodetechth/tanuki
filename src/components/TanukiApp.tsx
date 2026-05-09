@@ -42,7 +42,6 @@ import { listeningArticles as fallbackListeningArticles } from "@/lib/listening-
 import type {
   ListeningArticle,
   ListeningAccent,
-  ListeningContentType,
   ListeningSentence,
 } from "@/lib/listening-articles";
 import { materials } from "@/lib/materials";
@@ -378,15 +377,6 @@ const wpmLevels = [
   { range: "150〜160", description: "自然なスピード" },
   { range: "170〜180", description: "ニュース・プレゼン速度" },
   { range: "190〜200", description: "ネイティブの速い会話" },
-];
-
-const listeningContentTabs: Array<{
-  id: ListeningContentType;
-  label: string;
-  description: string;
-}> = [
-  { id: "shadowing", label: "シャドーイング", description: "30秒前後の短い練習" },
-  { id: "listening", label: "リスニング", description: "3分前後の記事" },
 ];
 
 const listeningPlaybackRates = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5];
@@ -799,14 +789,14 @@ export function TanukiApp() {
   const [loginDays, setLoginDays] = useState<string[]>([]);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [listeningCategory, setListeningCategory] = useState("ALL");
-  const [listeningContentType, setListeningContentType] =
-    useState<ListeningContentType>("shadowing");
   const [listeningArticles, setListeningArticles] = useState<ListeningArticle[]>(
     fallbackListeningArticles,
   );
   const [selectedListeningArticleId, setSelectedListeningArticleId] = useState<string | null>(
     null,
   );
+  const [listeningDetailBackTab, setListeningDetailBackTab] =
+    useState<AppTab>("listening");
   const [listeningTextMode, setListeningTextMode] = useState<ListeningTextMode>("both");
   const [listeningFavoritesFirst, setListeningFavoritesFirst] = useState(false);
   const [listeningWpmSort, setListeningWpmSort] = useState<ListeningWpmSort>("asc");
@@ -2382,7 +2372,7 @@ export function TanukiApp() {
   const visibleListeningArticles = useMemo(
     () => {
       const filtered = listeningArticles.filter((article) => {
-        const matchesType = article.contentType === listeningContentType;
+        const matchesType = article.contentType === "listening";
         const matchesCategory =
           listeningCategory === "ALL" || article.category === listeningCategory;
         return matchesType && matchesCategory;
@@ -2398,12 +2388,6 @@ export function TanukiApp() {
           }
         }
 
-        if (listeningContentType === "shadowing") {
-          const aWpm = a.wpm ?? 0;
-          const bWpm = b.wpm ?? 0;
-          return listeningWpmSort === "asc" ? aWpm - bWpm : bWpm - aWpm;
-        }
-
         return b.date.localeCompare(a.date);
       });
     },
@@ -2411,10 +2395,19 @@ export function TanukiApp() {
       likedListeningArticles,
       listeningArticles,
       listeningCategory,
-      listeningContentType,
       listeningFavoritesFirst,
-      listeningWpmSort,
     ],
+  );
+  const visibleShadowingArticles = useMemo(
+    () =>
+      listeningArticles
+        .filter((article) => article.contentType === "shadowing")
+        .sort((a, b) => {
+          const aWpm = a.wpm ?? 0;
+          const bWpm = b.wpm ?? 0;
+          return listeningWpmSort === "asc" ? aWpm - bWpm : bWpm - aWpm;
+        }),
+    [listeningArticles, listeningWpmSort],
   );
   const selectedListeningArticle = selectedListeningArticleId
     ? listeningArticles.find((article) => article.id === selectedListeningArticleId) ?? null
@@ -2953,7 +2946,8 @@ export function TanukiApp() {
                     <button
                       className="new-practice-button"
                       onClick={() => {
-                        setActiveTab("listening");
+                        setActiveTab("speak");
+                        setSpeakView("home");
                         setSelectedListeningArticleId(null);
                       }}
                       type="button"
@@ -3044,6 +3038,74 @@ export function TanukiApp() {
                     過去の添削履歴を確認する
                     <ChevronRight size={16} />
                   </button>
+                </section>
+
+                <section className="speak-card shadowing-article-section">
+                  <div className="panel-heading">
+                    <span>シャドーイング教材</span>
+                    <strong>{visibleShadowingArticles.length} articles</strong>
+                  </div>
+                  <div className="shadowing-article-toolbar">
+                    <span>30秒前後の短い練習</span>
+                    <button
+                      className="wpm-sort-button"
+                      onClick={() =>
+                        setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
+                      }
+                      type="button"
+                    >
+                      WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
+                    </button>
+                  </div>
+                  <div className="listening-article-list is-compact">
+                    {visibleShadowingArticles.map((article) => {
+                      const liked = likedListeningArticles.has(article.id);
+                      const practiced = practicedListeningArticleIds.has(article.id);
+                      return (
+                        <article
+                          className="listening-article-card"
+                          key={article.id}
+                          onClick={() => startShadowingArticle(article)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Enter") {
+                              startShadowingArticle(article);
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div className="listening-thumbnail" aria-hidden="true">
+                            <Mic size={30} />
+                          </div>
+                          <div className="listening-article-body">
+                            <div className="listening-meta">
+                              <span>{article.category}</span>
+                              <span>{article.levelLabel}</span>
+                              <time>{article.date}</time>
+                            </div>
+                            <h3>{article.title}</h3>
+                            <p>{article.description}</p>
+                            <div className="listening-card-stats">
+                              {article.wpm ? <small>WPM {article.wpm}</small> : null}
+                              <small>{article.readTimeMinutes}分</small>
+                              {practiced ? <small className="is-practiced">練習済み</small> : null}
+                            </div>
+                          </div>
+                          <button
+                            aria-label={liked ? "お気に入りを解除" : "お気に入りに追加"}
+                            className={liked ? "listen-like is-active" : "listen-like"}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              toggleListeningLike(article.id);
+                            }}
+                            type="button"
+                          >
+                            <Heart size={30} />
+                          </button>
+                        </article>
+                      );
+                    })}
+                  </div>
                 </section>
               </>
             ) : null}
@@ -3481,13 +3543,18 @@ export function TanukiApp() {
                     setSelectedListeningWord(null);
                     setActiveListeningSentenceId(null);
                     setListeningPlaybackProgress(0);
+                    setActiveTab(listeningDetailBackTab);
                     stopListeningArticle();
                   }}
                   type="button"
                 >
                   <ArrowLeft size={24} />
                 </button>
-                <strong>Listening</strong>
+                <strong>
+                  {selectedListeningArticle.contentType === "shadowing"
+                    ? "Shadowing"
+                    : "Listening"}
+                </strong>
                 <button
                   aria-label={
                     likedListeningArticles.has(selectedListeningArticle.id)
@@ -3798,28 +3865,7 @@ export function TanukiApp() {
             <section className="listening-screen">
               <div className="panel-heading">
                 <span>Listening</span>
-                <strong>
-                  {
-                    listeningContentTabs.find((tab) => tab.id === listeningContentType)
-                      ?.label
-                  }
-                </strong>
-              </div>
-              <div className="listening-mode-tabs" aria-label="教材タイプ">
-                {listeningContentTabs.map((tab) => (
-                  <button
-                    className={listeningContentType === tab.id ? "is-active" : ""}
-                    key={tab.id}
-                    onClick={() => {
-                      setListeningContentType(tab.id);
-                      setSelectedListeningArticleId(null);
-                    }}
-                    type="button"
-                  >
-                    <span>{tab.label}</span>
-                    <small>{tab.description}</small>
-                  </button>
-                ))}
+                <strong>リスニング</strong>
               </div>
               <div className="listening-tabs">
                 {listeningCategories.map((category) => (
@@ -3844,31 +3890,23 @@ export function TanukiApp() {
                     <Heart size={16} />
                     お気に入り
                   </button>
-                  {listeningContentType === "shadowing" ? (
-                    <button
-                      className="wpm-sort-button"
-                      onClick={() =>
-                        setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
-                      }
-                      type="button"
-                    >
-                      WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
-                    </button>
-                  ) : null}
                 </div>
               </div>
               <div className="listening-article-list">
                 {visibleListeningArticles.map((article) => {
                   const liked = likedListeningArticles.has(article.id);
                   const read = completedListeningArticles.has(article.id);
-                  const practiced = practicedListeningArticleIds.has(article.id);
                   return (
                     <article
                       className="listening-article-card"
                       key={article.id}
-                      onClick={() => setSelectedListeningArticleId(article.id)}
+                      onClick={() => {
+                        setListeningDetailBackTab("listening");
+                        setSelectedListeningArticleId(article.id);
+                      }}
                       onKeyDown={(event) => {
                         if (event.key === "Enter") {
+                          setListeningDetailBackTab("listening");
                           setSelectedListeningArticleId(article.id);
                         }
                       }}
@@ -3882,24 +3920,13 @@ export function TanukiApp() {
                         <div className="listening-meta">
                           <span>{article.category}</span>
                           <span>{article.levelLabel}</span>
-                          <span>
-                            {article.contentType === "shadowing"
-                              ? "シャドーイング"
-                              : "リスニング"}
-                          </span>
                           <time>{article.date}</time>
                         </div>
                         <h3>{article.title}</h3>
                         <p>{article.description}</p>
                         <div className="listening-card-stats">
-                          {article.contentType === "shadowing" && article.wpm ? (
-                            <small>WPM {article.wpm}</small>
-                          ) : null}
                           <small>{article.readTimeMinutes}分</small>
                           {read ? <small className="is-read">読了</small> : null}
-                          {article.contentType === "shadowing" && practiced ? (
-                            <small className="is-practiced">練習済み</small>
-                          ) : null}
                         </div>
                       </div>
                       <button
