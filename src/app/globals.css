@@ -499,32 +499,32 @@ button:disabled {
 
 .listening-article-list {
   display: grid;
-  gap: 18px;
-  margin-top: 16px;
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .listening-article-card {
   align-items: center;
   background: #f8f9fb;
   border: 0;
-  border-radius: 24px;
+  border-radius: 20px;
   color: #17202f;
   display: grid;
-  gap: 26px;
-  grid-template-columns: 152px minmax(0, 1fr) auto;
-  min-height: 188px;
-  padding: 34px;
+  gap: 18px;
+  grid-template-columns: 118px minmax(0, 1fr) auto;
+  min-height: 150px;
+  padding: 22px;
 }
 
 .listening-thumbnail {
   align-items: center;
   aspect-ratio: 1;
   background: #e9eef4;
-  border-radius: 18px;
+  border-radius: 16px;
   color: #4d94df;
   display: flex;
   justify-content: center;
-  width: 152px;
+  width: 118px;
 }
 
 .listening-article-body {
@@ -535,42 +535,42 @@ button:disabled {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .listening-meta span {
   background: #d9ecfc;
-  border-radius: 7px;
+  border-radius: 999px;
   color: #4d94df;
   display: inline-flex;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 850;
   line-height: 1;
-  padding: 8px 14px;
+  padding: 6px 10px;
 }
 
 .listening-meta time {
   color: #a4adbb;
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 800;
   line-height: 1;
 }
 
 .listening-article-card h3 {
   color: #17202f;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: 0;
-  line-height: 1.1;
-  margin: 0 0 14px;
+  line-height: 1.25;
+  margin: 0 0 8px;
 }
 
 .listening-article-card p {
   color: #667386;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.3;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -682,21 +682,21 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   gap: 18px;
-  padding: 34px 28px 26px;
+  padding: 28px 28px 22px;
 }
 
 .word-hero h2 {
-  font-size: clamp(48px, 10vw, 68px);
+  font-size: clamp(36px, 8vw, 52px);
   font-weight: 850;
   letter-spacing: 0;
-  line-height: 0.95;
-  margin: 0 0 10px;
+  line-height: 1.05;
+  margin: 0 0 8px;
 }
 
 .word-hero p {
   color: #657287;
-  font-size: 23px;
-  line-height: 1.2;
+  font-size: 17px;
+  line-height: 1.35;
   margin: 0 0 6px;
 }
 
@@ -786,7 +786,7 @@ button:disabled {
 
 .word-hero span {
   color: #657287;
-  font-size: 24px;
+  font-size: 17px;
 }
 
 .word-hero button {
@@ -794,14 +794,14 @@ button:disabled {
   border-radius: 999px;
   color: #4d94df;
   flex: 0 0 auto;
-  height: 86px;
-  width: 86px;
+  height: 64px;
+  width: 64px;
 }
 
 .definition-stack,
 .word-section {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   padding: 0 28px;
 }
 
@@ -809,15 +809,15 @@ button:disabled {
 .example-card {
   background: #ffffff;
   border: 1px solid #dfe7f1;
-  border-radius: 22px;
-  padding: 24px;
+  border-radius: 18px;
+  padding: 18px;
 }
 
 .definition-card div {
   align-items: center;
   display: flex;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .definition-card div span {
@@ -826,23 +826,23 @@ button:disabled {
   border-radius: 999px;
   color: #4d94df;
   display: inline-flex;
-  font-size: 23px;
+  font-size: 16px;
   font-weight: 800;
-  height: 52px;
+  height: 38px;
   justify-content: center;
-  width: 52px;
+  width: 38px;
 }
 
 .definition-card div strong {
   color: #4d94df;
-  font-size: 23px;
+  font-size: 17px;
 }
 
 .definition-card p {
   color: #202a3a;
-  font-size: 26px;
-  line-height: 1.55;
-  margin: 0 0 20px;
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 12px;
 }
 
 .definition-card p:last-child {
@@ -850,12 +850,12 @@ button:disabled {
 }
 
 .word-section {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 
 .word-section h3 {
   color: #17202f;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 850;
   letter-spacing: 0;
   margin: 0;
@@ -864,7 +864,7 @@ button:disabled {
 .example-card {
   background: #eef3f8;
   display: grid;
-  gap: 16px;
+  gap: 12px;
   position: relative;
 }
 
@@ -873,18 +873,18 @@ button:disabled {
   border-radius: 7px;
   color: #4d94df;
   display: inline-flex;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 800;
   justify-self: start;
-  padding: 8px 12px;
+  padding: 6px 10px;
 }
 
 .example-card p {
   color: #202a3a;
-  font-size: 27px;
-  line-height: 1.55;
+  font-size: 19px;
+  line-height: 1.65;
   margin: 0;
-  padding-right: 108px;
+  padding-right: 92px;
 }
 
 .example-card p strong {
@@ -894,9 +894,9 @@ button:disabled {
 
 .example-card small {
   color: #657287;
-  font-size: 20px;
-  line-height: 1.45;
-  padding-right: 108px;
+  font-size: 15px;
+  line-height: 1.65;
+  padding-right: 92px;
 }
 
 .example-actions {
@@ -1057,10 +1057,10 @@ button:disabled {
   border-radius: 8px;
   color: #f7f2e8;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   grid-template-columns: minmax(72px, 0.24fr) minmax(0, 1fr) auto;
-  min-height: 72px;
-  padding: 14px 16px;
+  min-height: 64px;
+  padding: 12px 14px;
   text-align: left;
 }
 
@@ -1089,7 +1089,8 @@ button:disabled {
 .wpm-row strong,
 .article-row strong {
   display: block;
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 1.35;
   min-width: 0;
 }
 
@@ -1276,14 +1277,15 @@ button:disabled {
   color: #14170e;
   display: flex;
   gap: 12px;
-  padding: 20px;
+  padding: 18px;
 }
 
 .script-box p {
-  font-size: clamp(20px, 3vw, 34px);
-  font-weight: 720;
+  font-size: clamp(17px, 2vw, 22px);
+  font-weight: 680;
   letter-spacing: 0;
-  line-height: 1.2;
+  line-height: 1.65;
+  margin: 0;
 }
 
 .problem-word {
@@ -2267,7 +2269,7 @@ nav.mobile-footer button.is-active {
   }
 
   .listening-article-list {
-    gap: 14px;
+    gap: 12px;
   }
 
   .listening-mode-tabs {
@@ -2282,40 +2284,41 @@ nav.mobile-footer button.is-active {
   }
 
   .listening-article-card {
-    border-radius: 20px;
-    gap: 16px;
-    grid-template-columns: 96px minmax(0, 1fr) auto;
-    min-height: 130px;
-    padding: 18px;
+    align-items: start;
+    border-radius: 18px;
+    gap: 12px;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    min-height: 108px;
+    padding: 14px;
   }
 
   .listening-thumbnail {
-    border-radius: 16px;
-    width: 96px;
+    border-radius: 14px;
+    width: 72px;
   }
 
   .listening-meta {
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .listening-meta span {
-    border-radius: 6px;
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .listening-meta time {
-    font-size: 16px;
-  }
-
-  .listening-article-card h3 {
-    font-size: 22px;
+    gap: 6px;
     margin-bottom: 8px;
   }
 
-  .listening-article-card p {
+  .listening-meta span {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .listening-meta time {
+    font-size: 11px;
+  }
+
+  .listening-article-card h3 {
     font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .listening-article-card p {
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .listen-like {
@@ -2328,65 +2331,66 @@ nav.mobile-footer button.is-active {
   }
 
   .word-hero {
-    padding: 30px 22px 24px;
+    padding: 24px 20px 20px;
   }
 
   .word-hero h2 {
-    font-size: 50px;
+    font-size: 38px;
   }
 
   .word-hero p,
   .word-hero span {
-    font-size: 21px;
+    font-size: 15px;
   }
 
   .word-hero button {
-    height: 74px;
-    width: 74px;
+    height: 56px;
+    width: 56px;
   }
 
   .definition-stack,
   .word-section {
-    padding: 0 22px;
+    padding: 0 20px;
   }
 
   .definition-card,
   .example-card {
     border-radius: 18px;
-    padding: 20px;
+    padding: 16px;
   }
 
   .definition-card div span {
-    font-size: 21px;
-    height: 48px;
-    width: 48px;
+    font-size: 15px;
+    height: 34px;
+    width: 34px;
   }
 
   .definition-card div strong {
-    font-size: 21px;
+    font-size: 16px;
   }
 
   .definition-card p {
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .word-section h3 {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .example-card p {
-    font-size: 25px;
-    padding-right: 84px;
+    font-size: 17px;
+    padding-right: 0;
   }
 
   .example-card small {
-    font-size: 19px;
-    padding-right: 84px;
+    font-size: 14px;
+    padding-right: 0;
   }
 
   .example-actions {
     gap: 14px;
-    right: 20px;
+    position: static;
+    transform: none;
   }
 
   .usage-note {
@@ -4623,58 +4627,63 @@ nav.mobile-footer button {
 .listening-reader-block {
   background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 18px;
   box-shadow: 0 14px 30px rgba(33, 72, 120, 0.06);
   display: grid;
-  gap: 14px;
-  padding: 22px;
+  gap: 12px;
+  padding: 18px;
 }
 
 .listening-english-text,
 .listening-japanese-text {
   color: var(--text);
-  font-size: 20px;
-  line-height: 1.85;
+  font-size: 17px;
+  font-weight: 620;
+  line-height: 1.72;
   margin: 0;
 }
 
-.listening-sentence-list,
+.listening-sentence-list {
+  display: block;
+  line-height: 1.72;
+}
+
 .listening-sentence-translation-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .listening-sentence-list > div {
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 16px;
+  border: 0;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 8px 10px;
+  display: inline;
+  padding: 1px 2px;
   transition:
     background 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+    color 160ms ease;
 }
 
 .listening-sentence-list > div:hover,
 .listening-sentence-list > div.is-active {
   background: #eaf5ff;
-  border-color: #b7d8f7;
-  box-shadow: inset 0 0 0 1px rgba(73, 148, 218, 0.12);
+  color: var(--blue-strong);
 }
 
 .listening-sentence-list .listening-english-text {
+  display: inline;
   margin: 0;
 }
 
 .listening-english-text button {
   background: transparent;
   border: 0;
-  border-radius: 7px;
+  border-radius: 5px;
   color: inherit;
   display: inline;
   font: inherit;
-  padding: 0 2px;
+  padding: 0;
 }
 
 .listening-english-text button:hover {
@@ -4684,8 +4693,9 @@ nav.mobile-footer button {
 
 .listening-japanese-text {
   color: var(--muted);
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.7;
 }
 
 .listening-japanese-text.is-active {
@@ -5151,11 +5161,16 @@ nav.mobile-footer button {
   }
 
   .listening-reader-block {
-    padding: 18px;
+    padding: 16px;
   }
 
   .listening-english-text {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .listening-japanese-text {
+    font-size: 13px;
   }
 
   .listening-word-popover {
