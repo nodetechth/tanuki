@@ -188,7 +188,7 @@ async function generateArticleAudio({ article, defaults, model, openai, outputDi
 }
 
 function validateArticle(article) {
-  const required = ["id", "contentType", "title", "wordCount", "wpm", "paragraphs"];
+  const required = ["id", "contentType", "title", "wordCount", "paragraphs"];
   for (const key of required) {
     if (article[key] === undefined || article[key] === null || article[key] === "") {
       throw new Error(`Article is missing ${key}.`);
@@ -235,8 +235,14 @@ function validateArticle(article) {
       }
     }
   }
-  if (!Number.isFinite(Number(article.wpm)) || Number(article.wpm) <= 0) {
-    throw new Error(`Invalid wpm: ${article.wpm}`);
+  if (
+    article.contentType === "shadowing" &&
+    (!Number.isFinite(Number(article.wpm)) || Number(article.wpm) <= 0)
+  ) {
+    throw new Error(`Invalid shadowing wpm: ${article.wpm}`);
+  }
+  if (article.contentType === "listening" && article.wpm != null) {
+    throw new Error("Listening articles must not include wpm. Use the ElevenLabs workflow for listening audio.");
   }
   if (!Number.isFinite(Number(article.wordCount)) || Number(article.wordCount) <= 0) {
     throw new Error(`Invalid wordCount: ${article.wordCount}`);

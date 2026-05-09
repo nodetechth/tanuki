@@ -89,7 +89,7 @@ create table if not exists public.listening_articles (
   body jsonb not null default '[]'::jsonb,
   read_time_minutes integer not null default 2,
   word_count integer not null default 0,
-  wpm integer not null default 120,
+  wpm integer,
   audio_url text,
   audio_sources jsonb not null default '{}'::jsonb,
   published_at date not null default current_date,

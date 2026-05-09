@@ -77,7 +77,7 @@
 - 280-500 words
 - 3-6段落
 - `targetDurationSeconds`: 120-180
-- `wpm`: 120-155
+- `wpm` は入れない
 - 話題の導入、具体例、まとめがある構成
 - 長すぎる一文を避ける
 - 語彙学習に使いやすい自然な本文
@@ -91,8 +91,9 @@
 
 ## WPMとTTS
 
-- `wpm` はその記事で目標にする読み上げ速度
-- TTS生成スクリプト側で `wpm` から `speed` を計算するため、記事単位の `tts.speed` は基本的に入れない
+- `wpm` はShadowing教材だけに入れる
+- ShadowingのTTS生成スクリプト側で `wpm` から `speed` を計算するため、記事単位の `tts.speed` は基本的に入れない
+- Listening教材はElevenLabsでUS/UK音声を作るため、記事JSONには `wpm` を入れない
 - どうしても個別調整が必要な場合だけ `tts.speed` を入れる
 
 ## JSONスキーマ例
@@ -148,7 +149,6 @@
       "description": "日本語の短い説明。",
       "targetDurationSeconds": 150,
       "wordCount": 330,
-      "wpm": 132,
       "audioUrl": null,
       "audioSources": { "us": null, "uk": null },
       "tts": {

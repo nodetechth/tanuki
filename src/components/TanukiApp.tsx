@@ -2398,7 +2398,13 @@ export function TanukiApp() {
           }
         }
 
-        return listeningWpmSort === "asc" ? a.wpm - b.wpm : b.wpm - a.wpm;
+        if (listeningContentType === "shadowing") {
+          const aWpm = a.wpm ?? 0;
+          const bWpm = b.wpm ?? 0;
+          return listeningWpmSort === "asc" ? aWpm - bWpm : bWpm - aWpm;
+        }
+
+        return b.date.localeCompare(a.date);
       });
     },
     [
@@ -3514,7 +3520,9 @@ export function TanukiApp() {
                 <h2>{selectedListeningArticle.title}</h2>
                 <p>{selectedListeningArticle.description}</p>
                 <div className="listening-stats">
-                  <span>WPM {selectedListeningArticle.wpm}</span>
+                  {selectedListeningArticle.contentType === "shadowing" && selectedListeningArticle.wpm ? (
+                    <span>WPM {selectedListeningArticle.wpm}</span>
+                  ) : null}
                   <time>{selectedListeningArticle.date}</time>
                 </div>
               </header>
@@ -3834,15 +3842,17 @@ export function TanukiApp() {
                     <Heart size={16} />
                     お気に入り
                   </button>
-                  <button
-                    className="wpm-sort-button"
-                    onClick={() =>
-                      setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
-                    }
-                    type="button"
-                  >
-                    WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
-                  </button>
+                  {listeningContentType === "shadowing" ? (
+                    <button
+                      className="wpm-sort-button"
+                      onClick={() =>
+                        setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
+                      }
+                      type="button"
+                    >
+                      WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
+                    </button>
+                  ) : null}
                 </div>
               </div>
               <div className="listening-article-list">
@@ -3880,7 +3890,9 @@ export function TanukiApp() {
                         <h3>{article.title}</h3>
                         <p>{article.description}</p>
                         <div className="listening-card-stats">
-                          <small>WPM {article.wpm}</small>
+                          {article.contentType === "shadowing" && article.wpm ? (
+                            <small>WPM {article.wpm}</small>
+                          ) : null}
                           <small>{article.readTimeMinutes}分</small>
                           {read ? <small className="is-read">読了</small> : null}
                           {article.contentType === "shadowing" && practiced ? (

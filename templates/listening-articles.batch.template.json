@@ -48,7 +48,6 @@
       "description": "公共スペースが地域の学びとつながりを支える理由。",
       "targetDurationSeconds": 130,
       "wordCount": 286,
-      "wpm": 132,
       "audioUrl": null,
       "audioSources": {
         "us": null,
@@ -82,8 +81,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -93,8 +98,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]
@@ -110,8 +121,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -121,8 +138,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -132,8 +155,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]
@@ -149,8 +178,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -160,8 +195,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -171,8 +212,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]
@@ -188,8 +235,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -199,8 +252,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -210,8 +269,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -221,8 +286,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]
@@ -238,8 +309,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -249,8 +326,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -260,8 +343,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]
@@ -277,8 +366,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -288,8 +383,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -299,8 +400,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             },
             {
@@ -310,8 +417,14 @@
               "start": null,
               "end": null,
               "timings": {
-                "us": { "start": null, "end": null },
-                "uk": { "start": null, "end": null }
+                "us": {
+                  "start": null,
+                  "end": null
+                },
+                "uk": {
+                  "start": null,
+                  "end": null
+                }
               }
             }
           ]

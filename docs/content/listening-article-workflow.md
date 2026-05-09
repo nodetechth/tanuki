@@ -160,7 +160,8 @@ JSONが正しくても、記事内容の確認は必要です。
 - `contentType=shadowing` が長すぎないか
 - `contentType=listening` が短すぎないか
 - `wordCount` が実際の英文量と大きくズレていないか
-- `wpm` が学習用途として妥当か
+- Shadowing教材の `wpm` が学習用途として妥当か
+- Listening教材に `wpm` が入っていないか
 - 英文と日本語訳の意味がズレていないか
 - `id` が重複していないか
 
@@ -172,7 +173,7 @@ DBへ入れる前に、ローカルで見え方を確認するのが安全です
 
 - 一覧カードでタイトルが長すぎないか
 - カテゴリ表示が自然か
-- WPM順で並び替えた時に違和感がないか
+- Shadowing教材のWPM順で並び替えた時に違和感がないか
 - 詳細ページで英日表示が読みやすいか
 - シャドーイング記事だけに「この記事でシャドーイング」が出るか
 - リスニング記事には添削導線が出ていないか
@@ -198,7 +199,7 @@ npm run tts:articles -- --input templates/listening-articles.2026-05-batch-001.j
 代わりに、以下を確認できます。
 
 - 対象記事数
-- 各記事のWPM
+- Shadowing記事のWPM
 - 予想秒数
 - TTSに渡す `speed`
 - 出力予定ファイル名
@@ -213,8 +214,9 @@ DRYRUN  shadowing-sample-short-update -> shadowing/shadowing-sample-short-update
 
 ## Step 7. WPMとTTS速度の考え方
 
-記事JSONには `wpm` があります。
+Shadowing記事JSONには `wpm` があります。
 これは「この記事を何WPMくらいで読ませたいか」という目標値です。
+Listening記事には `wpm` を入れません。
 
 TTS側には直接WPMを指定できないため、スクリプト側で `speed` に変換します。
 
@@ -442,7 +444,7 @@ Listening教材の追加確認ポイント:
 - 切り替えたときに記事内容が同じか
 - 文をタップしたとき、文の冒頭から再生されるか
 - 文末で次の文に少しかかる程度なら許容。文の途中から始まる場合は再生成またはタイムスタンプ調整が必要
-- 速度が速すぎる/遅すぎる場合は、記事の `wpm` またはElevenLabs側のvoice settingsを見直す
+- 速度が速すぎる/遅すぎる場合は、ElevenLabs側のvoice settingsを見直す
 
 ## Step 10. 音声に問題があった場合
 
@@ -575,7 +577,7 @@ npm run db:upsert-listening-articles -- --input scripts/content/audio-output/<�
 | `contentType` | `shadowing` / `listening` 以外はエラー |
 | `status` | `draft` / `reviewed` / `published` 以外はエラー |
 | `wordCount` | 本文から数えた語数と大きくズレていないか |
-| `wpm` | contentTypeごとの想定範囲と、`targetDurationSeconds` との整合 |
+| `wpm` | Shadowingでは想定範囲と `targetDurationSeconds` との整合。Listeningでは未設定であること |
 | Listening `audioSources` | `us` / `uk` のキーがあるか |
 | Listening `sentences` | 各文に `id` / `en` / `ja` / `timings.us/uk` があるか |
 
@@ -680,7 +682,7 @@ npm run dev
 確認ポイント:
 
 - ListeningタブにDBへ入れた記事が表示される
-- WPM順の並び替えが効く
+- Shadowing記事でWPM順の並び替えが効く
 - Listening記事でUS/UK音声切り替えUIが表示される
 - 音声URLが入っている記事で再生できる
 - 文をタップした時に該当箇所から再生される
@@ -700,7 +702,7 @@ JSONとDBの対応:
 | `description` | `description` |
 | `paragraphs` | `body` |
 | `wordCount` | `word_count` |
-| `wpm` | `wpm` |
+| `wpm` | `wpm`。Shadowingのみ。Listeningはnull |
 | `audioUrl` | `audio_url` |
 | `audioSources` | `audio_sources` |
 | `publishedAt` | `published_at` |
@@ -746,7 +748,7 @@ Listening教材向けの `audio_sources JSONB` は、US/UK音声URLを持つた�
 | `description` | yes | 日本語の短い説明 |
 | `targetDurationSeconds` | yes | 制作目標。DBには直接保存しないが検証に使う |
 | `wordCount` | yes | 英文の概算語数 |
-| `wpm` | yes | 想定読み上げ速度 |
+| `wpm` | Shadowingのみyes | 想定読み上げ速度。Listening教材には入れない |
 | `audioUrl` | no | 旧形式/フォールバック用TTS音声URL。未生成なら `null` |
 | `audioSources` | no | Listening教材のみ。`{ "us": "...", "uk": "..." }` でアメリカ英語/イギリス英語の音声URLを持つ |
 | `tts` | no | 記事単位で声・速度・指示を上書きする場合に指定 |
@@ -829,7 +831,8 @@ Listening教材向けの `audio_sources JSONB` は、US/UK音声URLを持つた�
 - `level` が日本語になっている
 - `levelLabel` が英語になっている
 - `wordCount` が本文と大きく違う
-- `wpm` が未設定
+- Shadowing教材の `wpm` が未設定
+- Listening教材に `wpm` が入っている
 - Listening教材で `audioSources.us/uk` が未設定のまま `published` にしている
 - Listening教材で `timings.us/uk` が `null` のまま `published` にしている
 - `paragraphs` の `en` と `ja` の対応がズレている

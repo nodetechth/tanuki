@@ -17,7 +17,7 @@ export type ListeningArticleRow = {
   body: unknown;
   read_time_minutes: number;
   word_count: number;
-  wpm: number;
+  wpm: number | null;
   audio_url: string | null;
   audio_sources?: Partial<Record<ListeningAccent, string | null>> | null;
   published_at: string;
@@ -35,7 +35,7 @@ export function listeningArticleFromRow(row: ListeningArticleRow): ListeningArti
     description: row.description,
     readTimeMinutes: Number(row.read_time_minutes) || 1,
     wordCount: Number(row.word_count) || 0,
-    wpm: Number(row.wpm) || 120,
+    wpm: row.wpm === null ? null : Number(row.wpm) || null,
     liked: false,
     audioUrl: row.audio_url,
     audioSources: isRecord(row.audio_sources) ? row.audio_sources : undefined,

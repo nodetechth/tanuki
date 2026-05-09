@@ -27,7 +27,7 @@ export type ListeningArticle = {
   description: string;
   readTimeMinutes: number;
   wordCount: number;
-  wpm: number;
+  wpm: number | null;
   liked: boolean;
   audioUrl: string | null;
   audioSources?: Partial<Record<ListeningAccent, string | null>>;
@@ -155,7 +155,7 @@ export const listeningArticles: ListeningArticle[] = [
     description: "地域の図書館が今も大切にされる理由。",
     readTimeMinutes: 2,
     wordCount: 274,
-    wpm: 130,
+    wpm: null,
     liked: false,
     audioUrl: null,
     paragraphs: [
@@ -192,7 +192,7 @@ export const listeningArticles: ListeningArticle[] = [
     description: "AI導入で変わるカスタマーサポートの役割。",
     readTimeMinutes: 2,
     wordCount: 290,
-    wpm: 145,
+    wpm: null,
     liked: false,
     audioUrl: null,
     paragraphs: [

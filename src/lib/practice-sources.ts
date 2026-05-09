@@ -48,14 +48,15 @@ export function listeningArticleToPracticeSource(
 export function listeningArticleToPracticeSourceFromArticle(
   article: ListeningArticle,
 ): PracticeSource {
+  const articleWpm = article.wpm ?? 120;
   return {
     id: article.id,
     sourceType: "listening_article",
     sourceId: article.id,
     level: article.level,
     levelLabel: article.levelLabel,
-    wpmRange: `WPM ${article.wpm}`,
-    wpmDescription: `${article.wpm} WPM / ${article.readTimeMinutes}分`,
+    wpmRange: `WPM ${articleWpm}`,
+    wpmDescription: `${articleWpm} WPM / ${article.readTimeMinutes}分`,
     category: article.category,
     title: article.title,
     scriptText: article.paragraphs.map((paragraph) => paragraph.en).join("\n\n"),
@@ -63,7 +64,7 @@ export function listeningArticleToPracticeSourceFromArticle(
     duration: Math.max(30, article.readTimeMinutes * 60),
     accent: "US",
     focus: ["内容語の強弱", "文の区切り", "自然なリズム"],
-    wpm: article.wpm,
+    wpm: articleWpm,
     readTimeMinutes: article.readTimeMinutes,
     description: article.description,
   };

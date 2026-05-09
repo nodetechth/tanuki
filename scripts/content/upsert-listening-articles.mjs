@@ -113,7 +113,7 @@ function articleToRow(article, options = {}) {
     body: article.paragraphs,
     read_time_minutes: readTimeMinutes(article),
     word_count: article.wordCount,
-    wpm: article.wpm,
+    wpm: article.contentType === "shadowing" ? article.wpm : null,
     audio_url: article.audioUrl ?? null,
     audio_sources: article.audioSources ?? {},
     published_at: publishedAt(article),
@@ -168,14 +168,19 @@ function validateArticle(article, options = {}) {
   if (!Number.isFinite(Number(article.wordCount)) || Number(article.wordCount) <= 0) {
     throw new Error(`${article.id}: wordCount must be a positive number.`);
   }
-  if (!Number.isFinite(Number(article.wpm)) || Number(article.wpm) <= 0) {
-    throw new Error(`${article.id}: wpm must be a positive number.`);
+  if (article.contentType === "shadowing" && (!Number.isFinite(Number(article.wpm)) || Number(article.wpm) <= 0)) {
+    throw new Error(`${article.id}: shadowing articles must include a positive wpm.`);
+  }
+  if (article.contentType === "listening" && article.wpm != null) {
+    throw new Error(`${article.id}: listening articles must not include wpm.`);
   }
   if (!publishedAt(article)) {
     throw new Error(`${article.id}: publishedAt or date is required.`);
   }
   validateWordCount(article);
-  validateWpm(article);
+  if (article.contentType === "shadowing") {
+    validateWpm(article);
+  }
 
   for (const [index, paragraph] of article.paragraphs.entries()) {
     if (!paragraph?.en || !paragraph?.ja) {
@@ -330,6 +335,9 @@ function readTimeMinutes(article) {
     Number(article.targetDurationSeconds) > 0
   ) {
     return Math.max(1, Math.round(Number(article.targetDurationSeconds) / 60));
+  }
+  if (article.contentType === "listening") {
+    return Math.max(1, Math.round(Number(article.wordCount) / 140));
   }
   return Math.max(1, Math.round(Number(article.wordCount) / Number(article.wpm)));
 }
