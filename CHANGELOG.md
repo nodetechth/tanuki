@@ -2,6 +2,7 @@
 
 ## 2026-05-09
 
+- 記事仕様更新: リスニング/シャドーイング記事からKey wordsを廃止し、表示UI、型、DB取得、記事投入スクリプト、テンプレート、仕様書、Supabase migrationから関連項目を削除。
 - UI調整: リスニング本文の英文を段落として読みやすく詰め、単語検索結果・記事一覧・シャドーイング本文の文字サイズと余白を全体的に整理。
 - 単語検索UI修正: スマホ表示で検索カードと単語フォルダが画面幅を超えて崩れないよう、ボックス計算と検索フォーム/フォルダカードの幅制約を調整。
 - 添削ページUI: 進捗カードの「練習したWPM」を月別平均WPMのコンパクトな折れ線グラフに変更し、「今週の練習」の下へ移動。
@@ -11,7 +12,7 @@
 
 ## 2026-05-08
 
-- 記事投入安全性: リスニング記事upsert前のバリデーションを強化し、ID重複、公開前audioSources/timings、wordCount/WPM、keyWords、draft拒否、seed/rollback方針を手順化。
+- 記事投入安全性: リスニング記事upsert前のバリデーションを強化し、ID重複、公開前audioSources/timings、wordCount/WPM、draft拒否、seed/rollback方針を手順化。
 - 単語検索: 不規則変化の正規化マップに `went/gone -> go`、`children -> child`、`better/best -> good`、`worse/worst -> bad` を追加。
 
 ## 2026-05-07

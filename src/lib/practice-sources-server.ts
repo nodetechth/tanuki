@@ -49,7 +49,6 @@ async function getDbListeningArticleSource(articleId: string) {
         "title",
         "description",
         "body",
-        "key_words",
         "read_time_minutes",
         "word_count",
         "wpm",

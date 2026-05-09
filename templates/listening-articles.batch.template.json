@@ -29,7 +29,6 @@
         "voice": "coral",
         "instructions": "Speak clearly for a shadowing exercise. Keep the rhythm steady and leave a brief pause after each sentence."
       },
-      "keyWords": ["update", "review", "copy", "testing"],
       "paragraphs": [
         {
           "en": "Here is a short update on the project. The design review is finished, and we agreed on the main layout. We still need final copy for the pricing page, so I will ask marketing for it today. If we receive it tomorrow morning, we can test the new flow in the afternoon.",
@@ -71,7 +70,6 @@
         },
         "instructions": "Speak clearly for a listening exercise. Keep a calm pace and use natural pauses between paragraphs."
       },
-      "keyWords": ["public", "community", "access", "learning"],
       "paragraphs": [
         {
           "en": "Public spaces are important because they give people a place to learn, rest, and meet others without needing to buy anything. A library, a park, or a community center can support people who need a quiet place to study or a safe place to spend time.",

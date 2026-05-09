@@ -87,7 +87,6 @@ create table if not exists public.listening_articles (
   title text not null,
   description text not null,
   body jsonb not null default '[]'::jsonb,
-  key_words jsonb not null default '[]'::jsonb,
   read_time_minutes integer not null default 2,
   word_count integer not null default 0,
   wpm integer not null default 120,

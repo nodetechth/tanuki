@@ -3696,21 +3696,6 @@ export function TanukiApp() {
                 ))}
               </article>
 
-              <section className="listening-keywords">
-                <h3>Key words</h3>
-                <div>
-                  {selectedListeningArticle.keyWords.map((word) => (
-                    <button
-                      key={word}
-                      onClick={() => setSelectedListeningWord(word)}
-                      type="button"
-                    >
-                      {word}
-                    </button>
-                  ))}
-                </div>
-              </section>
-
               {selectedListeningArticle.contentType === "shadowing" ? (
                 <button
                   className="article-shadowing-button"

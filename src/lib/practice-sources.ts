@@ -62,9 +62,7 @@ export function listeningArticleToPracticeSourceFromArticle(
     audioUrl: article.audioUrl,
     duration: Math.max(30, article.readTimeMinutes * 60),
     accent: "US",
-    focus: article.keyWords.length
-      ? article.keyWords.map((word) => `${word} の発音とリズム`)
-      : ["内容語の強弱", "文の区切り", "自然なリズム"],
+    focus: ["内容語の強弱", "文の区切り", "自然なリズム"],
     wpm: article.wpm,
     readTimeMinutes: article.readTimeMinutes,
     description: article.description,

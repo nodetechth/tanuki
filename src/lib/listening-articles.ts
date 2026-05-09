@@ -36,7 +36,6 @@ export type ListeningArticle = {
     ja: string;
     sentences?: ListeningSentence[];
   }>;
-  keyWords: string[];
 };
 
 export const listeningArticles: ListeningArticle[] = [
@@ -60,7 +59,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "家の鍵をなくしたと思ったので、かばんの中をゆっくり確認しました。まず前のポケットを見ました。次にノートの下と財布の後ろを確認しました。最後に、お弁当袋の中で見つけました。ほっとして、毎日鍵の置き場所を1つに決めようと思いました。次からは、家を出る前にその場所を確認します。",
       },
     ],
-    keyWords: ["key", "checked", "found", "relieved"],
   },
   {
     id: "shadowing-status-update",
@@ -82,7 +80,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "プロジェクトの簡単な進捗共有です。デザインレビューは完了し、チームは主要なレイアウトに合意しました。料金ページの最終文言がまだ必要なので、今日マーケティングに依頼します。明日の朝までに受け取れれば、午後に新しい導線のテストを始められます。金曜日の会議前にテスト結果を共有します。",
       },
     ],
-    keyWords: ["update", "review", "layout", "testing"],
   },
   {
     id: "shadowing-bike-lanes",
@@ -104,7 +101,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "市は今週、駅の近くに新しい自転車レーンを2本開設しました。市の担当者は、短い移動がより安全になり、商店街周辺の交通量も減ると話しています。駐車スペースの減少を心配する運転者もいますが、地域の店主は昼休みや仕事帰りに立ち寄る自転車利用者が増えることを期待しています。市は来月の第1週に、交通データを確認する予定です。",
       },
     ],
-    keyWords: ["bike", "station", "traffic", "cyclists"],
   },
   {
     id: "shadowing-password-manager",
@@ -126,7 +122,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "パスワードマネージャーは、強いパスワードを代わりに覚えてくれるので便利です。すべてのサイトで同じパスワードを使う代わりに、アカウントごとに別のものを作れます。最初は手間に感じるかもしれませんが、1つのサービスで情報漏えいが起きたときのリスクを下げられます。良いセキュリティは、1つの簡単な習慣から始まることが多いです。二段階認証を有効にすると、チーム全員にとってその習慣はさらに強くなります。",
       },
     ],
-    keyWords: ["password", "account", "security", "habit"],
   },
   {
     id: "shadowing-directions",
@@ -148,7 +143,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "すみません、駅への行き方を教えていただけますか。近くにいると思うのですが、どの道を行けばよいか分かりません。まっすぐ歩いて次の角を左に曲がれば、入口が見えますか。助けてくださってありがとうございます。道案内をしていただき、本当に助かります。",
       },
     ],
-    keyWords: ["excuse", "station", "street", "entrance"],
   },
   {
     id: "listening-city-library",
@@ -186,7 +180,6 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "多くのサービスがオンライン化するほど、図書館のような公共の場所はさらに価値を持つかもしれません。知識へのアクセスは、収入、年齢、背景だけに左右されるべきではないと教えてくれるからです。図書館は本が並ぶ建物ではなく、変化する世界で生きるために学ぶ共有の道具なのです。",
       },
     ],
-    keyWords: ["library", "public", "community", "access"],
   },
   {
     id: "listening-ai-customer-support",
@@ -224,6 +217,5 @@ export const listeningArticles: ListeningArticle[] = [
         ja: "企業にとって重要な問いは、AIでどれだけ費用を削減できるかだけではありません。自動化と人間らしい配慮が一緒に機能するサービスフローをどう設計するかです。顧客が企業はボットの後ろに隠れていると感じれば、信頼は下がります。AIが優秀な担当者をより速く、より情報豊かにするなら、信頼は高まります。",
       },
     ],
-    keyWords: ["support", "automation", "judgment", "trust"],
   },
 ];

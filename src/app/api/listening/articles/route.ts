@@ -23,7 +23,6 @@ export async function GET() {
         "title",
         "description",
         "body",
-        "key_words",
         "read_time_minutes",
         "word_count",
         "wpm",

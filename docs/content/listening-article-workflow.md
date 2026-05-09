@@ -162,7 +162,6 @@ JSONが正しくても、記事内容の確認は必要です。
 - `wordCount` が実際の英文量と大きくズレていないか
 - `wpm` が学習用途として妥当か
 - 英文と日本語訳の意味がズレていないか
-- `keyWords` が本文に出てくる語になっているか
 - `id` が重複していないか
 
 ## Step 5. ローカル画面で見え方を確認する
@@ -577,7 +576,6 @@ npm run db:upsert-listening-articles -- --input scripts/content/audio-output/<�
 | `status` | `draft` / `reviewed` / `published` 以外はエラー |
 | `wordCount` | 本文から数えた語数と大きくズレていないか |
 | `wpm` | contentTypeごとの想定範囲と、`targetDurationSeconds` との整合 |
-| `keyWords` | 3-6語、重複なし、本文に出てくる語か |
 | Listening `audioSources` | `us` / `uk` のキーがあるか |
 | Listening `sentences` | 各文に `id` / `en` / `ja` / `timings.us/uk` があるか |
 
@@ -701,7 +699,6 @@ JSONとDBの対応:
 | `title` | `title` |
 | `description` | `description` |
 | `paragraphs` | `body` |
-| `keyWords` | `key_words` |
 | `wordCount` | `word_count` |
 | `wpm` | `wpm` |
 | `audioUrl` | `audio_url` |
@@ -753,7 +750,6 @@ Listening教材向けの `audio_sources JSONB` は、US/UK音声URLを持つた�
 | `audioUrl` | no | 旧形式/フォールバック用TTS音声URL。未生成なら `null` |
 | `audioSources` | no | Listening教材のみ。`{ "us": "...", "uk": "..." }` でアメリカ英語/イギリス英語の音声URLを持つ |
 | `tts` | no | 記事単位で声・速度・指示を上書きする場合に指定 |
-| `keyWords` | yes | 3-6語程度 |
 | `paragraphs` | yes | Shadowingは `{ "en": "...", "ja": "..." }` の配列。Listeningは文単位再生用に `sentences` も持たせる |
 | `status` | yes | `draft`, `reviewed`, `published` |
 

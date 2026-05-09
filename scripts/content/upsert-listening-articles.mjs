@@ -111,7 +111,6 @@ function articleToRow(article, options = {}) {
     title: article.title,
     description: article.description,
     body: article.paragraphs,
-    key_words: article.keyWords,
     read_time_minutes: readTimeMinutes(article),
     word_count: article.wordCount,
     wpm: article.wpm,
@@ -166,7 +165,6 @@ function validateArticle(article, options = {}) {
     throw new Error(`${article.id}: paragraphs must contain at least one paragraph.`);
   }
   validateStatus(article);
-  validateKeyWords(article);
   if (!Number.isFinite(Number(article.wordCount)) || Number(article.wordCount) <= 0) {
     throw new Error(`${article.id}: wordCount must be a positive number.`);
   }
@@ -201,43 +199,6 @@ function validateStatus(article) {
 
 function normalizeStatus(value) {
   return String(value ?? "draft").trim().toLowerCase();
-}
-
-function validateKeyWords(article) {
-  if (!Array.isArray(article.keyWords)) {
-    throw new Error(`${article.id}: keyWords must be an array.`);
-  }
-  if (article.keyWords.length < 3 || article.keyWords.length > 6) {
-    throw new Error(`${article.id}: keyWords must contain 3-6 words.`);
-  }
-
-  const text = normalizeForSearch(article.paragraphs.map((paragraph) => paragraph.en).join(" "));
-  const seen = new Set();
-  for (const [index, keyword] of article.keyWords.entries()) {
-    if (!keyword || typeof keyword !== "string") {
-      throw new Error(`${article.id}: keyWords[${index}] must be a non-empty string.`);
-    }
-    const normalized = normalizeForSearch(keyword);
-    if (seen.has(normalized)) {
-      throw new Error(`${article.id}: duplicate keyWords entry: ${keyword}`);
-    }
-    seen.add(normalized);
-    if (!keywordAppearsInText(text, normalized)) {
-      throw new Error(`${article.id}: keyWords[${index}] does not appear in article text: ${keyword}`);
-    }
-  }
-}
-
-function keywordAppearsInText(normalizedText, normalizedKeyword) {
-  return keywordVariants(normalizedKeyword).some((variant) => normalizedText.includes(variant));
-}
-
-function keywordVariants(value) {
-  const variants = new Set([value]);
-  if (value.endsWith("ing") && value.length > 5) variants.add(value.slice(0, -3));
-  if (value.endsWith("ed") && value.length > 4) variants.add(value.slice(0, -2));
-  if (value.endsWith("s") && value.length > 4) variants.add(value.slice(0, -1));
-  return Array.from(variants);
 }
 
 function validateWordCount(article) {
@@ -348,10 +309,6 @@ function validateTimingOrder(articleId, sentences, accent) {
 
 function countEnglishWords(value) {
   return (String(value).match(/[A-Za-z]+(?:['-][A-Za-z]+)?/g) ?? []).length;
-}
-
-function normalizeForSearch(value) {
-  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 function isHttpUrl(value) {

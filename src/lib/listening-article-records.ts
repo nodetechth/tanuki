@@ -15,7 +15,6 @@ export type ListeningArticleRow = {
   title: string;
   description: string;
   body: unknown;
-  key_words: unknown;
   read_time_minutes: number;
   word_count: number;
   wpm: number;
@@ -41,7 +40,6 @@ export function listeningArticleFromRow(row: ListeningArticleRow): ListeningArti
     audioUrl: row.audio_url,
     audioSources: isRecord(row.audio_sources) ? row.audio_sources : undefined,
     paragraphs: parseParagraphs(row.body),
-    keyWords: Array.isArray(row.key_words) ? row.key_words.map(String) : [],
   };
 }
 

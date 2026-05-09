@@ -30,7 +30,6 @@
 - `tts.status` は `pending`
 - `tts.voice` は `coral`
 - `tts.instructions` は記事タイプに合わせて英語で短く書く
-- `keyWords` は本文に出てくる重要語を3-6語
 - `paragraphs` は `{ "en": "...", "ja": "..." }` の配列
 - 英文と日本語訳の段落数を一致させる
 - `status` は `draft`
@@ -130,7 +129,6 @@
         "voice": "coral",
         "instructions": "Speak clearly for a shadowing exercise. Keep the rhythm steady and easy to repeat."
       },
-      "keyWords": ["example", "daily", "clear"],
       "paragraphs": [
         {
           "en": "English paragraph here.",
@@ -163,7 +161,6 @@
         },
         "instructions": "Speak clearly for a listening exercise. Keep a calm pace and use natural pauses between paragraphs."
       },
-      "keyWords": ["public", "community", "access"],
       "paragraphs": [
         {
           "en": "English sentence one. English sentence two.",
