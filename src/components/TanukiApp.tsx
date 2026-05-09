@@ -753,7 +753,7 @@ export function TanukiApp() {
       selectedSourceType,
     ],
   );
-  const [selectedTutorId, setSelectedTutorId] = useState<TutorId>(tutorProfiles[0].id);
+  const [, setSelectedTutorId] = useState<TutorId>(tutorProfiles[0].id);
   const [recorderState, setRecorderState] = useState<RecorderState>("idle");
   const [recorderMode, setRecorderMode] = useState<RecorderMode>("practice");
   const [recordedBlob, setRecordedBlob] = useState<Blob | null>(null);
@@ -2325,9 +2325,6 @@ export function TanukiApp() {
     currentStatus === "uploaded" ||
     currentStatus === "azure_processing" ||
     currentStatus === "llm_processing";
-  const activeTutor =
-    tutorProfiles.find((tutor) => tutor.id === (submission?.tutorId ?? selectedTutorId)) ??
-    tutorProfiles[0];
   const selectedLevelMaterials = useMemo(
     () => materials.filter((material) => material.wpmRange === selectedWpmRange),
     [selectedWpmRange],
@@ -2883,7 +2880,6 @@ export function TanukiApp() {
                 <section className="speak-card speak-progress-card">
                   <div className="panel-heading">
                     <span>進捗</span>
-                    <strong>Shadowing</strong>
                   </div>
                   <div className="progress-summary-grid is-two-column">
                     <div>
@@ -2965,7 +2961,6 @@ export function TanukiApp() {
                 <section className="speak-card">
                   <div className="panel-heading">
                     <span>添削履歴</span>
-                    <strong>{authUser ? `${visibleHistory.length} items` : "sign in"}</strong>
                   </div>
                   {!authUser ? (
                     <div className="history-empty">
@@ -3043,7 +3038,6 @@ export function TanukiApp() {
                 <section className="speak-card shadowing-article-section">
                   <div className="panel-heading">
                     <span>シャドーイング教材</span>
-                    <strong>{visibleShadowingArticles.length} articles</strong>
                   </div>
                   <div className="shadowing-article-toolbar">
                     <span>30秒前後の短い練習</span>
@@ -3184,7 +3178,6 @@ export function TanukiApp() {
                   <aside className="result-panel result-panel-complete">
                     <div className="panel-heading">
                       <span>添削結果</span>
-                      <strong>{activeTutor.displayName}</strong>
                     </div>
 
                     <div className="feedback-stack">
@@ -3865,7 +3858,6 @@ export function TanukiApp() {
             <section className="listening-screen">
               <div className="panel-heading">
                 <span>Listening</span>
-                <strong>リスニング</strong>
               </div>
               <div className="listening-tabs">
                 {listeningCategories.map((category) => (
@@ -4562,9 +4554,6 @@ export function TanukiApp() {
               <section className="word-search-section">
                 <div className="panel-heading">
                   <span>検索</span>
-                  <strong>
-                    {selectedSearchLevel?.label} / {selectedSearchPurpose?.label}
-                  </strong>
                 </div>
                 <form className="word-search" onSubmit={searchWord}>
                   <Search size={20} />
