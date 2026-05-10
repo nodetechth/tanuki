@@ -814,6 +814,7 @@ export function TanukiApp() {
   const [loginDays, setLoginDays] = useState<string[]>([]);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [listeningCategory, setListeningCategory] = useState("ALL");
+  const [shadowingCategory, setShadowingCategory] = useState("ALL");
   const [listeningArticles, setListeningArticles] = useState<ListeningArticle[]>(
     fallbackListeningArticles,
   );
@@ -824,6 +825,7 @@ export function TanukiApp() {
     useState<AppTab>("listening");
   const [listeningTextMode, setListeningTextMode] = useState<ListeningTextMode>("both");
   const [listeningFavoritesFirst, setListeningFavoritesFirst] = useState(false);
+  const [shadowingFavoritesFirst, setShadowingFavoritesFirst] = useState(false);
   const [listeningWpmSort, setListeningWpmSort] = useState<ListeningWpmSort>("asc");
   const [listeningPlaybackRate, setListeningPlaybackRate] = useState(1);
   const [listeningAccent, setListeningAccent] = useState<ListeningAccent>(
@@ -2448,15 +2450,37 @@ export function TanukiApp() {
     ],
   );
   const visibleShadowingArticles = useMemo(
-    () =>
-      listeningArticles
-        .filter((article) => article.contentType === "shadowing")
+    () => {
+      const filtered = listeningArticles.filter((article) => {
+        const matchesType = article.contentType === "shadowing";
+        const matchesCategory =
+          shadowingCategory === "ALL" || article.category === shadowingCategory;
+        return matchesType && matchesCategory;
+      });
+
+      return [...filtered]
         .sort((a, b) => {
+          if (shadowingFavoritesFirst) {
+            const favoriteDiff =
+              Number(likedListeningArticles.has(b.id)) -
+              Number(likedListeningArticles.has(a.id));
+            if (favoriteDiff !== 0) {
+              return favoriteDiff;
+            }
+          }
+
           const aWpm = a.wpm ?? 0;
           const bWpm = b.wpm ?? 0;
           return listeningWpmSort === "asc" ? aWpm - bWpm : bWpm - aWpm;
-        }),
-    [listeningArticles, listeningWpmSort],
+        });
+    },
+    [
+      likedListeningArticles,
+      listeningArticles,
+      listeningWpmSort,
+      shadowingCategory,
+      shadowingFavoritesFirst,
+    ],
   );
   const selectedListeningArticle = selectedListeningArticleId
     ? listeningArticles.find((article) => article.id === selectedListeningArticleId) ?? null
@@ -3113,17 +3137,39 @@ export function TanukiApp() {
                   <div className="panel-heading">
                     <span>シャドーイング教材</span>
                   </div>
+                  <div className="listening-tabs">
+                    {listeningCategories.map((category) => (
+                      <button
+                        className={shadowingCategory === category ? "is-active" : ""}
+                        key={category}
+                        onClick={() => setShadowingCategory(category)}
+                        type="button"
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
                   <div className="shadowing-article-toolbar">
-                    <span>30秒前後の短い練習</span>
-                    <button
-                      className="wpm-sort-button"
-                      onClick={() =>
-                        setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
-                      }
-                      type="button"
-                    >
-                      WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
-                    </button>
+                    <span>{visibleShadowingArticles.length} articles</span>
+                    <div className="listening-sort-actions">
+                      <button
+                        className={shadowingFavoritesFirst ? "is-active" : ""}
+                        onClick={() => setShadowingFavoritesFirst((value) => !value)}
+                        type="button"
+                      >
+                        <Heart size={16} />
+                        お気に入り
+                      </button>
+                      <button
+                        className="wpm-sort-button"
+                        onClick={() =>
+                          setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
+                        }
+                        type="button"
+                      >
+                        WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
+                      </button>
+                    </div>
                   </div>
                   <div className="listening-article-list is-compact">
                     {visibleShadowingArticles.map((article) => {

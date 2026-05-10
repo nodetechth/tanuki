@@ -4357,8 +4357,15 @@ nav.mobile-footer button {
   border-radius: 999px;
   display: inline-flex;
   font-weight: 850;
+  gap: 8px;
   min-height: 38px;
   padding: 0 14px;
+}
+
+.shadowing-article-toolbar button.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #ffffff;
 }
 
 .listening-article-card {
