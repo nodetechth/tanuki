@@ -831,7 +831,7 @@ export function TanukiApp() {
   const [listeningAccent, setListeningAccent] = useState<ListeningAccent>(
     () => loadListeningAccent(),
   );
-  const [listeningPlaybackProgress, setListeningPlaybackProgress] = useState(0);
+  const [, setListeningPlaybackProgress] = useState(0);
   const [activeListeningSentenceId, setActiveListeningSentenceId] = useState<string | null>(null);
   const [listeningFeatureNotice, setListeningFeatureNotice] =
     useState<ListeningFeatureNotice | null>(null);
@@ -3720,9 +3720,6 @@ export function TanukiApp() {
                     <Pause size={22} />
                     停止
                   </button>
-                  <div className="listening-progress" aria-hidden="true">
-                    <span style={{ width: `${Math.max(4, listeningPlaybackProgress || 38)}%` }} />
-                  </div>
                   {selectedListeningArticle.contentType === "listening" && selectedListeningAudioUrl ? (
                     <audio
                       key={`${selectedListeningArticle.id}-${effectiveListeningAccent}`}
@@ -3776,16 +3773,6 @@ export function TanukiApp() {
 
               {selectedListeningArticle.contentType === "listening" ? (
                 <section className="listening-accent-toggle" aria-label="英語音声の種類">
-                  <div>
-                    <span>音声</span>
-                    <strong>
-                      {
-                        listeningAccentOptions.find(
-                          (option) => option.id === effectiveListeningAccent,
-                        )?.label
-                      }
-                    </strong>
-                  </div>
                   <div>
                     {listeningAccentOptions.map((option) => (
                       <button
@@ -4063,7 +4050,6 @@ export function TanukiApp() {
         {selectedListeningWord ? (
           <div className="listening-word-popover" role="dialog" aria-label="単語アクション">
             <div>
-              <span>selected word</span>
               <strong>{selectedListeningWord}</strong>
             </div>
             <button
@@ -4078,7 +4064,7 @@ export function TanukiApp() {
               type="button"
             >
               <Search size={18} />
-              検索する
+              検索
             </button>
             <button
               aria-label="閉じる"

@@ -4465,7 +4465,7 @@ nav.mobile-footer button {
 
 .listening-detail-hero h2 {
   color: var(--text);
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.18;
   margin: 14px 0 8px;
 }
@@ -4499,7 +4499,7 @@ nav.mobile-footer button {
   border-bottom: 1px solid var(--line);
   display: grid;
   gap: 12px;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 0 0 14px;
 }
 
@@ -4630,27 +4630,10 @@ nav.mobile-footer button {
   box-shadow: 0 14px 30px rgba(33, 72, 120, 0.06);
   display: grid;
   gap: 14px;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, auto);
   padding: 14px 16px;
 }
 
-.listening-accent-toggle > div:first-child {
-  display: grid;
-  gap: 4px;
-}
-
-.listening-accent-toggle span {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.listening-accent-toggle strong {
-  color: var(--text);
-  font-size: 18px;
-}
-
-.listening-accent-toggle > div:last-child {
+.listening-accent-toggle > div {
   background: var(--surface-soft);
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -4901,14 +4884,6 @@ nav.mobile-footer button {
   transform: translateX(-50%);
   width: 560px;
   z-index: 45;
-}
-
-.listening-word-popover span {
-  color: var(--muted);
-  display: block;
-  font-family: var(--font-geist-mono);
-  font-size: 11px;
-  text-transform: uppercase;
 }
 
 .listening-word-popover strong {
@@ -5179,7 +5154,7 @@ nav.mobile-footer button {
   }
 
   .listening-detail-hero h2 {
-    font-size: 24px;
+    font-size: 21px;
     margin-top: 12px;
   }
 
@@ -5195,12 +5170,7 @@ nav.mobile-footer button {
 
   .listening-player {
     gap: 10px;
-    grid-template-columns: 1fr 1fr;
     padding-bottom: 12px;
-  }
-
-  .listening-progress {
-    grid-column: 1 / -1;
   }
 
   .listening-player button {
@@ -5234,10 +5204,6 @@ nav.mobile-footer button {
   .listening-save-cta {
     min-height: 58px;
     min-width: 112px;
-  }
-
-  .listening-accent-toggle {
-    grid-template-columns: 1fr;
   }
 
   .listening-self-recording-controls {
