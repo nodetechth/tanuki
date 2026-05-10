@@ -398,6 +398,18 @@ function formatPlaybackRate(rate: number) {
   return `${rate.toFixed(1)}x`;
 }
 
+function authErrorMessage(message: string) {
+  if (message.includes("only request this after") || message.includes("security purposes")) {
+    return "安全のため、メール送信は30秒ほど間隔を空けてから再度お試しください。";
+  }
+
+  if (message.includes("Email rate limit exceeded")) {
+    return "メール送信が短時間に集中しています。少し時間を置いてから再度お試しください。";
+  }
+
+  return message;
+}
+
 function getWordReviewStatus(entry: SavedWordEntry): WordReviewStatus {
   return entry.status ?? "unreviewed";
 }
@@ -766,6 +778,7 @@ export function TanukiApp() {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [history, setHistory] = useState<SubmissionWithFeedback[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [authSubmitting, setAuthSubmitting] = useState(false);
   const [billing, setBilling] = useState<BillingState | null>(null);
   const [adminTestMode, setAdminTestMode] = useState(false);
   const [adminCompletionPreview, setAdminCompletionPreview] =
@@ -2275,6 +2288,10 @@ export function TanukiApp() {
   }
 
   async function sendAuthLink(mode: "signup" | "signin") {
+    if (authSubmitting) {
+      return;
+    }
+
     if (!supabase) {
       setAuthMessage("Supabaseの公開環境変数が未設定のため、現在はデモユーザーで動作します。");
       return;
@@ -2285,21 +2302,26 @@ export function TanukiApp() {
       return;
     }
 
-    const { error: signInError } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: window.location.origin,
-        shouldCreateUser: mode === "signup",
-      },
-    });
+    setAuthSubmitting(true);
+    try {
+      const { error: signInError } = await supabase.auth.signInWithOtp({
+        email: email.trim(),
+        options: {
+          emailRedirectTo: window.location.origin,
+          shouldCreateUser: mode === "signup",
+        },
+      });
 
-    setAuthMessage(
-      signInError
-        ? signInError.message
-        : mode === "signup"
-          ? "登録用リンクを送信しました。メールを確認してください。"
-          : "ログインリンクを送信しました。メールを確認してください。",
-    );
+      setAuthMessage(
+        signInError
+          ? authErrorMessage(signInError.message)
+          : mode === "signup"
+            ? "登録用リンクを送信しました。メールを確認してください。"
+            : "ログインリンクを送信しました。メールを確認してください。",
+      );
+    } finally {
+      setAuthSubmitting(false);
+    }
   }
 
   async function signOut() {
@@ -2640,11 +2662,19 @@ export function TanukiApp() {
                     type="email"
                     value={email}
                   />
-                  <button onClick={() => sendAuthLink("signup")} type="button">
-                    登録
+                  <button
+                    disabled={authSubmitting}
+                    onClick={() => sendAuthLink("signup")}
+                    type="button"
+                  >
+                    {authSubmitting ? "送信中" : "登録"}
                   </button>
-                  <button onClick={() => sendAuthLink("signin")} type="button">
-                    ログイン
+                  <button
+                    disabled={authSubmitting}
+                    onClick={() => sendAuthLink("signin")}
+                    type="button"
+                  >
+                    {authSubmitting ? "送信中" : "ログイン"}
                   </button>
                 </div>
                 <button className="checkout-button" onClick={startCheckout} type="button">
