@@ -398,6 +398,21 @@ function formatPlaybackRate(rate: number) {
   return `${rate.toFixed(1)}x`;
 }
 
+function authRedirectUrl() {
+  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  const currentOrigin = window.location.origin;
+
+  if (configuredUrl && !configuredUrl.includes("localhost")) {
+    return configuredUrl.replace(/\/$/, "");
+  }
+
+  if (!currentOrigin.includes("localhost")) {
+    return currentOrigin;
+  }
+
+  return configuredUrl?.replace(/\/$/, "") || currentOrigin;
+}
+
 function authErrorMessage(message: string) {
   const normalizedMessage = message.toLowerCase();
 
@@ -2313,7 +2328,7 @@ export function TanukiApp() {
     window.location.href = data.url;
   }
 
-  async function sendAuthLink(mode: "signup" | "signin") {
+  async function sendAuthLink() {
     if (authSubmitting || authCooldownSeconds > 0) {
       return;
     }
@@ -2333,8 +2348,8 @@ export function TanukiApp() {
       const { error: signInError } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
-          emailRedirectTo: window.location.origin,
-          shouldCreateUser: mode === "signup",
+          emailRedirectTo: authRedirectUrl(),
+          shouldCreateUser: true,
         },
       });
 
@@ -2345,11 +2360,7 @@ export function TanukiApp() {
         return;
       }
 
-      setAuthMessage(
-        mode === "signup"
-          ? "登録用リンクをメールで送信しました。受信ボックスを確認し、メール内のリンクを開くと登録が完了します。"
-          : "ログインリンクをメールで送信しました。受信ボックスを確認し、メール内のリンクを開くとログインできます。",
-      );
+      setAuthMessage("登録/ログイン用リンクをメールで送信しました。受信ボックスを確認し、メール内のリンクを開くとTanukiに戻ります。");
       setAuthCooldownSeconds(30);
     } finally {
       setAuthSubmitting(false);
@@ -2718,27 +2729,15 @@ export function TanukiApp() {
                   />
                   <button
                     disabled={authSubmitting || authCooldownSeconds > 0}
-                    onClick={() => sendAuthLink("signup")}
+                    onClick={sendAuthLink}
                     type="button"
                   >
-                    {authSubmitting
-                      ? "送信中"
-                      : authCooldownSeconds > 0
-                        ? `${authCooldownSeconds}秒後`
-                        : "登録"}
-                  </button>
-                  <button
-                    disabled={authSubmitting || authCooldownSeconds > 0}
-                    onClick={() => sendAuthLink("signin")}
-                    type="button"
-                  >
-                    {authSubmitting
-                      ? "送信中"
-                      : authCooldownSeconds > 0
-                        ? `${authCooldownSeconds}秒後`
-                        : "ログイン"}
+                    {authSubmitting ? "送信中" : "登録 / ログイン"}
                   </button>
                 </div>
+                {authCooldownSeconds > 0 ? (
+                  <p className="auth-resend-timer">再送信まで{authCooldownSeconds}秒</p>
+                ) : null}
                 {authMessage ? (
                   <div className="auth-helper" role="status" aria-live="polite">
                     <strong>メールを確認してください</strong>

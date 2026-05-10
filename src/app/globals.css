@@ -139,6 +139,15 @@ button:disabled {
   width: 100%;
 }
 
+.auth-resend-timer {
+  color: var(--blue-strong);
+  font-size: 13px;
+  font-weight: 850;
+  margin: -2px 0 0;
+  text-align: right;
+  width: 100%;
+}
+
 .auth-helper strong {
   font-size: 14px;
 }
@@ -2504,6 +2513,10 @@ nav.mobile-footer button.is-active {
 
   .auth-helper {
     max-width: none;
+  }
+
+  .auth-resend-timer {
+    text-align: left;
   }
 
   .settings-menu {
