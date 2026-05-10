@@ -399,15 +399,26 @@ function formatPlaybackRate(rate: number) {
 }
 
 function authErrorMessage(message: string) {
-  if (message.includes("only request this after") || message.includes("security purposes")) {
-    return "安全のため、メール送信は30秒ほど間隔を空けてから再度お試しください。";
+  const normalizedMessage = message.toLowerCase();
+
+  if (
+    normalizedMessage.includes("only request this after") ||
+    normalizedMessage.includes("security purposes")
+  ) {
+    return {
+      cooldownSeconds: 30,
+      text: "安全のため、メール送信は30秒ほど間隔を空けてから再度お試しください。",
+    };
   }
 
-  if (message.includes("Email rate limit exceeded")) {
-    return "メール送信が短時間に集中しています。少し時間を置いてから再度お試しください。";
+  if (normalizedMessage.includes("email rate limit exceeded")) {
+    return {
+      cooldownSeconds: 60,
+      text: "メール送信が短時間に集中しています。少し時間を置いてから再度お試しください。",
+    };
   }
 
-  return message;
+  return { cooldownSeconds: 0, text: message };
 }
 
 function getWordReviewStatus(entry: SavedWordEntry): WordReviewStatus {
@@ -779,6 +790,7 @@ export function TanukiApp() {
   const [history, setHistory] = useState<SubmissionWithFeedback[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [authSubmitting, setAuthSubmitting] = useState(false);
+  const [authCooldownSeconds, setAuthCooldownSeconds] = useState(0);
   const [billing, setBilling] = useState<BillingState | null>(null);
   const [adminTestMode, setAdminTestMode] = useState(false);
   const [adminCompletionPreview, setAdminCompletionPreview] =
@@ -881,6 +893,18 @@ export function TanukiApp() {
   const pcmChunksRef = useRef<Float32Array[]>([]);
   const startedAtRef = useRef<number>(0);
   const supabase = useMemo(() => getSupabaseBrowser(), []);
+
+  useEffect(() => {
+    if (authCooldownSeconds <= 0) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      setAuthCooldownSeconds((current) => Math.max(0, current - 1));
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [authCooldownSeconds]);
 
   useEffect(() => {
     if (recorderState !== "recording") {
@@ -2288,7 +2312,7 @@ export function TanukiApp() {
   }
 
   async function sendAuthLink(mode: "signup" | "signin") {
-    if (authSubmitting) {
+    if (authSubmitting || authCooldownSeconds > 0) {
       return;
     }
 
@@ -2312,13 +2336,19 @@ export function TanukiApp() {
         },
       });
 
+      if (signInError) {
+        const mappedError = authErrorMessage(signInError.message);
+        setAuthMessage(mappedError.text);
+        setAuthCooldownSeconds(mappedError.cooldownSeconds);
+        return;
+      }
+
       setAuthMessage(
-        signInError
-          ? authErrorMessage(signInError.message)
-          : mode === "signup"
-            ? "登録用リンクを送信しました。メールを確認してください。"
-            : "ログインリンクを送信しました。メールを確認してください。",
+        mode === "signup"
+          ? "登録用リンクをメールで送信しました。受信ボックスを確認し、メール内のリンクを開くと登録が完了します。"
+          : "ログインリンクをメールで送信しました。受信ボックスを確認し、メール内のリンクを開くとログインできます。",
       );
+      setAuthCooldownSeconds(30);
     } finally {
       setAuthSubmitting(false);
     }
@@ -2663,20 +2693,35 @@ export function TanukiApp() {
                     value={email}
                   />
                   <button
-                    disabled={authSubmitting}
+                    disabled={authSubmitting || authCooldownSeconds > 0}
                     onClick={() => sendAuthLink("signup")}
                     type="button"
                   >
-                    {authSubmitting ? "送信中" : "登録"}
+                    {authSubmitting
+                      ? "送信中"
+                      : authCooldownSeconds > 0
+                        ? `${authCooldownSeconds}秒後`
+                        : "登録"}
                   </button>
                   <button
-                    disabled={authSubmitting}
+                    disabled={authSubmitting || authCooldownSeconds > 0}
                     onClick={() => sendAuthLink("signin")}
                     type="button"
                   >
-                    {authSubmitting ? "送信中" : "ログイン"}
+                    {authSubmitting
+                      ? "送信中"
+                      : authCooldownSeconds > 0
+                        ? `${authCooldownSeconds}秒後`
+                        : "ログイン"}
                   </button>
                 </div>
+                {authMessage ? (
+                  <div className="auth-helper" role="status" aria-live="polite">
+                    <strong>メールを確認してください</strong>
+                    <span>{authMessage}</span>
+                    <small>届かない場合は、迷惑メールフォルダも確認してください。</small>
+                  </div>
+                ) : null}
                 <button className="checkout-button" onClick={startCheckout} type="button">
                   <CreditCard size={18} />
                   3日間無料体験
@@ -2686,7 +2731,6 @@ export function TanukiApp() {
           </div>
         </header>
 
-        {authMessage ? <div className="notice">{authMessage}</div> : null}
         {checkoutError ? <div className="notice">{checkoutError}</div> : null}
         {error ? <div className="notice error">{error}</div> : null}
         {submissionNotice ? (

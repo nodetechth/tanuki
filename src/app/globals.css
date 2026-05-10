@@ -125,6 +125,35 @@ button:disabled {
   color: #f7f2e8;
 }
 
+.auth-helper {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(33, 72, 120, 0.08);
+  color: var(--text);
+  display: grid;
+  gap: 5px;
+  line-height: 1.5;
+  max-width: 520px;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.auth-helper strong {
+  font-size: 14px;
+}
+
+.auth-helper span,
+.auth-helper small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.auth-helper small {
+  color: var(--blue-strong);
+  font-weight: 800;
+}
+
 .settings-menu {
   position: relative;
 }
@@ -2471,6 +2500,10 @@ nav.mobile-footer button.is-active {
   .auth-box {
     gap: 6px;
     min-width: 0;
+  }
+
+  .auth-helper {
+    max-width: none;
   }
 
   .settings-menu {
