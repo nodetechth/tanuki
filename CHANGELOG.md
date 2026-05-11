@@ -2,6 +2,9 @@
 
 ## 2026-05-12
 
+- ネイティブ移行: Expo SDK 55 / TypeScriptの `apps/mobile` を追加し、Tanuki向けの初期タブUI、モバイル用環境変数サンプル、root起動スクリプトを用意。
+- ネイティブ移行: Web版からネイティブアプリへ移行する方針、画面移行順、API/秘密キーの扱い、直近タスクを `docs/mobile-migration-plan.md` に整理。
+- ビルド設定: Next.js側のTypeScriptチェックが `apps/mobile` のReact Native型を拾わないよう、root `tsconfig.json` からモバイルアプリを除外。
 - 添削/ホームUI整理: 添削ページの進捗カードと直近の添削履歴をHomeへ移動し、添削タブのトップをシャドーイング教材一覧中心に変更。
 - シャドーイング教材UI: リスニング一覧と同じ固定ヘッダー、カテゴリタブ、右側アイコンの行リストへ統一。
 
