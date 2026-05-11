@@ -1596,18 +1596,11 @@ button:disabled {
 
 .feedback-stack {
   display: grid;
-  gap: 18px;
-  margin-top: 20px;
+  gap: 14px;
+  margin-top: 12px;
 }
 
-.score-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.overall-score-card,
-.score-card {
+.overall-score-card {
   background: linear-gradient(135deg, #eaf4ff 0%, #f5faff 100%);
   border: 1px solid #d5e6f7;
   border-radius: 16px;
@@ -1621,8 +1614,7 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
-.overall-score-card span,
-.score-card span {
+.overall-score-card > span {
   color: var(--muted);
   font-family: var(--font-geist-mono);
   font-size: 12px;
@@ -1630,14 +1622,13 @@ button:disabled {
   letter-spacing: 0;
 }
 
-.overall-score-card strong,
-.score-card strong {
+.overall-score-card > strong {
   font-family: var(--font-geist-mono);
   font-size: 36px;
   line-height: 1;
 }
 
-.overall-score-card strong {
+.overall-score-card > strong {
   color: var(--blue-strong) !important;
   font-size: 56px;
   grid-row: 1 / span 2;
@@ -1687,9 +1678,54 @@ button:disabled {
   color: var(--muted);
   font-size: 12px;
   font-weight: 650;
-  grid-column: 1 / -1;
   line-height: 1.55;
   margin: 0;
+}
+
+.score-detail-panel {
+  display: grid;
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.score-detail-list {
+  display: grid;
+  gap: 8px;
+}
+
+.score-detail-row {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.score-detail-row span {
+  align-items: baseline;
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 6px;
+}
+
+.score-detail-row small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.score-detail-row strong {
+  color: var(--blue-strong);
+  font-family: var(--font-geist-mono);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.score-detail-row .score-bar {
+  grid-column: 1 / -1;
+  height: 8px;
 }
 
 .feedback-stack section h3 {
@@ -1758,8 +1794,7 @@ button:disabled {
   gap: 10px;
 }
 
-.feedback-point-chip,
-.feedback-point-index {
+.feedback-point-chip {
   align-items: center;
   border-radius: 999px;
   display: inline-flex;
@@ -1775,20 +1810,9 @@ button:disabled {
   color: #ffffff;
 }
 
-.feedback-point-index {
-  background: #ffffff;
-  border: 1px solid #58b4bf;
-  color: #58b4bf;
-}
-
 .feedback-point-panel.is-focus .feedback-point-chip {
   background: #f5c9d3;
   color: #7f3447;
-}
-
-.feedback-point-panel.is-focus .feedback-point-index {
-  border-color: #efbac7;
-  color: #a94d63;
 }
 
 .feedback-point-card p {
@@ -2533,8 +2557,7 @@ nav.mobile-footer button.is-active {
   .article-list,
   .preference-options,
   .focus-grid,
-  .progress-summary-grid,
-  .score-grid {
+  .progress-summary-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2580,7 +2603,6 @@ main.min-h-screen {
 .wpm-row span,
 .article-row small,
 .history-row small,
-.score-card span,
 .recorder-strip span,
 .focus-grid span,
 .panel-heading {
@@ -2846,10 +2868,6 @@ nav.mobile-footer button {
 .result-panel .feedback-stack ul {
   font-size: 15px;
   line-height: 1.75;
-}
-
-.result-panel .score-card strong {
-  color: var(--blue-strong) !important;
 }
 
 .result-panel .next-focus-box {

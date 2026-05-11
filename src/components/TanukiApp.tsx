@@ -560,13 +560,25 @@ function overallScore(input: {
 
 function OverallScoreCard({
   score,
+  accuracyScore,
+  fluencyScore,
+  completenessScore,
   detailsOpen,
   onToggleDetails,
 }: {
   score: number;
+  accuracyScore: number;
+  fluencyScore: number;
+  completenessScore: number;
   detailsOpen: boolean;
   onToggleDetails: () => void;
 }) {
+  const detailScores = [
+    { label: "Accuracy", meaning: "正確さ", score: accuracyScore },
+    { label: "Fluency", meaning: "流暢さ", score: fluencyScore },
+    { label: "Completeness", meaning: "完成度", score: completenessScore },
+  ];
+
   return (
     <div className="overall-score-card">
       <span>総合スコア</span>
@@ -583,28 +595,26 @@ function OverallScoreCard({
         {detailsOpen ? "詳細を閉じる" : "詳細を見る"}
       </button>
       {detailsOpen ? (
-        <p className="score-detail-note">
-          Accuracy / Fluency / Completeness の平均を四捨五入しています。
-        </p>
+        <div className="score-detail-panel">
+          <p className="score-detail-note">
+            総合スコアはAccuracy/Fluency/Completenessの平均です
+          </p>
+          <div className="score-detail-list">
+            {detailScores.map((detail) => (
+              <div className="score-detail-row" key={detail.label}>
+                <span>
+                  {detail.label}
+                  <small>{detail.meaning}</small>
+                </span>
+                <strong>{detail.score}</strong>
+                <div className="score-bar" aria-label={`${detail.label} ${detail.score}点`}>
+                  <i style={{ width: `${detail.score}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : null}
-    </div>
-  );
-}
-
-function ScoreCard({
-  label,
-  score,
-}: {
-  label: string;
-  score: number;
-}) {
-  return (
-    <div className="score-card">
-      <span>{label}</span>
-      <strong className={scoreTone(score)}>{score}</strong>
-      <div className="score-bar" aria-label={`${label} ${score}点`}>
-        <i style={{ width: `${score}%` }} />
-      </div>
     </div>
   );
 }
@@ -743,15 +753,12 @@ function FeedbackPointSection({
         </h3>
       </div>
       <div className="feedback-point-list">
-        {visiblePoints.map((point, index) => (
+        {visiblePoints.map((point) => (
           <article className="feedback-point-card" key={`${tone}-${point}`}>
             <div className="feedback-point-badges">
               <span className="feedback-point-chip">
                 <Icon size={16} />
                 {tone === "good" ? "Good" : "Focus"}
-              </span>
-              <span className="feedback-point-index">
-                {tone === "good" ? "良かったところ" : "気になったところ"} {index + 1}
               </span>
             </div>
             <p>{point}</p>
@@ -821,7 +828,7 @@ export function TanukiApp() {
   );
   const [activeTab, setActiveTab] = useState<AppTab>("speak");
   const [speakView, setSpeakView] = useState<SpeakView>("home");
-  const [articleBackView, setArticleBackView] = useState<ArticleBackView>("home");
+  const [, setArticleBackView] = useState<ArticleBackView>("home");
   const [articlePracticeOpen, setArticlePracticeOpen] = useState(true);
   const [scoreDetailsOpen, setScoreDetailsOpen] = useState(false);
   const [selectedWpmRange] = useState(wpmLevels[0].range);
@@ -3274,25 +3281,6 @@ export function TanukiApp() {
 
             {speakView === "article" ? (
               <section className="article-practice-layout">
-                <header className="article-detail-header">
-                  <button
-                    className="back-button"
-                    onClick={() => setSpeakView(articleBackView)}
-                    type="button"
-                  >
-                    <ArrowLeft size={17} />
-                    {articleBackView === "history"
-                      ? "添削一覧へ"
-                      : articleBackView === "home"
-                        ? "Speakへ"
-                        : "記事一覧へ"}
-                  </button>
-                  <div>
-                    <span>Shadowing detail</span>
-                    <strong>{submission?.feedback ? "添削結果" : "録音練習"}</strong>
-                  </div>
-                </header>
-
                 {submission?.feedback ? (
                   <aside className="result-panel result-panel-complete">
                     <div className="panel-heading">
@@ -3301,20 +3289,13 @@ export function TanukiApp() {
 
                     <div className="feedback-stack">
                       <OverallScoreCard
+                        accuracyScore={submission.feedback.accuracyScore}
+                        completenessScore={submission.feedback.completenessScore}
                         detailsOpen={scoreDetailsOpen}
+                        fluencyScore={submission.feedback.fluencyScore}
                         onToggleDetails={() => setScoreDetailsOpen((value) => !value)}
                         score={overallScore(submission.feedback)}
                       />
-                      {scoreDetailsOpen ? (
-                        <div className="score-grid">
-                          <ScoreCard label="Accuracy" score={submission.feedback.accuracyScore} />
-                          <ScoreCard label="Fluency" score={submission.feedback.fluencyScore} />
-                          <ScoreCard
-                            label="Completeness"
-                            score={submission.feedback.completenessScore}
-                          />
-                        </div>
-                      ) : null}
 
                       {submission.feedback.improvementPoints.length ? (
                         <section className="improvement-box">
