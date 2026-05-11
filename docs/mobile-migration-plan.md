@@ -142,6 +142,53 @@ npm run mobile:typecheck
 | `apps/mobile/src/hooks/useAuth.ts` | メールリンク送信、セッション保持、ログアウト、Deep Link処理 |
 | `apps/mobile/src/screens/HomeScreen.tsx` | ログイン状態の確認UI |
 
+### 初回オンボーディング
+
+初回起動時は、先にメール登録/ログインを行います。
+
+理由:
+
+- ログイン前にレベル/用途を聞くと、ログアウト後に再度初回ユーザー扱いになりやすい
+- 先にSupabase Authの `user_id` を確定すると、既存プロフィールを取得して再質問を避けられる
+- レベル/用途は `user_profiles` に保存し、ログインユーザーに紐づけて管理できる
+
+現在の流れ:
+
+```text
+アプリ起動
+↓
+メール登録/ログイン
+↓
+既存 user_profiles を確認
+↓
+未完了の場合だけレベル・用途を選択
+↓
+user_profiles に保存
+↓
+Homeへ進む
+```
+
+オンボーディングで聞く項目:
+
+| 項目 | 選択肢 |
+|---|---|
+| レベル | 初級 / 中級 / 上級 |
+| 用途 | カジュアル / ビジネス / 試験 |
+
+表示文:
+
+```text
+選択した用途・レベルであなたに合わせた英語の例文を作成します。
+```
+
+受け皿のDB:
+
+```text
+supabase/20260512_user_profiles.sql
+```
+
+本番Supabaseへ適用後、モバイル版は `user_profiles` を直接読み書きします。RLSにより、自分のプロフィールだけ読める/保存できる設計です。
+
 ### Supabase Authの確認手順
 
 1. `apps/mobile/.env` を作ります。

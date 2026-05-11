@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { AppScrollView } from "../components/AppScrollView";
 import { SectionCard } from "../components/SectionCard";
-import { useAuth } from "../hooks/useAuth";
+import { learningLevels, learningPurposes } from "../data/learningPreferences";
+import type { AuthState } from "../hooks/useAuth";
+import type { useOnboarding } from "../hooks/useOnboarding";
 import { colors } from "../theme";
 
-export function HomeScreen() {
-  const [email, setEmail] = useState("");
-  const auth = useAuth();
+type HomeScreenProps = {
+  auth: AuthState;
+  onboarding: ReturnType<typeof useOnboarding>;
+};
+
+export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
+  const currentLevel = learningLevels.find((level) => level.id === onboarding.profile?.englishLevel);
+  const currentPurpose = learningPurposes.find((purpose) => purpose.id === onboarding.profile?.learningPurpose);
 
   return (
     <AppScrollView>
@@ -27,6 +33,11 @@ export function HomeScreen() {
           <View>
             <Text style={styles.authLabel}>ログイン中</Text>
             <Text style={styles.authEmail}>{auth.user.email}</Text>
+            {currentLevel && currentPurpose ? (
+              <Text style={styles.authNotice}>
+                学習設定: {currentLevel.label} / {currentPurpose.label}
+              </Text>
+            ) : null}
             <Pressable onPress={auth.signOut} style={styles.secondaryButton}>
               <Text style={styles.secondaryButtonText}>ログアウト</Text>
             </Pressable>
@@ -34,30 +45,8 @@ export function HomeScreen() {
         ) : (
           <View>
             <Text style={styles.authNotice}>
-              メールアドレスを入力すると、登録とログインに使えるリンクを送ります。
+              オンボーディングでメール登録を行います。ログイン状態が切れた場合は、アプリを再起動して登録フローからメールリンクを再送してください。
             </Text>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              inputMode="email"
-              keyboardType="email-address"
-              onChangeText={setEmail}
-              placeholder="email@example.com"
-              placeholderTextColor={colors.mutedSoft}
-              style={styles.emailInput}
-              value={email}
-            />
-            <Pressable
-              disabled={auth.loading}
-              onPress={() => {
-                void auth.sendMagicLink(email);
-              }}
-              style={[styles.primaryButton, auth.loading ? styles.disabledButton : null]}
-            >
-              <Text style={styles.primaryButtonText}>
-                {auth.loading ? "送信中..." : "登録 or ログイン"}
-              </Text>
-            </Pressable>
           </View>
         )}
         {auth.message ? <Text style={styles.authMessage}>{auth.message}</Text> : null}
@@ -144,21 +133,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 21,
   },
-  disabledButton: {
-    opacity: 0.55,
-  },
-  emailInput: {
-    backgroundColor: colors.surfaceSoft,
-    borderColor: colors.line,
-    borderRadius: 16,
-    borderWidth: 1,
-    color: colors.text,
-    fontSize: 16,
-    fontWeight: "800",
-    marginTop: 14,
-    minHeight: 54,
-    paddingHorizontal: 16,
-  },
   historyTitle: {
     color: colors.text,
     fontSize: 16,
@@ -180,9 +154,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.blue,
     borderRadius: 18,
+    justifyContent: "center",
     marginTop: 16,
     minHeight: 56,
-    justifyContent: "center",
   },
   primaryButtonText: {
     color: "#ffffff",

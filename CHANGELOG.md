@@ -2,6 +2,7 @@
 
 ## 2026-05-12
 
+- ネイティブ移行: 初回オンボーディングをメール登録/ログイン後にレベル・用途を聞く流れへ整理し、`user_profiles` へ学習設定を保存する土台とmigrationを追加。
 - ネイティブ移行: モバイル版にSupabase Authクライアント、メールリンクログインhook、Deep Linkコールバック、セッション保持、Homeのログイン確認UIを追加。
 - ネイティブ移行: `tanuki://auth/callback` のアプリスキームとSupabase Redirect URL設定手順を移行手順書へ追記。
 - ネイティブ移行: モバイル版のShadowing/Listening一覧を既存 `/api/listening/articles` に接続し、取得失敗時はサンプル記事へフォールバックするhookとAPIクライアントを追加。

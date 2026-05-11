@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { hasSupabaseConfig, supabase } from "../lib/supabase";
 
-type AuthState = {
+export type AuthState = {
   configured: boolean;
   error: string | null;
   loading: boolean;
