@@ -848,7 +848,7 @@ export function TanukiApp() {
   const [listeningTextMode, setListeningTextMode] = useState<ListeningTextMode>("both");
   const [listeningFavoritesFirst, setListeningFavoritesFirst] = useState(false);
   const [shadowingFavoritesFirst, setShadowingFavoritesFirst] = useState(false);
-  const [listeningWpmSort, setListeningWpmSort] = useState<ListeningWpmSort>("asc");
+  const [listeningWpmSort] = useState<ListeningWpmSort>("asc");
   const [listeningPlaybackRate, setListeningPlaybackRate] = useState(1);
   const [listeningAccent, setListeningAccent] = useState<ListeningAccent>(
     () => loadListeningAccent(),
@@ -2633,6 +2633,8 @@ export function TanukiApp() {
   const effectiveListeningAccent: ListeningAccent = canUseListeningPremiumFeature()
     ? listeningAccent
     : "us";
+  const usesStandaloneListHeader =
+    activeTab === "listening" || (activeTab === "speak" && speakView === "home");
   const selectedListeningAudioUrl = selectedListeningArticle
     ? audioUrlForListeningArticle(selectedListeningArticle, effectiveListeningAccent)
     : null;
@@ -2682,7 +2684,7 @@ export function TanukiApp() {
   return (
     <main className="min-h-screen bg-[#11140f] text-stone-100">
       <div className="app-shell">
-        {activeTab === "listening" ? null : (
+        {usesStandaloneListHeader ? null : (
         <header className={activeTab === "home" ? "topbar" : "topbar is-actions-only"}>
           {activeTab === "home" ? (
             <div>
@@ -2927,6 +2929,144 @@ export function TanukiApp() {
                 })}
               </div>
             </div>
+
+            <section className="speak-card speak-progress-card">
+              <div className="panel-heading">
+                <span>進捗</span>
+              </div>
+              <div className="progress-summary-grid is-two-column">
+                <div>
+                  <span>総添削回数</span>
+                  <strong>{progressSummary.total}回</strong>
+                </div>
+                <div>
+                  <span>今週の練習</span>
+                  <strong>{progressSummary.weekCount}回</strong>
+                </div>
+              </div>
+              <div className="monthly-wpm-card" aria-label="月別の平均WPM">
+                <div className="monthly-wpm-header">
+                  <div>
+                    <span>練習した記事の平均WPM</span>
+                    <strong>
+                      {progressSummary.averageWpm ? `${progressSummary.averageWpm} WPM` : "-"}
+                    </strong>
+                  </div>
+                  <small>月別平均</small>
+                </div>
+                {monthlyWpmChart.points.length ? (
+                  <div className="monthly-wpm-chart">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox={`0 0 ${monthlyWpmChart.width} ${monthlyWpmChart.height}`}
+                    >
+                      <line
+                        className="monthly-wpm-axis"
+                        x1="20"
+                        x2="280"
+                        y1="78"
+                        y2="78"
+                      />
+                      {monthlyWpmChart.points.length > 1 ? (
+                        <polyline className="monthly-wpm-line" points={monthlyWpmChart.line} />
+                      ) : null}
+                      {monthlyWpmChart.points.map((point) => (
+                        <g key={point.month}>
+                          <circle className="monthly-wpm-dot" cx={point.x} cy={point.y} r="4" />
+                          <text className="monthly-wpm-value" x={point.x} y={point.y - 9}>
+                            {point.average}
+                          </text>
+                          <text className="monthly-wpm-label" x={point.x} y="92">
+                            {point.label}
+                          </text>
+                        </g>
+                      ))}
+                    </svg>
+                  </div>
+                ) : (
+                  <p className="monthly-wpm-empty">練習データが増えると月別平均を表示します。</p>
+                )}
+              </div>
+            </section>
+
+            <section className="speak-card">
+              <div className="panel-heading">
+                <span>添削履歴</span>
+              </div>
+              {!authUser ? (
+                <div className="history-empty">
+                  ログインすると、直近の添削履歴をここに表示します。
+                </div>
+              ) : historyLoading ? (
+                <div className="history-empty">読み込み中...</div>
+              ) : recentHistory.length ? (
+                <div className="history-list">
+                  {recentHistory.map((item) => {
+                    const source = getPracticeSourceFromSubmission(item);
+                    const failed = item.status === "failed";
+                    return (
+                      <button
+                        className={failed ? "history-row is-error" : "history-row"}
+                        disabled={!item.feedback && !failed}
+                        key={item.id}
+                        onClick={() => {
+                          if (failed) {
+                            setErrorDetailSubmission(item);
+                            setErrorCodeCopied(false);
+                            return;
+                          }
+                          openSubmissionFromHistory(item, source, "home");
+                        }}
+                        type="button"
+                      >
+                        <Clock3 size={16} />
+                        <span>
+                          <strong>{source?.title ?? item.sourceId}</strong>
+                          {item.isTest ? <small>管理者テスト</small> : null}
+                          <small>
+                            {new Intl.DateTimeFormat("ja-JP", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            }).format(new Date(item.createdAt))}
+                          </small>
+                          {item.feedback ? (
+                            <em>総合スコア {overallScore(item.feedback)}</em>
+                          ) : (
+                            <small>{statusLabels[item.status]}</small>
+                          )}
+                        </span>
+                        <strong className="history-repeat-label">
+                          {failed
+                            ? "エラーの詳細を確認する"
+                            : item.feedback
+                              ? "添削結果を見る"
+                              : statusLabels[item.status]}
+                        </strong>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="history-empty">
+                  まだ提出履歴はありません。録音を提出するとここに追加されます。
+                </div>
+              )}
+              <button
+                className="text-link-button"
+                disabled={!authUser}
+                onClick={() => {
+                  setActiveTab("speak");
+                  setSpeakView("history");
+                }}
+                type="button"
+              >
+                過去の添削履歴を確認する
+                <ChevronRight size={16} />
+              </button>
+            </section>
           </section>
         ) : null}
 
@@ -2983,200 +3123,49 @@ export function TanukiApp() {
                     </div>
                   </section>
                 ) : null}
-                <section className="speak-card speak-progress-card">
-                  <div className="panel-heading">
-                    <span>進捗</span>
-                  </div>
-                  <div className="progress-summary-grid is-two-column">
-                    <div>
-                      <span>総添削回数</span>
-                      <strong>{progressSummary.total}回</strong>
-                    </div>
-                    <div>
-                      <span>今週の練習</span>
-                      <strong>{progressSummary.weekCount}回</strong>
-                    </div>
-                  </div>
-                  <div className="monthly-wpm-card" aria-label="月別の平均WPM">
-                    <div className="monthly-wpm-header">
-                      <div>
-                        <span>練習した記事の平均WPM</span>
-                        <strong>
-                          {progressSummary.averageWpm ? `${progressSummary.averageWpm} WPM` : "-"}
-                        </strong>
-                      </div>
-                      <small>月別平均</small>
-                    </div>
-                    {monthlyWpmChart.points.length ? (
-                      <div className="monthly-wpm-chart">
-                        <svg
-                          aria-hidden="true"
-                          focusable="false"
-                          viewBox={`0 0 ${monthlyWpmChart.width} ${monthlyWpmChart.height}`}
+                <section className="listening-screen shadowing-list-screen">
+                  <div className="listening-list-header">
+                    <div className="listening-list-title-row">
+                      <h2>Shadowing</h2>
+                      <div className="listening-list-actions">
+                        <button
+                          aria-label={
+                            shadowingFavoritesFirst
+                              ? "お気に入り優先をオフ"
+                              : "お気に入り優先をオン"
+                          }
+                          aria-pressed={shadowingFavoritesFirst}
+                          className={
+                            shadowingFavoritesFirst
+                              ? "listening-header-icon is-active"
+                              : "listening-header-icon"
+                          }
+                          onClick={() => setShadowingFavoritesFirst((value) => !value)}
+                          type="button"
                         >
-                          <line
-                            className="monthly-wpm-axis"
-                            x1="20"
-                            x2="280"
-                            y1="78"
-                            y2="78"
-                          />
-                          {monthlyWpmChart.points.length > 1 ? (
-                            <polyline
-                              className="monthly-wpm-line"
-                              points={monthlyWpmChart.line}
-                            />
-                          ) : null}
-                          {monthlyWpmChart.points.map((point) => (
-                            <g key={point.month}>
-                              <circle className="monthly-wpm-dot" cx={point.x} cy={point.y} r="4" />
-                              <text className="monthly-wpm-value" x={point.x} y={point.y - 9}>
-                                {point.average}
-                              </text>
-                              <text className="monthly-wpm-label" x={point.x} y="92">
-                                {point.label}
-                              </text>
-                            </g>
-                          ))}
-                        </svg>
+                          <Heart size={22} />
+                        </button>
+                        <button
+                          aria-label="学習設定を開く"
+                          className="listening-header-icon"
+                          onClick={() => setPreferencesOpen(true)}
+                          type="button"
+                        >
+                          <Settings size={22} />
+                        </button>
                       </div>
-                    ) : (
-                      <p className="monthly-wpm-empty">練習データが増えると月別平均を表示します。</p>
-                    )}
-                  </div>
-                  {canSubmitToday ? (
-                    <button
-                      className="new-practice-button"
-                      onClick={() => {
-                        setActiveTab("speak");
-                        setSpeakView("home");
-                        setSelectedListeningArticleId(null);
-                      }}
-                      type="button"
-                    >
-                      <Plus size={20} />
-                      新しく練習する
-                    </button>
-                  ) : (
-                    <div className="new-practice-button is-completed" aria-live="polite">
-                      今日の添削は完了しました
                     </div>
-                  )}
-                </section>
-
-                <section className="speak-card">
-                  <div className="panel-heading">
-                    <span>添削履歴</span>
-                  </div>
-                  {!authUser ? (
-                    <div className="history-empty">
-                      ログインすると、直近の添削履歴をここに表示します。
-                    </div>
-                  ) : historyLoading ? (
-                    <div className="history-empty">読み込み中...</div>
-                  ) : recentHistory.length ? (
-                    <div className="history-list">
-	                      {recentHistory.map((item) => {
-	                        const source = getPracticeSourceFromSubmission(item);
-	                        const failed = item.status === "failed";
-	                        return (
-	                          <button
-	                            className={failed ? "history-row is-error" : "history-row"}
-	                            disabled={!item.feedback && !failed}
-	                            key={item.id}
-	                            onClick={() => {
-	                              if (failed) {
-	                                setErrorDetailSubmission(item);
-	                                setErrorCodeCopied(false);
-	                                return;
-	                              }
-	                              openSubmissionFromHistory(item, source, "home");
-	                            }}
-	                            type="button"
-	                          >
-                            <Clock3 size={16} />
-                            <span>
-                              <strong>{source?.title ?? item.sourceId}</strong>
-                              {item.isTest ? <small>管理者テスト</small> : null}
-                              <small>
-                                {new Intl.DateTimeFormat("ja-JP", {
-                                  month: "2-digit",
-                                  day: "2-digit",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                }).format(new Date(item.createdAt))}
-                              </small>
-                              {item.feedback ? (
-                                <em>
-                                  総合スコア {overallScore(item.feedback)}
-                                </em>
-                              ) : (
-                                <small>{statusLabels[item.status]}</small>
-                              )}
-                            </span>
-	                            <strong className="history-repeat-label">
-	                              {failed
-	                                ? "エラーの詳細を確認する"
-	                                : item.feedback
-	                                  ? "添削結果を見る"
-	                                  : statusLabels[item.status]}
-	                            </strong>
-	                          </button>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="history-empty">
-                      まだ提出履歴はありません。録音を提出するとここに追加されます。
-                    </div>
-                  )}
-                  <button
-                    className="text-link-button"
-                    disabled={!authUser}
-                    onClick={() => setSpeakView("history")}
-                    type="button"
-                  >
-                    過去の添削履歴を確認する
-                    <ChevronRight size={16} />
-                  </button>
-                </section>
-
-                <section className="speak-card shadowing-article-section">
-                  <div className="panel-heading">
-                    <span>シャドーイング教材</span>
-                  </div>
-                  <div className="listening-tabs">
-                    {listeningCategories.map((category) => (
-                      <button
-                        className={shadowingCategory === category ? "is-active" : ""}
-                        key={category}
-                        onClick={() => setShadowingCategory(category)}
-                        type="button"
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="shadowing-article-toolbar">
-                    <span>{visibleShadowingArticles.length} articles</span>
-                    <div className="listening-sort-actions">
-                      <button
-                        className={shadowingFavoritesFirst ? "is-active" : ""}
-                        onClick={() => setShadowingFavoritesFirst((value) => !value)}
-                        type="button"
-                      >
-                        <Heart size={16} />
-                        お気に入り
-                      </button>
-                      <button
-                        className="wpm-sort-button"
-                        onClick={() =>
-                          setListeningWpmSort((value) => (value === "asc" ? "desc" : "asc"))
-                        }
-                        type="button"
-                      >
-                        WPM {listeningWpmSort === "asc" ? "昇順" : "降順"}
-                      </button>
+                    <div className="listening-tabs">
+                      {listeningCategories.map((category) => (
+                        <button
+                          className={shadowingCategory === category ? "is-active" : ""}
+                          key={category}
+                          onClick={() => setShadowingCategory(category)}
+                          type="button"
+                        >
+                          {category}
+                        </button>
+                      ))}
                     </div>
                   </div>
                   <div className="listening-article-list is-compact">
@@ -3196,34 +3185,38 @@ export function TanukiApp() {
                           role="button"
                           tabIndex={0}
                         >
-                          <div className="listening-thumbnail" aria-hidden="true">
-                            <Mic size={30} />
-                          </div>
                           <div className="listening-article-body">
                             <div className="listening-meta">
                               <span>{article.category}</span>
                               <span>{article.levelLabel}</span>
+                              {article.wpm ? <span>WPM {article.wpm}</span> : null}
+                              <span>{article.readTimeMinutes}分</span>
                               <time>{article.date}</time>
                             </div>
                             <h3>{article.title}</h3>
                             <p>{article.description}</p>
-                            <div className="listening-card-stats">
-                              {article.wpm ? <small>WPM {article.wpm}</small> : null}
-                              <small>{article.readTimeMinutes}分</small>
-                              {practiced ? <small className="is-practiced">練習済み</small> : null}
-                            </div>
+                            {practiced ? (
+                              <div className="listening-card-stats">
+                                <small className="is-practiced">練習済み</small>
+                              </div>
+                            ) : null}
                           </div>
-                          <button
-                            aria-label={liked ? "お気に入りを解除" : "お気に入りに追加"}
-                            className={liked ? "listen-like is-active" : "listen-like"}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              toggleListeningLike(article.id);
-                            }}
-                            type="button"
-                          >
-                            <Heart size={30} />
-                          </button>
+                          <div className="listening-row-media">
+                            <div className="listening-thumbnail" aria-hidden="true">
+                              <Mic size={26} />
+                            </div>
+                            <button
+                              aria-label={liked ? "お気に入りを解除" : "お気に入りに追加"}
+                              className={liked ? "listen-like is-active" : "listen-like"}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                toggleListeningLike(article.id);
+                              }}
+                              type="button"
+                            >
+                              <Heart size={18} />
+                            </button>
+                          </div>
                         </article>
                       );
                     })}
