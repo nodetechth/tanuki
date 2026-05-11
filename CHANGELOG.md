@@ -2,6 +2,8 @@
 
 ## 2026-05-12
 
+- ネイティブ移行: `apps/mobile/src` に共通テーマ、下部タブ、固定ヘッダー、記事リスト、Home/Shadowing/Listening/Search画面を分割実装し、各タブのモックUIをWeb版の構成に近づけた。
+- ネイティブ移行: モバイル側の型チェック用 `npm run mobile:typecheck` を追加し、画面分割後の構成を移行手順書へ追記。
 - ネイティブ移行: Expo SDK 55 / TypeScriptの `apps/mobile` を追加し、Tanuki向けの初期タブUI、モバイル用環境変数サンプル、root起動スクリプトを用意。
 - ネイティブ移行: Web版からネイティブアプリへ移行する方針、画面移行順、API/秘密キーの扱い、直近タスクを `docs/mobile-migration-plan.md` に整理。
 - ビルド設定: Next.js側のTypeScriptチェックが `apps/mobile` のReact Native型を拾わないよう、root `tsconfig.json` からモバイルアプリを除外。

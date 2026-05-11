@@ -89,6 +89,35 @@ npm run mobile:android
 - 色、余白、文字サイズの基準を決める
 - Web版のUIをそのままコピーせず、スマホアプリとして自然な形にする
 
+現在の構成:
+
+```text
+apps/mobile/src/
+  components/
+    AppScrollView.tsx
+    ArticleList.tsx
+    BottomTabs.tsx
+    ListHeader.tsx
+    SectionCard.tsx
+  data/
+    mock.ts
+  screens/
+    HomeScreen.tsx
+    ShadowingScreen.tsx
+    ListeningScreen.tsx
+    SearchScreen.tsx
+  theme.ts
+  types.ts
+```
+
+この段階では、まだSupabaseやAPIには接続していません。まずは画面の器を作り、Web版で固めてきたUIの方向性をネイティブで再現できるようにしています。
+
+型チェックは以下で実行します。
+
+```bash
+npm run mobile:typecheck
+```
+
 ### Step 2. Auth / Supabase接続
 
 対象:

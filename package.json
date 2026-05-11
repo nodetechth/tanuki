@@ -11,6 +11,7 @@
     "mobile:start": "npm run start --prefix apps/mobile",
     "mobile:ios": "npm run ios --prefix apps/mobile",
     "mobile:android": "npm run android --prefix apps/mobile",
+    "mobile:typecheck": "npx tsc --noEmit --project apps/mobile/tsconfig.json",
     "tts:eval": "node scripts/tts-eval/generate.mjs",
     "tts:articles": "node scripts/content/generate-article-audio.mjs",
     "tts:listening:elevenlabs": "node scripts/content/generate-elevenlabs-listening-audio.mjs",
