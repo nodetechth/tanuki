@@ -3943,32 +3943,48 @@ export function TanukiApp() {
             </section>
           ) : (
             <section className="listening-screen">
-              <div className="panel-heading">
-                <span>Listening</span>
-              </div>
-              <div className="listening-tabs">
-                {listeningCategories.map((category) => (
-                  <button
-                    className={listeningCategory === category ? "is-active" : ""}
-                    key={category}
-                    onClick={() => setListeningCategory(category)}
-                    type="button"
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-              <div className="listening-toolbar">
-                <span>{visibleListeningArticles.length} articles</span>
-                <div className="listening-sort-actions">
-                  <button
-                    className={listeningFavoritesFirst ? "is-active" : ""}
-                    onClick={() => setListeningFavoritesFirst((value) => !value)}
-                    type="button"
-                  >
-                    <Heart size={16} />
-                    お気に入り
-                  </button>
+              <div className="listening-list-header">
+                <div className="listening-list-title-row">
+                  <h2>Listening</h2>
+                  <div className="listening-list-actions">
+                    <button
+                      aria-label={
+                        listeningFavoritesFirst
+                          ? "お気に入り優先をオフ"
+                          : "お気に入り優先をオン"
+                      }
+                      aria-pressed={listeningFavoritesFirst}
+                      className={
+                        listeningFavoritesFirst
+                          ? "listening-header-icon is-active"
+                          : "listening-header-icon"
+                      }
+                      onClick={() => setListeningFavoritesFirst((value) => !value)}
+                      type="button"
+                    >
+                      <Heart size={22} />
+                    </button>
+                    <button
+                      aria-label="学習設定を開く"
+                      className="listening-header-icon"
+                      onClick={() => setPreferencesOpen(true)}
+                      type="button"
+                    >
+                      <Settings size={22} />
+                    </button>
+                  </div>
+                </div>
+                <div className="listening-tabs">
+                  {listeningCategories.map((category) => (
+                    <button
+                      className={listeningCategory === category ? "is-active" : ""}
+                      key={category}
+                      onClick={() => setListeningCategory(category)}
+                      type="button"
+                    >
+                      {category}
+                    </button>
+                  ))}
                 </div>
               </div>
               <div className="listening-article-list">
@@ -3992,9 +4008,6 @@ export function TanukiApp() {
                       role="button"
                       tabIndex={0}
                     >
-                      <div className="listening-thumbnail" aria-hidden="true">
-                        <BookOpen size={34} />
-                      </div>
                       <div className="listening-article-body">
                         <div className="listening-meta">
                           <span>{article.category}</span>
@@ -4008,17 +4021,22 @@ export function TanukiApp() {
                           {read ? <small className="is-read">読了</small> : null}
                         </div>
                       </div>
-                      <button
-                        aria-label={liked ? "お気に入りを解除" : "お気に入りに追加"}
-                        className={liked ? "listen-like is-active" : "listen-like"}
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          toggleListeningLike(article.id);
-                        }}
-                        type="button"
-                      >
-                        <Heart size={32} />
-                      </button>
+                      <div className="listening-row-media">
+                        <div className="listening-thumbnail" aria-hidden="true">
+                          <BookOpen size={30} />
+                        </div>
+                        <button
+                          aria-label={liked ? "お気に入りを解除" : "お気に入りに追加"}
+                          className={liked ? "listen-like is-active" : "listen-like"}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            toggleListeningLike(article.id);
+                          }}
+                          type="button"
+                        >
+                          <Heart size={18} />
+                        </button>
+                      </div>
                     </article>
                   );
                 })}

@@ -4430,6 +4430,169 @@ nav.mobile-footer button {
   color: #ffffff;
 }
 
+.listening-screen .listening-list-header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+  margin: -22px -22px 0;
+  padding: 18px 22px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.listening-screen {
+  background: #ffffff;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.listening-list-title-row {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.listening-list-title-row h2 {
+  color: var(--text);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.listening-list-actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.listening-header-icon {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  padding: 0;
+  width: 48px;
+}
+
+.listening-header-icon.is-active {
+  background: #fff3f3;
+  border-color: #ffc9c9;
+  color: #ff4b4b;
+}
+
+.listening-header-icon.is-active svg {
+  fill: currentColor;
+}
+
+.listening-screen .listening-tabs {
+  margin-top: 18px;
+  padding-bottom: 2px;
+  scroll-padding-inline: 22px;
+}
+
+.listening-screen .listening-tabs button {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.listening-screen .listening-tabs button.is-active {
+  background: transparent;
+  border-bottom: 3px solid var(--blue);
+  color: var(--text);
+}
+
+.listening-screen .listening-article-list {
+  background: #ffffff;
+  border-radius: 0;
+  gap: 0;
+  margin: 0 -22px -22px;
+}
+
+.listening-screen .listening-article-card {
+  align-items: stretch;
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) 74px;
+  min-height: 126px;
+  padding: 18px 22px;
+}
+
+.listening-screen .listening-article-card:hover {
+  background: #f8fbff;
+}
+
+.listening-row-media {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.listening-screen .listening-thumbnail {
+  background: #edf5ff;
+  border-radius: 12px;
+  color: var(--blue);
+  width: 74px;
+}
+
+.listening-row-media .listen-like {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  min-height: 34px;
+  padding: 0;
+  width: 34px;
+}
+
+.listening-row-media .listen-like.is-active {
+  background: #fff3f3;
+  border-color: #ffc9c9;
+}
+
+.listening-screen .listening-meta {
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.listening-screen .listening-meta span {
+  font-size: 12px;
+  padding: 5px 8px;
+}
+
+.listening-screen .listening-meta time {
+  font-size: 12px;
+}
+
+.listening-screen .listening-article-card h3 {
+  font-size: 20px;
+  line-height: 1.32;
+  margin-bottom: 6px;
+}
+
+.listening-screen .listening-article-card p {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.listening-screen .listening-card-stats {
+  margin-top: 12px;
+}
+
 .listening-detail-screen {
   background: #f3f6fa;
   border: 1px solid var(--line);
@@ -5163,6 +5326,59 @@ nav.mobile-footer button {
 
   .listening-toolbar button {
     justify-content: center;
+  }
+
+  .listening-screen {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .listening-screen .listening-list-header {
+    margin: 0;
+    padding: 16px 14px 10px;
+  }
+
+  .listening-list-title-row h2 {
+    font-size: 26px;
+  }
+
+  .listening-header-icon {
+    height: 44px;
+    width: 44px;
+  }
+
+  .listening-screen .listening-tabs {
+    margin-left: -14px;
+    margin-right: -14px;
+    padding: 0 14px 2px;
+  }
+
+  .listening-screen .listening-tabs button {
+    min-height: 40px;
+    padding: 0 10px;
+  }
+
+  .listening-screen .listening-article-list {
+    margin: 0;
+  }
+
+  .listening-screen .listening-article-card {
+    grid-template-columns: minmax(0, 1fr) 64px;
+    min-height: 116px;
+    padding: 16px 14px;
+  }
+
+  .listening-screen .listening-thumbnail {
+    width: 64px;
+  }
+
+  .listening-screen .listening-article-card h3 {
+    font-size: 18px;
+  }
+
+  .listening-screen .listening-article-card p {
+    font-size: 13px;
   }
 
   .shadowing-article-toolbar {
