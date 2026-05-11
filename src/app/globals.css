@@ -4443,7 +4443,8 @@ nav.mobile-footer button {
 .listening-screen {
   background: #ffffff;
   box-shadow: none;
-  overflow: visible;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .listening-list-title-row {
@@ -4492,18 +4493,27 @@ nav.mobile-footer button {
 }
 
 .listening-screen .listening-tabs {
+  max-width: 100%;
   margin-top: 18px;
+  overflow-x: auto;
   padding-bottom: 2px;
   scroll-padding-inline: 22px;
+  scrollbar-width: none;
+}
+
+.listening-screen .listening-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .listening-screen .listening-tabs button {
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
   flex: 0 0 auto;
+  font-size: 15px;
   min-height: 42px;
-  padding: 0 12px;
+  padding: 0 10px;
 }
 
 .listening-screen .listening-tabs button.is-active {
@@ -4526,7 +4536,7 @@ nav.mobile-footer button {
   border-radius: 0;
   box-shadow: none;
   gap: 14px;
-  grid-template-columns: minmax(0, 1fr) 74px;
+  grid-template-columns: minmax(0, 1fr) 58px;
   min-height: 126px;
   padding: 18px 22px;
 }
@@ -4547,7 +4557,7 @@ nav.mobile-footer button {
   background: #edf5ff;
   border-radius: 12px;
   color: var(--blue);
-  width: 74px;
+  width: 58px;
 }
 
 .listening-row-media .listen-like {
@@ -5332,6 +5342,7 @@ nav.mobile-footer button {
     border: 0;
     border-radius: 0;
     padding: 0;
+    width: 100%;
   }
 
   .listening-screen .listening-list-header {
@@ -5355,8 +5366,9 @@ nav.mobile-footer button {
   }
 
   .listening-screen .listening-tabs button {
+    font-size: 14px;
     min-height: 40px;
-    padding: 0 10px;
+    padding: 0 9px;
   }
 
   .listening-screen .listening-article-list {
@@ -5364,13 +5376,14 @@ nav.mobile-footer button {
   }
 
   .listening-screen .listening-article-card {
-    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 52px;
     min-height: 116px;
     padding: 16px 14px;
   }
 
   .listening-screen .listening-thumbnail {
-    width: 64px;
+    width: 52px;
   }
 
   .listening-screen .listening-article-card h3 {

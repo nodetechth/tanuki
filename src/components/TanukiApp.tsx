@@ -2682,6 +2682,7 @@ export function TanukiApp() {
   return (
     <main className="min-h-screen bg-[#11140f] text-stone-100">
       <div className="app-shell">
+        {activeTab === "listening" ? null : (
         <header className={activeTab === "home" ? "topbar" : "topbar is-actions-only"}>
           {activeTab === "home" ? (
             <div>
@@ -2760,6 +2761,7 @@ export function TanukiApp() {
             )}
           </div>
         </header>
+        )}
 
         {checkoutError ? <div className="notice">{checkoutError}</div> : null}
         {error ? <div className="notice error">{error}</div> : null}
@@ -4012,14 +4014,16 @@ export function TanukiApp() {
                         <div className="listening-meta">
                           <span>{article.category}</span>
                           <span>{article.levelLabel}</span>
+                          <span>{article.readTimeMinutes}分</span>
                           <time>{article.date}</time>
                         </div>
                         <h3>{article.title}</h3>
                         <p>{article.description}</p>
-                        <div className="listening-card-stats">
-                          <small>{article.readTimeMinutes}分</small>
-                          {read ? <small className="is-read">読了</small> : null}
-                        </div>
+                        {read ? (
+                          <div className="listening-card-stats">
+                            <small className="is-read">読了</small>
+                          </div>
+                        ) : null}
                       </div>
                       <div className="listening-row-media">
                         <div className="listening-thumbnail" aria-hidden="true">
