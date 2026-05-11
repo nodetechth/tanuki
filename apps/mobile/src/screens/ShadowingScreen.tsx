@@ -3,20 +3,23 @@ import { View } from "react-native";
 
 import { AppScrollView } from "../components/AppScrollView";
 import { ArticleList } from "../components/ArticleList";
+import { ArticleListStatus } from "../components/ArticleListStatus";
 import { ListHeader } from "../components/ListHeader";
-import { categories, shadowingArticles } from "../data/mock";
+import { categories } from "../data/mock";
+import { useArticles } from "../hooks/useArticles";
 
 export function ShadowingScreen() {
   const [category, setCategory] = useState("ALL");
   const [favoriteFirst, setFavoriteFirst] = useState(false);
+  const { articles: sourceArticles, isFallback, loading } = useArticles("shadowing");
   const articles = useMemo(() => {
     const filtered =
       category === "ALL"
-        ? shadowingArticles
-        : shadowingArticles.filter((article) => article.category === category);
+        ? sourceArticles
+        : sourceArticles.filter((article) => article.category === category);
     if (!favoriteFirst) return filtered;
     return [...filtered].sort((a, b) => Number(Boolean(b.isFavorite)) - Number(Boolean(a.isFavorite)));
-  }, [category, favoriteFirst]);
+  }, [category, favoriteFirst, sourceArticles]);
 
   return (
     <AppScrollView>
@@ -28,6 +31,7 @@ export function ShadowingScreen() {
         onToggleFavoriteFirst={() => setFavoriteFirst((value) => !value)}
         title="Shadowing"
       />
+      <ArticleListStatus isFallback={isFallback} loading={loading} />
       <View>
         <ArticleList articles={articles} icon="●" />
       </View>

@@ -204,6 +204,34 @@ npm run mobile:typecheck
 5. Web版の `/api/listening/articles` をネイティブから読める形にする
 6. 録音ライブラリと音声再生ライブラリを選定する
 
+## 8. 記事一覧API接続
+
+モバイル側では、まず既存WebのAPIをそのまま使います。
+
+```text
+GET /api/listening/articles
+```
+
+接続先のベースURLは以下で設定します。
+
+```text
+apps/mobile/.env
+EXPO_PUBLIC_APP_URL=https://tanuki.nodetech.jp
+```
+
+未設定の場合は `https://tanuki.nodetech.jp` を使います。
+
+実装ファイル:
+
+| ファイル | 役割 |
+|---|---|
+| `apps/mobile/src/config.ts` | API接続先URL |
+| `apps/mobile/src/api/articles.ts` | 既存APIから記事一覧を取得 |
+| `apps/mobile/src/hooks/useArticles.ts` | Shadowing / Listening別に記事を取得 |
+| `apps/mobile/src/components/ArticleListStatus.tsx` | 読み込み中/フォールバック表示 |
+
+API接続に失敗した場合は、開発中でも画面確認できるように `apps/mobile/src/data/mock.ts` のサンプル記事を表示します。
+
 ## 7. 注意点
 
 - Web版のCSSはReact Nativeでは使えません。

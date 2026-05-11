@@ -5,6 +5,7 @@ export const categories = ["ALL", "ビジネス", "ニュース", "生活", "テ
 export const shadowingArticles: Article[] = [
   {
     id: "shadowing-directions",
+    contentType: "shadowing",
     title: "Asking for Directions",
     description: "道をたずねる場面で、丁寧に短く話す練習。",
     category: "生活",
@@ -16,6 +17,7 @@ export const shadowingArticles: Article[] = [
   },
   {
     id: "shadowing-customer-support",
+    contentType: "shadowing",
     title: "A Quick Support Call",
     description: "問い合わせ対応で使う、落ち着いた英語表現。",
     category: "ビジネス",
@@ -27,6 +29,7 @@ export const shadowingArticles: Article[] = [
   },
   {
     id: "shadowing-morning-routine",
+    contentType: "shadowing",
     title: "A Morning Routine",
     description: "日常の流れを自然なリズムで話す練習。",
     category: "生活",
@@ -40,6 +43,7 @@ export const shadowingArticles: Article[] = [
 export const listeningArticles: Article[] = [
   {
     id: "listening-library",
+    contentType: "listening",
     title: "Why Local Libraries Still Matter",
     description: "地域の図書館が今も大切にされる理由。",
     category: "生活",
@@ -50,6 +54,7 @@ export const listeningArticles: Article[] = [
   },
   {
     id: "listening-ai-support",
+    contentType: "listening",
     title: "AI and the Future of Customer Support",
     description: "AI導入で変わるカスタマーサポートの役割。",
     category: "ビジネス",
@@ -59,6 +64,7 @@ export const listeningArticles: Article[] = [
   },
   {
     id: "listening-power-banks",
+    contentType: "listening",
     title: "Power Banks on Planes",
     description: "飛行機内のモバイルバッテリー利用を考える。",
     category: "ニュース",

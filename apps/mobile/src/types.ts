@@ -2,6 +2,7 @@ export type TabId = "home" | "shadowing" | "listening" | "search";
 
 export type Article = {
   id: string;
+  contentType: "shadowing" | "listening";
   title: string;
   description: string;
   category: string;
