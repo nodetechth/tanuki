@@ -110,7 +110,7 @@ apps/mobile/src/
   types.ts
 ```
 
-この段階では、まだSupabaseやAPIには接続していません。まずは画面の器を作り、Web版で固めてきたUIの方向性をネイティブで再現できるようにしています。
+この段階では、まず画面の器を作り、Web版で固めてきたUIの方向性をネイティブで再現できるようにしています。
 
 型チェックは以下で実行します。
 
@@ -131,6 +131,56 @@ npm run mobile:typecheck
 - Expoで使う公開環境変数は `EXPO_PUBLIC_` から始めます。
 - Service Role Keyは絶対にモバイルアプリへ入れません。
 - 管理者判定や添削処理はサーバー側APIで行います。
+
+現在は、モバイル版Homeにメールリンクログインの最小UIを追加しています。
+
+実装ファイル:
+
+| ファイル | 役割 |
+|---|---|
+| `apps/mobile/src/lib/supabase.ts` | モバイル用Supabaseクライアント。Anon Keyだけを使う |
+| `apps/mobile/src/hooks/useAuth.ts` | メールリンク送信、セッション保持、ログアウト、Deep Link処理 |
+| `apps/mobile/src/screens/HomeScreen.tsx` | ログイン状態の確認UI |
+
+### Supabase Authの確認手順
+
+1. `apps/mobile/.env` を作ります。
+
+```bash
+cp apps/mobile/.env.example apps/mobile/.env
+```
+
+2. `apps/mobile/.env` に公開用の値だけを入れます。
+
+```text
+EXPO_PUBLIC_APP_URL=https://tanuki.nodetech.jp
+EXPO_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=xxxxx
+```
+
+`SUPABASE_SERVICE_ROLE_KEY` は絶対に `apps/mobile/.env` へ入れません。モバイルアプリに入れた値は、ビルド後にユーザー端末へ配布される前提で考えてください。
+
+3. Supabase管理画面でリダイレクトURLを許可します。
+
+Supabase Dashboardの `Authentication > URL Configuration` で、Redirect URLsに以下を追加します。
+
+```text
+tanuki://auth/callback
+```
+
+Expo Goで確認する場合、開発環境によってはExpo Go用のURLが使われます。その場合はアプリ起動後に生成される認証URLを確認して、同じ形式のURLをRedirect URLsへ追加します。実運用ではDevelopment Buildまたは本番アプリで `tanuki://auth/callback` を使う想定です。
+
+4. モバイルアプリを起動します。
+
+```bash
+npm run mobile:start
+```
+
+5. Homeのログイン欄にメールアドレスを入れて `登録 or ログイン` を押します。
+
+メール内のリンクを開き、アプリに戻ってログイン中のメールアドレスが表示されれば接続確認は完了です。
+
+この段階では課金状態の取得までは未接続です。次に、ログイン済みユーザーのセッションを使ってWeb版APIへAuthorizationヘッダーを渡す実装へ進みます。
 
 ### Step 3. Shadowing
 

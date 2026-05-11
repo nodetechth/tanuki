@@ -2,6 +2,8 @@
 
 ## 2026-05-12
 
+- ネイティブ移行: モバイル版にSupabase Authクライアント、メールリンクログインhook、Deep Linkコールバック、セッション保持、Homeのログイン確認UIを追加。
+- ネイティブ移行: `tanuki://auth/callback` のアプリスキームとSupabase Redirect URL設定手順を移行手順書へ追記。
 - ネイティブ移行: モバイル版のShadowing/Listening一覧を既存 `/api/listening/articles` に接続し、取得失敗時はサンプル記事へフォールバックするhookとAPIクライアントを追加。
 - ネイティブ移行: モバイル版の記事API接続先 `EXPO_PUBLIC_APP_URL` とフォールバック挙動を移行手順書へ追記。
 - ネイティブ移行: `apps/mobile/src` に共通テーマ、下部タブ、固定ヘッダー、記事リスト、Home/Shadowing/Listening/Search画面を分割実装し、各タブのモックUIをWeb版の構成に近づけた。
