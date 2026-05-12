@@ -2,6 +2,7 @@
 
 ## 2026-05-12
 
+- Stripe課金: Stripe本番向けWebhook Endpoint `https://tanuki.nodetech.jp/api/webhooks/stripe` をサンドボックスに作成し、Vercel Productionへ `STRIPE_PRICE_ID` / `STRIPE_WEBHOOK_SECRET` を設定して再デプロイ。
 - Stripe課金: Stripeサンドボックスに月額980円のテスト商品/Priceを作成し、Checkout/Webhook/Vercel環境変数のテスト手順を追加。
 - ネイティブ移行: 初回オンボーディングをメール登録/ログイン後にレベル・用途を聞く流れへ整理し、`user_profiles` へ学習設定を保存する土台とmigrationを追加。
 - ネイティブ移行: モバイル版にSupabase Authクライアント、メールリンクログインhook、Deep Linkコールバック、セッション保持、Homeのログイン確認UIを追加。
