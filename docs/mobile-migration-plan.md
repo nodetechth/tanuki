@@ -76,7 +76,7 @@ Development Buildで確認する場合は、Expo GoではなくTanuki専用の�
 
 ## Development Buildで実機確認する
 
-メールリンク認証、録音、通知、ネイティブ固有機能を確認する段階ではExpo GoではなくDevelopment Buildを使います。
+Auth、録音、通知、ネイティブ固有機能を確認する段階ではExpo GoではなくDevelopment Buildを使います。
 
 追加済みの設定:
 
@@ -194,7 +194,7 @@ npm run mobile:typecheck
 
 対象:
 
-- メールリンクログイン
+- メールアドレス + パスワードログイン
 - セッション保持
 - 課金状態取得
 
@@ -204,15 +204,16 @@ npm run mobile:typecheck
 - Service Role Keyは絶対にモバイルアプリへ入れません。
 - 管理者判定や添削処理はサーバー側APIで行います。
 
-現在は、モバイル版Homeにメールリンクログインの最小UIを追加しています。
+現在は、モバイル版オンボーディングにメールアドレス + パスワードの登録/ログインUIを追加しています。
 
 実装ファイル:
 
 | ファイル | 役割 |
 |---|---|
 | `apps/mobile/src/lib/supabase.ts` | モバイル用Supabaseクライアント。Anon Keyだけを使う |
-| `apps/mobile/src/hooks/useAuth.ts` | メールリンク送信、セッション保持、ログアウト、Deep Link処理 |
-| `apps/mobile/src/screens/HomeScreen.tsx` | ログイン状態の確認UI |
+| `apps/mobile/src/hooks/useAuth.ts` | メールアドレス + パスワード登録/ログイン、セッション保持、ログアウト |
+| `apps/mobile/src/screens/OnboardingScreen.tsx` | 初回の登録/ログインと学習設定UI |
+| `apps/mobile/src/screens/HomeScreen.tsx` | ログイン状態と学習設定の確認UI |
 
 ### 初回オンボーディング
 
@@ -295,9 +296,11 @@ Expo Goで確認する場合、開発環境によってはExpo Go用のURLが使
 npm run mobile:start
 ```
 
-5. Homeのログイン欄にメールアドレスを入れて `登録 or ログイン` を押します。
+5. オンボーディング画面でメールアドレスと6文字以上のパスワードを入力します。
 
-メール内のリンクを開き、アプリに戻ってログイン中のメールアドレスが表示されれば接続確認は完了です。
+初回は `登録`、登録済みの場合は `ログイン` を押します。ログイン後にレベル/用途の選択画面へ進めれば接続確認は完了です。
+
+Supabase Authでメール確認が有効な場合、初回登録後に確認メールが送信されます。検証を優先する間は、Supabase管理画面の Authentication > Providers > Email でメール確認をOFFにすると、登録直後にそのままログイン状態で確認できます。本番運用ではメール確認ON/OFFの方針を別途決めます。
 
 この段階では課金状態の取得までは未接続です。次に、ログイン済みユーザーのセッションを使ってWeb版APIへAuthorizationヘッダーを渡す実装へ進みます。
 

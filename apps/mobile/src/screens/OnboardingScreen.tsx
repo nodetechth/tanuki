@@ -14,8 +14,10 @@ type OnboardingScreenProps = {
 
 export function OnboardingScreen({ auth, onboarding }: OnboardingScreenProps) {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
-  const canSendEmail = Boolean(email.trim()) && !auth.loading;
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const canSubmitAuth = Boolean(email.trim() && password.length >= 6) && !auth.loading;
   const canComplete = Boolean(auth.user && onboarding.draft.englishLevel && onboarding.draft.learningPurpose);
   const isSignedIn = Boolean(auth.user);
 
@@ -23,26 +25,26 @@ export function OnboardingScreen({ auth, onboarding }: OnboardingScreenProps) {
     <AppScrollView>
       <View style={styles.hero}>
         <Text style={styles.logo}>tanuki</Text>
-        <Text style={styles.title}>{isSignedIn ? "学習設定をしましょう" : "メール登録"}</Text>
+        <Text style={styles.title}>{isSignedIn ? "学習設定をしましょう" : "ログイン / 登録"}</Text>
         <Text style={styles.lead}>
           {isSignedIn
             ? "選択した用途・レベルであなたに合わせた英語の例文を作成します。"
-            : "メールを登録すると、レベルに合わせた学習や単語が保存できます。"}
+            : "メールアドレスを登録すると、レベルに合わせた学習や単語が保存できます。"}
         </Text>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.step}>{isSignedIn ? "認証完了" : "1 / 3"}</Text>
-        <Text style={styles.cardTitle}>メール登録</Text>
+        <Text style={styles.cardTitle}>メールアドレスでログイン</Text>
         {auth.user ? (
           <View>
-            <Text style={styles.cardLead}>メール認証が完了しました。</Text>
+            <Text style={styles.cardLead}>ログインが完了しました。</Text>
             <Text style={styles.signedInEmail}>{auth.user.email}</Text>
           </View>
         ) : (
           <View>
             <Text style={styles.cardLead}>
-              メール内のリンクを開くと登録またはログインが完了します。
+              メールアドレスとパスワードで登録またはログインできます。
             </Text>
             <TextInput
               autoCapitalize="none"
@@ -56,20 +58,48 @@ export function OnboardingScreen({ auth, onboarding }: OnboardingScreenProps) {
               style={styles.emailInput}
               value={email}
             />
-            <Pressable
-              disabled={!canSendEmail}
-              onPress={() => {
-                setEmailTouched(true);
-                void auth.sendMagicLink(email);
-              }}
-              style={[styles.primaryButton, !canSendEmail ? styles.disabledButton : null]}
-            >
-              <Text style={styles.primaryButtonText}>
-                {auth.loading ? "送信中..." : "登録 or ログイン"}
-              </Text>
-            </Pressable>
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              onBlur={() => setPasswordTouched(true)}
+              onChangeText={setPassword}
+              placeholder="パスワード（6文字以上）"
+              placeholderTextColor={colors.mutedSoft}
+              secureTextEntry
+              style={styles.emailInput}
+              value={password}
+            />
+            <View style={styles.authButtonRow}>
+              <Pressable
+                disabled={!canSubmitAuth}
+                onPress={() => {
+                  setEmailTouched(true);
+                  setPasswordTouched(true);
+                  void auth.signUpWithPassword(email, password);
+                }}
+                style={[styles.secondaryAuthButton, !canSubmitAuth ? styles.disabledButton : null]}
+              >
+                <Text style={styles.secondaryAuthButtonText}>登録</Text>
+              </Pressable>
+              <Pressable
+                disabled={!canSubmitAuth}
+                onPress={() => {
+                  setEmailTouched(true);
+                  setPasswordTouched(true);
+                  void auth.signInWithPassword(email, password);
+                }}
+                style={[styles.primaryAuthButton, !canSubmitAuth ? styles.disabledButton : null]}
+              >
+                <Text style={styles.primaryButtonText}>
+                  {auth.loading ? "処理中..." : "ログイン"}
+                </Text>
+              </Pressable>
+            </View>
             {emailTouched && !email.trim() ? (
               <Text style={styles.errorText}>メールアドレスを入力してください。</Text>
+            ) : null}
+            {passwordTouched && password.length > 0 && password.length < 6 ? (
+              <Text style={styles.errorText}>パスワードは6文字以上で入力してください。</Text>
             ) : null}
           </View>
         )}
@@ -235,6 +265,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceBlue,
     borderColor: colors.blue,
   },
+  authButtonRow: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 14,
+  },
+  primaryAuthButton: {
+    alignItems: "center",
+    backgroundColor: colors.blue,
+    borderRadius: 18,
+    flex: 1,
+    justifyContent: "center",
+    minHeight: 56,
+  },
   primaryButton: {
     alignItems: "center",
     backgroundColor: colors.blue,
@@ -245,6 +288,21 @@ const styles = StyleSheet.create({
   },
   primaryButtonText: {
     color: "#ffffff",
+    fontSize: 17,
+    fontWeight: "900",
+  },
+  secondaryAuthButton: {
+    alignItems: "center",
+    backgroundColor: colors.surface,
+    borderColor: colors.line,
+    borderRadius: 18,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: "center",
+    minHeight: 56,
+  },
+  secondaryAuthButtonText: {
+    color: colors.blueStrong,
     fontSize: 17,
     fontWeight: "900",
   },

@@ -67,7 +67,7 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 
 ## テスト決済の流れ
 
-1. アプリにメールリンクでログインします。
+1. アプリにメールアドレスとパスワードでログインします。
 2. `3日間無料体験` ボタンを押します。
 3. Stripe Checkoutへ遷移します。
 4. テストカードで決済します。

@@ -2,6 +2,7 @@
 
 ## 2026-05-12
 
+- ネイティブ移行: Development Buildで検証しやすいよう、モバイルAuthをメールリンク方式からメールアドレス+パスワードの登録/ログイン方式へ変更。
 - ネイティブ移行: モバイルオンボーディングのメール登録文言を調整し、Development Build用のSupabase公開環境変数をローカル設定へ同期。
 - ネイティブ移行: Expo Development Build用に `expo-dev-client`、EAS設定、iOS/AndroidアプリID、実機確認手順を追加。
 - Stripe課金: Stripe本番向けWebhook Endpoint `https://tanuki.nodetech.jp/api/webhooks/stripe` をサンドボックスに作成し、Vercel Productionへ `STRIPE_PRICE_ID` / `STRIPE_WEBHOOK_SECRET` を設定して再デプロイ。

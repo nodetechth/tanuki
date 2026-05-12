@@ -27,7 +27,7 @@ export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
       <SectionCard eyebrow="Account" title="ログイン">
         {!auth.configured ? (
           <Text style={styles.authNotice}>
-            Supabase環境変数を設定すると、ネイティブ版でもメールリンクログインを確認できます。
+            Supabase環境変数を設定すると、ネイティブ版でもメールアドレスとパスワードでログインを確認できます。
           </Text>
         ) : auth.user ? (
           <View>
@@ -45,7 +45,7 @@ export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
         ) : (
           <View>
             <Text style={styles.authNotice}>
-              オンボーディングでメール登録を行います。ログイン状態が切れた場合は、アプリを再起動して登録フローからメールリンクを再送してください。
+              オンボーディングでメールアドレスとパスワードを登録します。ログイン状態が切れた場合は、同じメールアドレスとパスワードでログインしてください。
             </Text>
           </View>
         )}

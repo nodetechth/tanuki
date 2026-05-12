@@ -9,7 +9,8 @@ export type AuthState = {
   error: string | null;
   loading: boolean;
   message: string | null;
-  sendMagicLink: (email: string) => Promise<void>;
+  signInWithPassword: (email: string, password: string) => Promise<void>;
+  signUpWithPassword: (email: string, password: string) => Promise<void>;
   session: Session | null;
   signOut: () => Promise<void>;
   user: User | null;
@@ -17,6 +18,18 @@ export type AuthState = {
 
 function getAuthErrorMessage(message: string) {
   const normalized = message.toLowerCase();
+  if (normalized.includes("invalid login credentials")) {
+    return "メールアドレスまたはパスワードが正しくありません。";
+  }
+  if (normalized.includes("user already registered") || normalized.includes("already registered")) {
+    return "このメールアドレスは登録済みです。ログインをお試しください。";
+  }
+  if (normalized.includes("email not confirmed")) {
+    return "メール確認が完了していません。届いたメールを確認してください。";
+  }
+  if (normalized.includes("password should be at least") || normalized.includes("weak password")) {
+    return "パスワードは6文字以上で設定してください。";
+  }
   if (normalized.includes("rate limit") || normalized.includes("security purposes")) {
     return "短時間に複数回送信されています。少し待ってから再送信してください。";
   }
@@ -80,15 +93,27 @@ export function useAuth(): AuthState {
     };
   }, [handleAuthUrl]);
 
-  const sendMagicLink = useCallback(async (email: string) => {
+  const validateEmailAndPassword = useCallback((email: string, password: string) => {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      setError("メールアドレスを入力してください。");
+      return null;
+    }
+    if (password.length < 6) {
+      setError("パスワードは6文字以上で入力してください。");
+      return null;
+    }
+    return trimmedEmail;
+  }, []);
+
+  const signUpWithPassword = useCallback(async (email: string, password: string) => {
     if (!supabase) {
       setError("Supabase環境変数が未設定です。");
       return;
     }
 
-    const trimmedEmail = email.trim();
+    const trimmedEmail = validateEmailAndPassword(email, password);
     if (!trimmedEmail) {
-      setError("メールアドレスを入力してください。");
       return;
     }
 
@@ -97,12 +122,47 @@ export function useAuth(): AuthState {
     setLoading(true);
 
     const redirectTo = Linking.createURL("auth/callback");
-    const { error: signInError } = await supabase.auth.signInWithOtp({
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email: trimmedEmail,
+      password,
       options: {
         emailRedirectTo: redirectTo,
-        shouldCreateUser: true,
       },
+    });
+
+    setLoading(false);
+
+    if (signUpError) {
+      setError(getAuthErrorMessage(signUpError.message));
+      return;
+    }
+
+    if (data.session) {
+      setMessage("登録しました。続けて学習設定を選んでください。");
+      return;
+    }
+
+    setMessage("登録確認メールを送りました。メール内のリンクを開いてからログインしてください。");
+  }, [validateEmailAndPassword]);
+
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    if (!supabase) {
+      setError("Supabase環境変数が未設定です。");
+      return;
+    }
+
+    const trimmedEmail = validateEmailAndPassword(email, password);
+    if (!trimmedEmail) {
+      return;
+    }
+
+    setError(null);
+    setMessage(null);
+    setLoading(true);
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: trimmedEmail,
+      password,
     });
 
     setLoading(false);
@@ -112,8 +172,8 @@ export function useAuth(): AuthState {
       return;
     }
 
-    setMessage("ログイン用メールを送りました。メール内のリンクを開いてください。");
-  }, []);
+    setMessage("ログインしました。");
+  }, [validateEmailAndPassword]);
 
   const signOut = useCallback(async () => {
     if (!supabase) {
@@ -131,7 +191,8 @@ export function useAuth(): AuthState {
     error,
     loading,
     message,
-    sendMagicLink,
+    signInWithPassword,
+    signUpWithPassword,
     session,
     signOut,
     user,
