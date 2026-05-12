@@ -23,11 +23,11 @@ export function OnboardingScreen({ auth, onboarding }: OnboardingScreenProps) {
     <AppScrollView>
       <View style={styles.hero}>
         <Text style={styles.logo}>tanuki</Text>
-        <Text style={styles.title}>{isSignedIn ? "学習設定をしましょう" : "まずはメール登録"}</Text>
+        <Text style={styles.title}>{isSignedIn ? "学習設定をしましょう" : "メール登録"}</Text>
         <Text style={styles.lead}>
           {isSignedIn
             ? "選択した用途・レベルであなたに合わせた英語の例文を作成します。"
-            : "メール認証後に、あなたに合わせたレベルと用途を設定します。"}
+            : "メールを登録すると、レベルに合わせた学習や単語が保存できます。"}
         </Text>
       </View>
 

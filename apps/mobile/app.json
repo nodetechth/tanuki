@@ -14,7 +14,10 @@
     },
     "ios": {
       "bundleIdentifier": "jp.nodetech.tanuki",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -28,6 +31,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "05f4e133-eabe-4502-9de8-7d34e5c83dfb"
+      }
     }
   }
 }
