@@ -72,6 +72,78 @@ npm run mobile:android
 
 実機で確認する場合は、Expo GoアプリでQRコードを読み取ります。
 
+Development Buildで確認する場合は、Expo GoではなくTanuki専用の開発用アプリを端末に入れます。
+
+## Development Buildで実機確認する
+
+メールリンク認証、録音、通知、ネイティブ固有機能を確認する段階ではExpo GoではなくDevelopment Buildを使います。
+
+追加済みの設定:
+
+| ファイル | 内容 |
+|---|---|
+| `apps/mobile/eas.json` | Development Build用のEAS設定 |
+| `apps/mobile/app.json` | `scheme: tanuki`、iOS Bundle ID、Android package |
+| `apps/mobile/package.json` | `expo-dev-client` |
+
+アプリID:
+
+```text
+iOS Bundle ID: jp.nodetech.tanuki
+Android package: jp.nodetech.tanuki
+Deep Link: tanuki://auth/callback
+```
+
+初回だけExpoアカウントにログインします。
+
+```bash
+cd apps/mobile
+npx eas login
+```
+
+iPhone実機用のDevelopment Buildを作る場合:
+
+```bash
+npm run mobile:dev-build:ios
+```
+
+iOS Simulator用に作る場合:
+
+```bash
+npm run mobile:dev-build:ios-simulator
+```
+
+Android実機用に作る場合:
+
+```bash
+npm run mobile:dev-build:android
+```
+
+ビルド完了後、EASが表示するQRコードまたはURLから端末へインストールします。
+
+インストール後は、Metro開発サーバーをDevelopment Build用に起動します。
+
+```bash
+cd apps/mobile
+npx expo start --dev-client
+```
+
+Supabase Authを確認する前に、Supabase Dashboardの `Authentication > URL Configuration` のRedirect URLsへ以下を追加してください。
+
+```text
+tanuki://auth/callback
+```
+
+モバイル用 `.env` には公開値だけを入れます。
+
+```text
+EXPO_PUBLIC_APP_URL=https://tanuki.nodetech.jp
+EXPO_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=xxxxx
+```
+
+`SUPABASE_SERVICE_ROLE_KEY` やStripe/Azure/OpenAIの秘密キーは、モバイルアプリには入れません。
+
 ## 4. 画面移行の順番
 
 ### Step 1. ネイティブの画面骨格

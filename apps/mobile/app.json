@@ -13,6 +13,7 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "jp.nodetech.tanuki",
       "supportsTablet": true
     },
     "android": {
@@ -22,6 +23,7 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "package": "jp.nodetech.tanuki",
       "predictiveBackGestureEnabled": false
     },
     "web": {
