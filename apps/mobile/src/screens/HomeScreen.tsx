@@ -1,10 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import type { MobileSubmission } from "../api/submissions";
 import { AppScrollView } from "../components/AppScrollView";
 import { SectionCard } from "../components/SectionCard";
 import { learningLevels, learningPurposes } from "../data/learningPreferences";
 import type { AuthState } from "../hooks/useAuth";
 import type { useOnboarding } from "../hooks/useOnboarding";
+import { useSubmissionDashboard } from "../hooks/useSubmissionDashboard";
 import { colors } from "../theme";
 
 type HomeScreenProps = {
@@ -15,6 +17,7 @@ type HomeScreenProps = {
 export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
   const currentLevel = learningLevels.find((level) => level.id === onboarding.profile?.englishLevel);
   const currentPurpose = learningPurposes.find((purpose) => purpose.id === onboarding.profile?.learningPurpose);
+  const dashboard = useSubmissionDashboard(auth.session?.access_token);
 
   return (
     <AppScrollView>
@@ -57,11 +60,11 @@ export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
         <View style={styles.stats}>
           <View style={styles.statBox}>
             <Text style={styles.statLabel}>総添削回数</Text>
-            <Text style={styles.statValue}>12回</Text>
+            <Text style={styles.statValue}>{dashboard.summary.totalCount}回</Text>
           </View>
           <View style={styles.statBox}>
             <Text style={styles.statLabel}>今週</Text>
-            <Text style={styles.statValue}>3回</Text>
+            <Text style={styles.statValue}>{dashboard.summary.weekCount}回</Text>
           </View>
         </View>
         <Pressable style={styles.primaryButton}>
@@ -70,18 +73,66 @@ export function HomeScreen({ auth, onboarding }: HomeScreenProps) {
       </SectionCard>
 
       <SectionCard eyebrow="History" title="直近の添削履歴">
-        {["Morning Coffee", "Asking for Directions", "A Quick Support Call"].map((item, index) => (
-          <View key={item} style={styles.historyRow}>
-            <View>
-              <Text style={styles.historyTitle}>{item}</Text>
-              <Text style={styles.historyMeta}>05/{10 - index} 20:5{index}</Text>
+        {!auth.user ? (
+          <Text style={styles.authNotice}>ログインすると、直近の添削履歴を表示します。</Text>
+        ) : dashboard.loading ? (
+          <Text style={styles.authNotice}>読み込み中...</Text>
+        ) : dashboard.error ? (
+          <Text style={styles.authError}>{dashboard.error}</Text>
+        ) : dashboard.submissions.length ? (
+          dashboard.submissions.slice(0, 5).map((item) => (
+            <View key={item.id} style={styles.historyRow}>
+              <View style={styles.historyText}>
+                <Text numberOfLines={1} style={styles.historyTitle}>
+                  {item.sourceTitle ?? item.sourceId}
+                </Text>
+                <Text style={styles.historyMeta}>{formatHistoryDate(item.createdAt)}</Text>
+              </View>
+              <Text style={item.status === "failed" ? styles.errorScore : styles.score}>
+                {item.feedback ? `総合 ${overallScore(item.feedback)}` : statusLabel(item.status)}
+              </Text>
             </View>
-            <Text style={styles.score}>総合 {90 - index * 3}</Text>
-          </View>
-        ))}
+          ))
+        ) : (
+          <Text style={styles.authNotice}>
+            まだ提出履歴はありません。録音を提出するとここに追加されます。
+          </Text>
+        )}
       </SectionCard>
     </AppScrollView>
   );
+}
+
+function overallScore(feedback: NonNullable<MobileSubmission["feedback"]>) {
+  return Math.round((feedback.accuracyScore + feedback.fluencyScore + feedback.completenessScore) / 3);
+}
+
+function statusLabel(status: MobileSubmission["status"]) {
+  switch (status) {
+    case "completed":
+      return "完了";
+    case "failed":
+      return "失敗";
+    case "azure_processing":
+    case "llm_processing":
+      return "添削中";
+    case "uploaded":
+    default:
+      return "受付済み";
+  }
+}
+
+function formatHistoryDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+  return new Intl.DateTimeFormat("ja-JP", {
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    month: "2-digit",
+  }).format(date);
 }
 
 const styles = StyleSheet.create({
@@ -101,6 +152,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 13,
+  },
+  historyText: {
+    flex: 1,
+    paddingRight: 12,
   },
   authEmail: {
     color: colors.text,
@@ -165,6 +220,11 @@ const styles = StyleSheet.create({
   },
   score: {
     color: colors.blue,
+    fontSize: 13,
+    fontWeight: "900",
+  },
+  errorScore: {
+    color: "#b84c61",
     fontSize: 13,
     fontWeight: "900",
   },

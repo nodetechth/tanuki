@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestUser, isAdminUser } from "@/lib/auth";
 import { getBillingState } from "@/lib/billing";
-import { getPracticeSourceServer } from "@/lib/practice-sources-server";
+import {
+  getPracticeSourceFromSubmissionServer,
+  getPracticeSourceServer,
+} from "@/lib/practice-sources-server";
 import {
   createSubmission,
   getSubmission,
+  getUserSubmissionSummary,
   listUserSubmissions,
 } from "@/lib/submission-store";
 import { storeAudio } from "@/lib/storage/r2";
@@ -121,7 +125,19 @@ export async function GET(request: NextRequest) {
     const submissions = await listUserSubmissions(authenticatedUserId, includeTest ? 50 : 20, {
       includeTest,
     });
-    return NextResponse.json({ submissions });
+    const [summary, enrichedSubmissions] = await Promise.all([
+      getUserSubmissionSummary(authenticatedUserId, { includeTest }),
+      Promise.all(
+        submissions.map(async (submission) => {
+          const source = await getPracticeSourceFromSubmissionServer(submission);
+          return {
+            ...submission,
+            sourceTitle: source?.title ?? submission.sourceId,
+          };
+        }),
+      ),
+    ]);
+    return NextResponse.json({ submissions: enrichedSubmissions, summary });
   }
 
   if (!id) {

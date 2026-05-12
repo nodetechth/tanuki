@@ -294,6 +294,70 @@ export async function listUserSubmissions(
     }));
 }
 
+export async function getUserSubmissionSummary(
+  userId: string,
+  options: { includeTest?: boolean } = {},
+) {
+  const supabase = getSupabaseAdmin();
+  const weekStart = startOfCurrentWeekJst();
+
+  if (supabase) {
+    let totalQuery = supabase
+      .from("submissions")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId);
+    let weekQuery = supabase
+      .from("submissions")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .gte("created_at", weekStart.toISOString());
+
+    if (!options.includeTest) {
+      totalQuery = totalQuery.eq("is_test", false);
+      weekQuery = weekQuery.eq("is_test", false);
+    }
+
+    const [totalResult, weekResult] = await Promise.all([totalQuery, weekQuery]);
+
+    if (totalResult.error || weekResult.error) {
+      throw new Error(totalResult.error?.message ?? weekResult.error?.message ?? "Failed to load submission summary");
+    }
+
+    return {
+      totalCount: totalResult.count ?? 0,
+      weekCount: weekResult.count ?? 0,
+      weekStart: weekStart.toISOString(),
+    };
+  }
+
+  const submissions = Array.from(demoStore().submissions.values())
+    .filter((submission) => submission.userId === userId)
+    .filter((submission) => options.includeTest || !submission.isTest);
+
+  return {
+    totalCount: submissions.length,
+    weekCount: submissions.filter((submission) => new Date(submission.createdAt) >= weekStart).length,
+    weekStart: weekStart.toISOString(),
+  };
+}
+
+function startOfCurrentWeekJst() {
+  const now = new Date();
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const day = jst.getUTCDay();
+  const diffFromMonday = day === 0 ? 6 : day - 1;
+  const startJstUtcMs = Date.UTC(
+    jst.getUTCFullYear(),
+    jst.getUTCMonth(),
+    jst.getUTCDate() - diffFromMonday,
+    0,
+    0,
+    0,
+    0,
+  );
+  return new Date(startJstUtcMs - 9 * 60 * 60 * 1000);
+}
+
 export async function updateSubmission(
   id: string,
   patch: Partial<
